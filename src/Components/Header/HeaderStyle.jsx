@@ -37,6 +37,7 @@ export const Logo = styled.div`
 `;
 
 export const SearchBox = styled.div`
+  width: 60%;
   display: flex;
 
   input {
@@ -46,8 +47,8 @@ export const SearchBox = styled.div`
     display: flex;
     border: 0;
     border-radius: 10px;
-    margin: 0 30px;
     padding: 0 10px;
+    margin: 0 30px;
     box-sizing: border-box;
   }
 `;
@@ -56,6 +57,18 @@ export const Perfil = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-sizing: border-box;
+
+  img {
+    width: 40px;
+    height: 40px;
+    background-color: grey;
+    border: 0;
+    border-radius: 50%;
+    box-sizing: border-box;
+    margin: 0 10px;
+    cursor: pointer;
+  }
 
   p {
     margin: 0 20px;

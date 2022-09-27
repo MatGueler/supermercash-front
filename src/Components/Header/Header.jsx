@@ -1,7 +1,7 @@
 import { HeaderBox, Logo, Perfil, SearchBox } from "./HeaderStyle";
 import logo from "../../Assets/Image/Logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faPersonRunning } from "@fortawesome/free-solid-svg-icons";
 
 function Header() {
   return (
@@ -18,7 +18,8 @@ function Header() {
       </SearchBox>
       <Perfil>
         <p>Olá,fulana</p>
-        <FontAwesomeIcon icon={faUser} size="2x" cursor="pointer" />
+        <img src="" alt="" />
+        <FontAwesomeIcon icon={faPersonRunning} size="2x" cursor="pointer" />
       </Perfil>
     </HeaderBox>
   );
