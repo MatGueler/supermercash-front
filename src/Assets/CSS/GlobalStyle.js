@@ -24,7 +24,7 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-	font-family: 'Lato', sans-serif;
+	font-family: 'Varela Round', sans-serif;
     margin: 0;
 	padding: 0;
 	border: 0;
@@ -54,6 +54,6 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-`
+`;
 
 export default GlobalStyle;
