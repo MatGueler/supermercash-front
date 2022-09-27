@@ -2,8 +2,10 @@ import { HeaderBox, Logo, Perfil, SearchBox } from "./HeaderStyle";
 import logo from "../../Assets/Image/Logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faPersonRunning } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
+  let navigate = useNavigate();
   return (
     <HeaderBox>
       <Logo>
@@ -19,7 +21,12 @@ function Header() {
       <Perfil>
         <p>Olá,fulana</p>
         <img src="" alt="" />
-        <FontAwesomeIcon icon={faPersonRunning} size="2x" cursor="pointer" />
+        <FontAwesomeIcon
+          icon={faPersonRunning}
+          size="2x"
+          cursor="pointer"
+          onClick={() => navigate("/")}
+        />
       </Perfil>
     </HeaderBox>
   );
