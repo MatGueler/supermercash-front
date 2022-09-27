@@ -1,6 +1,7 @@
 // import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import GlobalStyle from "../../Assets/CSS/GlobalStyle";
+import CartScreen from "../Pages/Cart/CartScreen";
 import LoginScreen from "../Pages/Login/LoginScreen";
 import MenuScreen from "../Pages/Menu/MenuScreen";
 import ProductsScreen from "../Pages/Products/ProductsScreen";
@@ -16,6 +17,7 @@ function App() {
           <Route path={"/sign-up"} element={<RegisterScreen />} />
           <Route path={"/menu"} element={<MenuScreen />} />
           <Route path={"/products"} element={<ProductsScreen />} />
+          <Route path={"/cart"} element={<CartScreen />} />
         </Routes>
       </BrowserRouter>
     </>
