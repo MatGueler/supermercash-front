@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 // *Components
 import { Clip, Logo, Main, TextLogo, UserButtons } from "./RegisterStyle";
-import { Container } from "../../Container/ContainerStyle";
+import { AuthContainer } from "../../Container/ContainerStyle";
 import { Input } from "../../Input/InputSyle";
 import { Button } from "../../Button/ButtonSyle";
 
@@ -38,7 +38,7 @@ function RegisterScreen() {
   }
 
   return (
-    <Container>
+    <AuthContainer>
       <Logo>
         <img src={logo} alt="logo" />
         <TextLogo>
@@ -100,7 +100,7 @@ function RegisterScreen() {
           </UserButtons>
         </form>
       </Main>
-    </Container>
+    </AuthContainer>
   );
 }
 
