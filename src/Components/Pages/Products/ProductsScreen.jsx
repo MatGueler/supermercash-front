@@ -111,7 +111,9 @@ function ProductsScreen() {
               </Add>
             </Product>
           </ProductsBox>
-          <Button color="#c51b1b">Comparar</Button>
+          <Button color="#c51b1b" onClick={() => navigate("/cart")}>
+            Comparar
+          </Button>
         </Main>
       </Container>
     </>
