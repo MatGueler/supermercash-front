@@ -10,7 +10,7 @@ function Header() {
     <HeaderBox>
       <Logo>
         <img src={logo} alt="logo" />
-        <h1>
+        <h1 onClick={() => navigate("/menu")}>
           <span>Supermer</span>
           <span>cash</span>
         </h1>
@@ -20,7 +20,11 @@ function Header() {
       </SearchBox>
       <Perfil>
         <p>Olá,fulana</p>
-        <img src="" alt="" />
+        <img
+          src="https://conteudo.imguol.com.br/c/esporte/eb/2022/09/27/neymar-comemora-gol-marcado-pela-selecao-brasileira-contra-a-tunisia-1664308063053_v2_450x600.jpg"
+          alt="PerfilPhoto"
+          onClick={() => navigate("/perfil")}
+        />
         <FontAwesomeIcon
           icon={faPersonRunning}
           size="2x"

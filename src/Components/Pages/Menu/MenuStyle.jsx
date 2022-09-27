@@ -8,7 +8,7 @@ export const Main = styled.div`
   padding: 90px 20px 0 20px;
   position: relative;
   background-color: #d9d9d9;
-  overflow: hidden;
+  box-sizing: border-box;
 `;
 
 export const Adverts = styled.div`
