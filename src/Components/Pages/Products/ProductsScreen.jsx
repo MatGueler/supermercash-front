@@ -1,18 +1,27 @@
 // *Hooks
 // import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 
 // *Components
-import { Adverts, ButtonsMenu, Main, Map } from "./MenuStyle";
+import {
+  Legend,
+  Main,
+  Product,
+  ProductsBox,
+  Add,
+  ProductInfo,
+} from "./ProductsStyle";
 import { Container } from "../../Container/ContainerStyle";
-import Footer from "../../Footer/Footer";
 
 // *Image
 import { useState } from "react";
 import Header from "../../Header/Header";
 import { Button } from "../../Button/ButtonSyle";
+import Footer from "../../Footer/Footer";
 
-function MenuScreen() {
+function ProductsScreen() {
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
@@ -68,33 +77,45 @@ function MenuScreen() {
   // }, 16000);
 
   return (
+    // <Container>
+    //   <Header />
+    //   <Main>
+
+    //   </Main>
+    // </Container>
     <>
       <Container>
         <Header />
         <Main>
-          <Adverts>
-            <img src={advertsImages[1].image} alt={advertsImages[1].name} />
-            <img src={advertsImages[2].image} alt={advertsImages[2].name} />
-            <img src={advertsImages[3].image} alt={advertsImages[3].name} />
-            <img src={advertsImages[0].image} alt={advertsImages[0].name} />
-            <img src={advertsImages[4].image} alt={advertsImages[4].name} />
-          </Adverts>
-          <ButtonsMenu>
-            <button onClick={() => navigate("/products")}>Produtos</button>
-            <button onClick={() => navigate("/perfil")}>Perfil</button>
-          </ButtonsMenu>
-          <Map>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31760591.28161111!2d-69.73009156372365!3d-13.656224737639535!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9c59c7ebcc28cf%3A0x295a1506f2293e63!2sBrasil!5e0!3m2!1spt-BR!2sbr!4v1664261466349!5m2!1spt-BR!2sbr"
-              width="100%"
-              height="200"
-            ></iframe>
-          </Map>
-          <Footer />
+          <ProductsBox>
+            <Legend>
+              <p>Produto</p>
+              <p>Quantidade</p>
+              <p>Preço médio</p>
+              <p>Selecionar</p>
+            </Legend>
+            <Product>
+              <ProductInfo>
+                <img src="" alt="foto" />
+                <p>Nome do Produto</p>
+              </ProductInfo>
+              <p>Quantidade</p>
+              <p>Preço médio</p>
+              <Add>
+                <FontAwesomeIcon
+                  icon={faCirclePlus}
+                  color="#1D733A"
+                  size="2x"
+                  cursor="pointer"
+                />
+              </Add>
+            </Product>
+          </ProductsBox>
+          <Button color="#c51b1b">Comparar</Button>
         </Main>
       </Container>
     </>
   );
 }
 
-export default MenuScreen;
+export default ProductsScreen;

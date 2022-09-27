@@ -13,7 +13,7 @@ export const Main = styled.div`
 
 export const Adverts = styled.div`
   width: 100%;
-  height: 400px;
+  height: 250px;
   display: flex;
   margin-bottom: 30px;
   border-radius: 10px;

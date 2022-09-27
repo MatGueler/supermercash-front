@@ -10,6 +10,6 @@ export const HeaderBox = styled.div`
   z-index: 1;
 
   p {
-    height: 120px;
+    height: 60px;
   }
 `;

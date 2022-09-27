@@ -10,6 +10,7 @@ html, body, #root {
 	height: 100vh;
 	margin: 0;
 	padding: 0;
+	background-color: #d9d9d9;
 }
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,

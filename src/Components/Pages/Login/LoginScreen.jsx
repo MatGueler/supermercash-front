@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 // *Components
 import { Logo, Main, TextLogo, UserButtons, Clip } from "./LoginStyle";
-import { Container } from "../../Container/ContainerStyle";
+import { AuthContainer } from "../../Container/ContainerStyle";
 import { Input } from "../../Input/InputSyle";
 import { Button } from "../../Button/ButtonSyle";
 
@@ -20,6 +20,7 @@ function LoginScreen() {
 
   function SignIn(event) {
     event.preventDefault();
+    navigate("/menu");
     // const url = "http://localhost:5000/signin";
     // const body = { email, password };
     // axios
@@ -35,7 +36,7 @@ function LoginScreen() {
   }
 
   return (
-    <Container>
+    <AuthContainer>
       <Logo>
         <img src={logo} alt="logo" />
         <TextLogo>
@@ -81,7 +82,7 @@ function LoginScreen() {
           </UserButtons>
         </form>
       </Main>
-    </Container>
+    </AuthContainer>
   );
 }
 
