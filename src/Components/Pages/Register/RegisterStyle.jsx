@@ -64,7 +64,7 @@ export const Logo = styled.div`
   justify-content: space-around;
   padding: 30px 0;
   box-sizing: border-box;
-  background-color: #940f0f;
+  background-image: linear-gradient(#940f0f 60%, #2a2e37);
 
   img:active {
     transform: rotate(-20deg);
