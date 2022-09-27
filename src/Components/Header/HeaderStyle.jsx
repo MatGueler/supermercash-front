@@ -20,6 +20,7 @@ export const Logo = styled.div`
     display: flex;
     align-items: center;
     font-size: 30px;
+    cursor: pointer;
   }
 
   span {
@@ -67,6 +68,7 @@ export const Perfil = styled.div`
     border-radius: 50%;
     box-sizing: border-box;
     margin: 0 10px;
+    object-fit: cover;
     cursor: pointer;
   }
 
