@@ -78,7 +78,7 @@ export const Logo = styled.div`
         top: 0px;
       }
       100% {
-        left: 2000px;
+        left: 1500px;
         top: 0px;
       }
     }
@@ -88,6 +88,7 @@ export const Logo = styled.div`
     width: 150px;
     height: 150px;
     cursor: pointer;
+    z-index: 1;
   }
 `;
 

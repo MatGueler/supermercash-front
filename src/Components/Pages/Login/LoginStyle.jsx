@@ -77,7 +77,7 @@ export const Logo = styled.div`
         left: 0px;
       }
       100% {
-        left: 900px;
+        left: 1500px;
       }
     }
   }
