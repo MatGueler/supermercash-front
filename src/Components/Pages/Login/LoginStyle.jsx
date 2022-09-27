@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Main = styled.div`
   width: 100%;
   height: 100%;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -74,11 +75,9 @@ export const Logo = styled.div`
     @keyframes example {
       0% {
         left: 0px;
-        top: 0px;
       }
       100% {
-        left: 2000px;
-        top: 0px;
+        left: 900px;
       }
     }
   }
@@ -87,6 +86,7 @@ export const Logo = styled.div`
     width: 150px;
     height: 150px;
     cursor: pointer;
+    z-index: 1;
   }
 `;
 
@@ -125,5 +125,23 @@ export const UserButtons = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+`;
+
+export const Clip = styled.div`
+  position: absolute;
+  width: 50px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  left: -30px;
+
+  span {
+    width: 60px;
+    height: 10px;
+    border-radius: 10px;
+    background-color: black;
+    box-shadow: 2px 2px 5px black;
   }
 `;

@@ -3,7 +3,7 @@
 import { useNavigate } from "react-router-dom";
 
 // *Components
-import { Logo, Main, TextLogo, UserButtons } from "./LoginStyle";
+import { Logo, Main, TextLogo, UserButtons, Clip } from "./LoginStyle";
 import { Container } from "../../Container/ContainerStyle";
 import { Input } from "../../Input/InputSyle";
 import { Button } from "../../Button/ButtonSyle";
@@ -45,6 +45,12 @@ function LoginScreen() {
         </TextLogo>
       </Logo>
       <Main>
+        <Clip>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </Clip>
         <h1>
           <span>Supermer</span>
           <span>cash</span>
@@ -68,8 +74,8 @@ function LoginScreen() {
             value={password}
           />
           <UserButtons>
-            <Button color="#34D70B">Acessar</Button>
-            <Button color="#0B8DD7" onClick={() => navigate("/login")}>
+            <Button color="#34D70B">Entrar</Button>
+            <Button color="#0B8DD7" onClick={() => navigate("/sign-up")}>
               Cadastrar
             </Button>
           </UserButtons>
