@@ -1,7 +1,8 @@
 // import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import GlobalStyle from "../../Assets/CSS/GlobalStyle";
-import LoginScreen from "../Pages/LoginScreen/LoginScreen";
+import LoginScreen from "../Pages/Login/LoginScreen";
+import RegisterScreen from "../Pages/Register/RegisterScreen";
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path={"/"} element={<LoginScreen />} />
-          {/* <Route path={"/sign-up"} element={<RegisterScreen />} /> */}
+          <Route path={"/sign-up"} element={<RegisterScreen />} />
         </Routes>
       </BrowserRouter>
     </>
