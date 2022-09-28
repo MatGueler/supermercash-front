@@ -23,7 +23,7 @@ function RegisterScreen() {
   function SignIn(event) {
     event.preventDefault();
     const url = "http://localhost:5000/sign-up";
-    const body = { email, password };
+    const body = { name, email, password, confirmPassword };
     axios
       .get(url)
       .then((res) => {
