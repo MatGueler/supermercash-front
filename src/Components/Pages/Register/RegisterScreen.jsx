@@ -22,19 +22,16 @@ function RegisterScreen() {
 
   function SignIn(event) {
     event.preventDefault();
-    console.log("oi");
-    // const url = "http://localhost:5000/signin";
-    // const body = { email, password };
-    // axios
-    //   .get(url)
-    //   .then((res) => {
-    //     const token = res.data;
-    //     localStorage.setItem("token", token);
-    //     navigate("/menu");
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    const url = "http://localhost:5000/sign-up";
+    const body = { email, password };
+    axios
+      .get(url)
+      .then((res) => {
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   return (
