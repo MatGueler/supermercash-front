@@ -3,7 +3,7 @@
 import { useNavigate } from "react-router-dom";
 
 // *Components
-import { Adverts, ButtonsMenu, Main, Map } from "./MenuStyle";
+import { Adverts, ButtonsMenu, Main, Map, Panel, Panel2 } from "./MenuStyle";
 import { Container } from "../../Container/ContainerStyle";
 import Footer from "../../Footer/Footer";
 
@@ -73,11 +73,18 @@ function MenuScreen() {
         <Header />
         <Main>
           <Adverts>
-            <img src={advertsImages[1].image} alt={advertsImages[1].name} />
-            <img src={advertsImages[2].image} alt={advertsImages[2].name} />
-            <img src={advertsImages[3].image} alt={advertsImages[3].name} />
-            <img src={advertsImages[0].image} alt={advertsImages[0].name} />
-            <img src={advertsImages[4].image} alt={advertsImages[4].name} />
+            <p>
+              Anuncie aqui! Ligue já!
+              <br />
+              (54) 4448-78965
+            </p>
+            <Panel>
+              <img src={advertsImages[1].image} alt={advertsImages[1].name} />
+              <img src={advertsImages[2].image} alt={advertsImages[2].name} />
+              <img src={advertsImages[3].image} alt={advertsImages[3].name} />
+              <img src={advertsImages[0].image} alt={advertsImages[0].name} />
+              <img src={advertsImages[4].image} alt={advertsImages[4].name} />
+            </Panel>
           </Adverts>
           <ButtonsMenu>
             <button onClick={() => navigate("/products")}>Produtos</button>

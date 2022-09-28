@@ -20,7 +20,7 @@ export const Adverts = styled.div`
   background-color: #ffffff;
   box-sizing: border-box;
   position: relative;
-  overflow-x: scroll;
+  overflow-x: hidden;
 
   img {
     width: 300px;
@@ -29,42 +29,41 @@ export const Adverts = styled.div`
     /* object-fit: cover; */
   }
 
-  /* img:nth-child(1) {
-    animation-name: example;
-    animation-duration: 16s;
-    animation-iteration-count: infinite;
-    animation-delay: 8s;
+  p {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    text-align: center;
+    font-size: 60px;
+  }
+`;
 
-    @keyframes example {
-      0% {
-        left: -900px;
-      }
-      50% {
-        left: 0px;
-      }
-      100% {
-        left: 900px;
-      }
+export const Panel = styled.div`
+  width: 100%;
+  height: 250px;
+  display: flex;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  position: relative;
+  animation-name: example;
+  animation-duration: 30s;
+  animation-iteration-count: infinite;
+
+  @keyframes example {
+    0% {
+      left: -110%;
+    }
+    50% {
+      left: 0;
+    }
+    100% {
+      left: 110%;
     }
   }
-
-  img:nth-child(2) {
-    animation-name: example;
-    animation-duration: 16s;
-    animation-iteration-count: infinite;
-
-    @keyframes example {
-      0% {
-        left: -900px;
-      }
-      50% {
-        left: 0px;
-      }
-      100% {
-        left: 900px;
-      }
-    }
-  } */
 `;
 
 export const ButtonsMenu = styled.div`
