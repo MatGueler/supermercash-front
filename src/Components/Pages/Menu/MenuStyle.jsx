@@ -52,6 +52,7 @@ export const Panel = styled.div`
   animation-name: example;
   animation-duration: 30s;
   animation-iteration-count: infinite;
+  background-color: #ffffff;
 
   @keyframes example {
     0% {
@@ -68,9 +69,10 @@ export const Panel = styled.div`
 
 export const ButtonsMenu = styled.div`
   width: 100%;
-  height: 200px;
+  height: 70px;
   display: flex;
   justify-content: center;
+  margin-bottom: 30px;
 
   button {
     width: 60px;
@@ -86,9 +88,9 @@ export const ButtonsMenu = styled.div`
 
 export const Map = styled.div`
   width: 100%;
-  height: 600px;
   display: flex;
   border-radius: 10px;
+  margin-bottom: 30px;
 
   iframe {
     border-radius: 10px;
