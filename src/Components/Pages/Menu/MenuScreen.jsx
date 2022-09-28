@@ -97,8 +97,8 @@ function MenuScreen() {
               height="200"
             ></iframe>
           </Map>
-          <Footer />
         </Main>
+        <Footer />
       </Container>
     </>
   );
