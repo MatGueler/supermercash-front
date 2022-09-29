@@ -1,5 +1,5 @@
 // *Hooks
-// import axios from "axios";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 // *Components
@@ -20,19 +20,18 @@ function LoginScreen() {
 
   function SignIn(event) {
     event.preventDefault();
-    navigate("/menu");
-    // const url = "http://localhost:5000/signin";
-    // const body = { email, password };
-    // axios
-    //   .get(url)
-    //   .then((res) => {
-    //     const token = res.data;
-    //     localStorage.setItem("token", token);
-    //     navigate("/menu");
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    const url = "http://localhost:5000/signin";
+    const body = { email, password };
+    axios
+      .get(url)
+      .then((res) => {
+        const token = res.data;
+        localStorage.setItem("token", token);
+        navigate("/menu");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   return (
