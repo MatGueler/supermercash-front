@@ -25,7 +25,7 @@ function RegisterScreen() {
     const url = "http://localhost:5000/sign-up";
     const body = { name, email, password, confirmPassword };
     axios
-      .get(url)
+      .post(url, body)
       .then((res) => {
         navigate("/");
       })
