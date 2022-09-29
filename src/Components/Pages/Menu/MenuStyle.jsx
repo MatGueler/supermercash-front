@@ -69,10 +69,17 @@ export const Panel = styled.div`
 
 export const ButtonsMenu = styled.div`
   width: 100%;
-  height: 70px;
+  height: 100px;
   display: flex;
   justify-content: center;
   margin-bottom: 30px;
+`;
+
+export const BoxButton = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
   button {
     width: 60px;
@@ -81,8 +88,9 @@ export const ButtonsMenu = styled.div`
     border-radius: 50%;
     box-shadow: 1px 1px 3px grey;
     cursor: pointer;
-    margin: 0 10px;
+    margin: 0px 10px 10px 10px;
     background-color: #c7c7c7;
+    box-sizing: border-box;
   }
 `;
 
