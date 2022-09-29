@@ -20,12 +20,12 @@ function LoginScreen() {
 
   function SignIn(event) {
     event.preventDefault();
-    const url = "http://localhost:5000/signin";
+    const url = "http://localhost:5000/sign-in";
     const body = { email, password };
     axios
-      .get(url)
+      .post(url, body)
       .then((res) => {
-        const token = res.data;
+        const token = res.data.token;
         localStorage.setItem("token", token);
         navigate("/menu");
       })
