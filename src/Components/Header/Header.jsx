@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-function Header() {
+function Header({ loading, setLoading }) {
   let navigate = useNavigate();
 
   const [userInfo, setUserInfo] = useState("");
@@ -25,6 +25,8 @@ function Header() {
     axios
       .get(`http://localhost:5000/user/me`, config)
       .then((response) => {
+        console.log("oi");
+        setLoading(true);
         setUserInfo(response.data);
       })
       .catch((error) => {
@@ -39,35 +41,41 @@ function Header() {
   }
 
   return (
-    <HeaderBox>
-      <Logo>
-        <img src={logo} alt="logo" />
-        <h1 onClick={() => navigate("/menu")}>
-          <span>Supermer</span>
-          <span>cash</span>
-        </h1>
-      </Logo>
-      <SearchBox>
-        <input placeholder="Pesquisar . . ." />
-      </SearchBox>
-      <Perfil>
-        {userInfo ? <GetFirstNameUser /> : <button>Entrar</button>}
-        <img
-          src="https://conteudo.imguol.com.br/c/esporte/eb/2022/09/27/neymar-comemora-gol-marcado-pela-selecao-brasileira-contra-a-tunisia-1664308063053_v2_450x600.jpg"
-          alt="PerfilPhoto"
-          onClick={() => navigate("/perfil")}
-        />
-        <FontAwesomeIcon
-          icon={faPersonRunning}
-          size="2x"
-          cursor="pointer"
-          onClick={() => {
-            localStorage.removeItem("token");
-            navigate("/");
-          }}
-        />
-      </Perfil>
-    </HeaderBox>
+    <>
+      {loading ? (
+        <HeaderBox>
+          <Logo>
+            <img src={logo} alt="logo" />
+            <h1 onClick={() => navigate("/menu")}>
+              <span>Supermer</span>
+              <span>cash</span>
+            </h1>
+          </Logo>
+          <SearchBox>
+            <input placeholder="Pesquisar . . ." />
+          </SearchBox>
+          <Perfil>
+            {userInfo ? <GetFirstNameUser /> : <button>Entrar</button>}
+            <img
+              src="https://conteudo.imguol.com.br/c/esporte/eb/2022/09/27/neymar-comemora-gol-marcado-pela-selecao-brasileira-contra-a-tunisia-1664308063053_v2_450x600.jpg"
+              alt="PerfilPhoto"
+              onClick={() => navigate("/perfil")}
+            />
+            <FontAwesomeIcon
+              icon={faPersonRunning}
+              size="2x"
+              cursor="pointer"
+              onClick={() => {
+                localStorage.removeItem("token");
+                navigate("/");
+              }}
+            />
+          </Perfil>
+        </HeaderBox>
+      ) : (
+        ""
+      )}
+    </>
   );
 }
 

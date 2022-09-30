@@ -3,7 +3,14 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 // *Components
-import { Clip, Logo, Main, TextLogo, UserButtons } from "./RegisterStyle";
+import {
+  Clip,
+  LoadingBox,
+  Logo,
+  Main,
+  TextLogo,
+  UserButtons,
+} from "./RegisterStyle";
 import { AuthContainer } from "../../Container/ContainerStyle";
 import { Input } from "../../Input/InputSyle";
 import { Button } from "../../Button/ButtonSyle";
@@ -12,7 +19,6 @@ import { Button } from "../../Button/ButtonSyle";
 import logo from "../../../Assets/Image/Logo.png";
 import { useState } from "react";
 import Loading from "../../Loading/Loading";
-import { LoadingBox } from "../Login/LoginStyle";
 
 function RegisterScreen() {
   const navigate = useNavigate();
@@ -118,7 +124,7 @@ function RegisterScreen() {
             </UserButtons>
           ) : (
             <LoadingBox>
-              <Loading
+              <LoadingBox
                 width="100"
                 height="100"
                 color="#FFFFFF"
