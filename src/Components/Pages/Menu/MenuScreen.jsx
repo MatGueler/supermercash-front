@@ -1,25 +1,31 @@
 // *Hooks
-// import axios from "axios";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 // *Components
-import { Adverts, ButtonsMenu, Main, Map, Panel, Panel2 } from "./MenuStyle";
+import {
+  Adverts,
+  BoxButton,
+  ButtonsMenu,
+  Main,
+  Map,
+  Panel,
+  Panel2,
+} from "./MenuStyle";
 import { Container } from "../../Container/ContainerStyle";
 import Footer from "../../Footer/Footer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShop } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 // *Image
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../../Header/Header";
 import { Button } from "../../Button/ButtonSyle";
 
 function MenuScreen() {
   const navigate = useNavigate();
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  // const [img2Advert, setImg2Advert] = useState(true);
   const advertsImages = [
     {
       image: "https://m.casasbahia.com.br/assets/images/casasbahia-logo.png",
@@ -46,27 +52,6 @@ function MenuScreen() {
     },
   ];
 
-  function SignIn(event) {
-    event.preventDefault();
-    console.log("oi");
-    // const url = "http://localhost:5000/signin";
-    // const body = { email, password };
-    // axios
-    //   .get(url)
-    //   .then((res) => {
-    //     const token = res.data;
-    //     localStorage.setItem("token", token);
-    //     navigate("/menu");
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-  }
-
-  // setInterval(() => {
-  //   setImg2Advert(!img2Advert);
-  // }, 16000);
-
   return (
     <>
       <Container>
@@ -87,8 +72,18 @@ function MenuScreen() {
             </Panel>
           </Adverts>
           <ButtonsMenu>
-            <button onClick={() => navigate("/products")}>Produtos</button>
-            <button onClick={() => navigate("/perfil")}>Perfil</button>
+            <BoxButton>
+              <button onClick={() => navigate("/products")}>
+                <FontAwesomeIcon icon={faShop} size="2x" />
+              </button>
+              <p>Shop</p>
+            </BoxButton>
+            <BoxButton>
+              <button onClick={() => navigate("/perfil")}>
+                <FontAwesomeIcon icon={faUser} size="2x" />
+              </button>
+              <p>Perfil</p>
+            </BoxButton>
           </ButtonsMenu>
           <Map>
             <iframe
