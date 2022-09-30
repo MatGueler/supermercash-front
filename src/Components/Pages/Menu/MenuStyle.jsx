@@ -25,8 +25,6 @@ export const Adverts = styled.div`
   img {
     width: 300px;
     height: 100%;
-    margin: 0 20px;
-    /* object-fit: cover; */
   }
 
   p {
