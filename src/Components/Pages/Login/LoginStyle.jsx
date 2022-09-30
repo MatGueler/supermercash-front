@@ -145,3 +145,9 @@ export const Clip = styled.div`
     box-shadow: 2px 2px 5px black;
   }
 `;
+
+export const LoadingBox = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;

@@ -3,7 +3,14 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 // *Components
-import { Logo, Main, TextLogo, UserButtons, Clip } from "./LoginStyle";
+import {
+  Logo,
+  Main,
+  TextLogo,
+  UserButtons,
+  Clip,
+  LoadingBox,
+} from "./LoginStyle";
 import { AuthContainer } from "../../Container/ContainerStyle";
 import { Input } from "../../Input/InputSyle";
 import { Button } from "../../Button/ButtonSyle";
@@ -11,15 +18,20 @@ import { Button } from "../../Button/ButtonSyle";
 // *Image
 import logo from "../../../Assets/Image/Logo.png";
 import { useState } from "react";
+import Loading from "../../Loading/Loading";
 
 function LoginScreen() {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [disable, setDisable] = useState(false);
 
   function SignIn(event) {
     event.preventDefault();
+    setLoading(true);
+    setDisable(true);
     const url = "http://localhost:5000/sign-in";
     const body = { email, password };
     axios
@@ -27,10 +39,14 @@ function LoginScreen() {
       .then((res) => {
         const token = res.data.token;
         localStorage.setItem("token", token);
+        setLoading(false);
+        setDisable(false);
         navigate("/menu");
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false);
+        setDisable(false);
       });
   }
 
@@ -64,6 +80,7 @@ function LoginScreen() {
               setEmail(e.target.value);
             }}
             value={email}
+            disabled={disable}
           />
           <Input
             placeholder="Senha"
@@ -72,13 +89,25 @@ function LoginScreen() {
               setPassword(e.target.value);
             }}
             value={password}
+            disabled={disable}
           />
-          <UserButtons>
-            <Button color="#34D70B">Entrar</Button>
-            <Button color="#0B8DD7" onClick={() => navigate("/sign-up")}>
-              Cadastrar
-            </Button>
-          </UserButtons>
+          {loading === false ? (
+            <UserButtons>
+              <Button color="#34D70B" disabled={disable}>Entrar</Button>
+              <Button color="#0B8DD7" onClick={() => navigate("/sign-up")} disabled={disable}>
+                Cadastrar
+              </Button>
+            </UserButtons>
+          ) : (
+            <LoadingBox>
+              <Loading
+                width="100"
+                height="100"
+                color="#FFFFFF"
+                secondColor="#FFFFFF"
+              />
+            </LoadingBox>
+          )}
         </form>
       </Main>
     </AuthContainer>
