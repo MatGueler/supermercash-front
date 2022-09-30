@@ -1,5 +1,5 @@
 // *Hooks
-// import axios from "axios";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
@@ -12,85 +12,104 @@ import {
   ProductsBox,
   Add,
   ProductInfo,
+  LoadingBox,
 } from "./CartStyle";
 import { Container } from "../../Container/ContainerStyle";
 import Header from "../../Header/Header";
 
 // *Image
 import logo from "../../../Assets/Image/Logo.png";
+import Loading from "../../Loading/Loading";
+import { useEffect, useState } from "react";
 
 function CartScreen() {
   const navigate = useNavigate();
 
-  function SignIn(event) {
-    event.preventDefault();
-    console.log("oi");
-    // const url = "http://localhost:5000/signin";
-    // const body = { email, password };
-    // axios
-    //   .get(url)
-    //   .then((res) => {
-    //     const token = res.data;
-    //     localStorage.setItem("token", token);
-    //     navigate("/menu");
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-  }
+  const [loading, setLoading] = useState(false);
+  const [userInfo, setUserInfo] = useState("");
 
-  // setInterval(() => {
-  //   setImg2Advert(!img2Advert);
-  // }, 16000);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    getUserInfo(token);
+  }, []);
+
+  function getUserInfo(token) {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    axios
+      .get(`http://localhost:5000/user/me`, config)
+      .then((response) => {
+        setLoading(true);
+        setUserInfo(response.data);
+      })
+      .catch((error) => {
+        navigate("/");
+        console.error(error);
+      });
+  }
 
   return (
     <>
-      <Container>
-        <Header />
-        <Main>
-          <ProductsBox>
-            <Legend>
-              <p>Produto</p>
-              <p>Cashback</p>
-              <p>Preço</p>
-              <p>Selecionar</p>
-            </Legend>
-            <Product>
-              <ProductInfo>
-                <h2>1</h2>
-                <p>Nome do Supermercado</p>
-              </ProductInfo>
-              <p>Cashback</p>
-              <p>Preço</p>
-              <Add>
-                <img src={logo} alt="logo" />
-              </Add>
-            </Product>
-            <Product>
-              <ProductInfo>
-                <h2>1</h2>
-                <p>Nome do Supermercado</p>
-              </ProductInfo>
-              <p>Cashback</p>
-              <p>Preço</p>
-              <Add>
-                <img src={logo} alt="logo" />
-              </Add>
-            </Product>
-            <Product>
-              <ProductInfo>
-                <h2>1</h2>
-                <p>Nome do Supermercado</p>
-              </ProductInfo>
-              <p>Cashback</p>
-              <p>Preço</p>
-              <Add>
-                <img src={logo} alt="logo" />
-              </Add>
-            </Product>
-          </ProductsBox>
-        </Main>
-      </Container>
+      {loading ? (
+        <Container>
+          <Header userInfo={userInfo} />
+          <Main>
+            <ProductsBox>
+              <Legend>
+                <p>Produto</p>
+                <p>Cashback</p>
+                <p>Preço</p>
+                <p>Selecionar</p>
+              </Legend>
+              <Product>
+                <ProductInfo>
+                  <h2>1</h2>
+                  <p>Nome do Supermercado</p>
+                </ProductInfo>
+                <p>Cashback</p>
+                <p>Preço</p>
+                <Add>
+                  <img src={logo} alt="logo" />
+                </Add>
+              </Product>
+              <Product>
+                <ProductInfo>
+                  <h2>1</h2>
+                  <p>Nome do Supermercado</p>
+                </ProductInfo>
+                <p>Cashback</p>
+                <p>Preço</p>
+                <Add>
+                  <img src={logo} alt="logo" />
+                </Add>
+              </Product>
+              <Product>
+                <ProductInfo>
+                  <h2>1</h2>
+                  <p>Nome do Supermercado</p>
+                </ProductInfo>
+                <p>Cashback</p>
+                <p>Preço</p>
+                <Add>
+                  <img src={logo} alt="logo" />
+                </Add>
+              </Product>
+            </ProductsBox>
+          </Main>
+        </Container>
+      ) : (
+        <LoadingBox>
+          <Loading
+            width="100"
+            height="100"
+            color="#000000"
+            secondColor="#000000"
+          />
+        </LoadingBox>
+      )}
     </>
   );
 }

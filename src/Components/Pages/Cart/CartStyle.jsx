@@ -112,3 +112,14 @@ export const Add = styled.div`
     transform: translate(1px, 1px);
   }
 `;
+
+export const LoadingBox = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  z-index: 2;
+`;
