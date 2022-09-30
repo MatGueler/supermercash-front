@@ -56,7 +56,10 @@ function Header() {
           icon={faPersonRunning}
           size="2x"
           cursor="pointer"
-          onClick={() => navigate("/")}
+          onClick={() => {
+            localStorage.removeItem("token");
+            navigate("/");
+          }}
         />
       </Perfil>
     </HeaderBox>
