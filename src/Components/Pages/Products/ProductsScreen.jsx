@@ -12,6 +12,7 @@ import {
   ProductsBox,
   Add,
   ProductInfo,
+  LoadingBox,
 } from "./ProductsStyle";
 import { Container } from "../../Container/ContainerStyle";
 
@@ -21,11 +22,14 @@ import Header from "../../Header/Header";
 import { Button } from "../../Button/ButtonSyle";
 import Footer from "../../Footer/Footer";
 import { useEffect } from "react";
+import Loading from "../../Loading/Loading";
 
 function ProductsScreen() {
   const navigate = useNavigate();
 
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [userInfo, setUserInfo] = useState("");
 
   const advertsImages = [
     {
@@ -54,8 +58,28 @@ function ProductsScreen() {
   ];
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
     getAllproducts();
+    getUserInfo(token);
   }, []);
+
+  function getUserInfo(token) {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    axios
+      .get(`http://localhost:5000/user/me`, config)
+      .then((response) => {
+        setLoading(true);
+        setUserInfo(response.data);
+      })
+      .catch((error) => {
+        navigate("/");
+        console.error(error);
+      });
+  }
 
   function getAllproducts() {
     const url = "http://localhost:5000/products";
@@ -93,27 +117,38 @@ function ProductsScreen() {
 
   return (
     <>
-      <Container>
-        <Header />
-        <Main>
-          <ProductsBox>
-            <Legend>
-              <p>Produto</p>
-              <p>Quantidade</p>
-              <p>Preço médio</p>
-              <p>Selecionar</p>
-            </Legend>
-            {products.length === 0
-              ? ""
-              : products.map((product, index) => {
-                  return <ProductRender key={index} product={product} />;
-                })}
-          </ProductsBox>
-          <Button color="#c51b1b" onClick={() => navigate("/cart")}>
-            Comparar
-          </Button>
-        </Main>
-      </Container>
+      {loading ? (
+        <Container>
+          <Header userInfo={userInfo} />
+          <Main>
+            <ProductsBox>
+              <Legend>
+                <p>Produto</p>
+                <p>Quantidade</p>
+                <p>Preço médio</p>
+                <p>Selecionar</p>
+              </Legend>
+              {products.length === 0
+                ? ""
+                : products.map((product, index) => {
+                    return <ProductRender key={index} product={product} />;
+                  })}
+            </ProductsBox>
+            <Button color="#c51b1b" onClick={() => navigate("/cart")}>
+              Comparar
+            </Button>
+          </Main>
+        </Container>
+      ) : (
+        <LoadingBox>
+          <Loading
+            width="100"
+            height="100"
+            color="#000000"
+            secondColor="#000000"
+          />
+        </LoadingBox>
+      )}
     </>
   );
 }

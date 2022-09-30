@@ -94,3 +94,14 @@ export const Add = styled.div`
   display: flex;
   justify-content: center;
 `;
+
+export const LoadingBox = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  z-index: 2;
+`;

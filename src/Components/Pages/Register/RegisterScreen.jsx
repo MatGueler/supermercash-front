@@ -3,7 +3,14 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 // *Components
-import { Clip, Logo, Main, TextLogo, UserButtons } from "./RegisterStyle";
+import {
+  Clip,
+  LoadingBox,
+  Logo,
+  Main,
+  TextLogo,
+  UserButtons,
+} from "./RegisterStyle";
 import { AuthContainer } from "../../Container/ContainerStyle";
 import { Input } from "../../Input/InputSyle";
 import { Button } from "../../Button/ButtonSyle";
@@ -11,6 +18,7 @@ import { Button } from "../../Button/ButtonSyle";
 // *Image
 import logo from "../../../Assets/Image/Logo.png";
 import { useState } from "react";
+import Loading from "../../Loading/Loading";
 
 function RegisterScreen() {
   const navigate = useNavigate();
@@ -19,17 +27,25 @@ function RegisterScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [disable, setDisable] = useState(false);
 
   function SignIn(event) {
     event.preventDefault();
+    setLoading(!loading);
+    setDisable(!disable);
     const url = "http://localhost:5000/sign-up";
     const body = { name, email, password, confirmPassword };
     axios
       .post(url, body)
       .then((res) => {
+        setLoading(false);
+        setDisable(false);
         navigate("/");
       })
       .catch((err) => {
+        setLoading(false);
+        setDisable(false);
         console.log(err);
       });
   }
@@ -64,6 +80,7 @@ function RegisterScreen() {
               setName(e.target.value);
             }}
             value={name}
+            disabled={disable}
           />
           <Input
             type="email"
@@ -72,6 +89,7 @@ function RegisterScreen() {
               setEmail(e.target.value);
             }}
             value={email}
+            disabled={disable}
           />
           <Input
             placeholder="Senha"
@@ -80,6 +98,7 @@ function RegisterScreen() {
               setPassword(e.target.value);
             }}
             value={password}
+            disabled={disable}
           />
           <Input
             placeholder="Confirmar senha"
@@ -88,13 +107,31 @@ function RegisterScreen() {
               setConfirmPassword(e.target.value);
             }}
             value={confirmPassword}
+            disabled={disable}
           />
-          <UserButtons>
-            <Button color="#34D70B" onClick={() => navigate("/")}>
-              Entrar
-            </Button>
-            <Button color="#0B8DD7">Cadastrar</Button>
-          </UserButtons>
+          {loading === false ? (
+            <UserButtons>
+              <Button
+                color="#34D70B"
+                onClick={() => navigate("/")}
+                disabled={disable}
+              >
+                Entrar
+              </Button>
+              <Button color="#0B8DD7" disabled={disable}>
+                Cadastrar
+              </Button>
+            </UserButtons>
+          ) : (
+            <LoadingBox>
+              <LoadingBox
+                width="100"
+                height="100"
+                color="#FFFFFF"
+                secondColor="#FFFFFF"
+              />
+            </LoadingBox>
+          )}
         </form>
       </Main>
     </AuthContainer>
