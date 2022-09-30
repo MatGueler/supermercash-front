@@ -33,6 +33,11 @@ function Header() {
       });
   }
 
+  function GetFirstNameUser() {
+    const firstName = userInfo.name.split(" ");
+    return <p>Olá, {firstName[0]}</p>;
+  }
+
   return (
     <HeaderBox>
       <Logo>
@@ -46,7 +51,7 @@ function Header() {
         <input placeholder="Pesquisar . . ." />
       </SearchBox>
       <Perfil>
-        <p>Olá, {userInfo ? userInfo.name : ""}</p>
+        {userInfo ? <GetFirstNameUser /> : <button>Entrar</button>}
         <img
           src="https://conteudo.imguol.com.br/c/esporte/eb/2022/09/27/neymar-comemora-gol-marcado-pela-selecao-brasileira-contra-a-tunisia-1664308063053_v2_450x600.jpg"
           alt="PerfilPhoto"
@@ -56,7 +61,10 @@ function Header() {
           icon={faPersonRunning}
           size="2x"
           cursor="pointer"
-          onClick={() => navigate("/")}
+          onClick={() => {
+            localStorage.removeItem("token");
+            navigate("/");
+          }}
         />
       </Perfil>
     </HeaderBox>
