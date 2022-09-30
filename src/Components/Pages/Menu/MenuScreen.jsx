@@ -26,8 +26,6 @@ import { Button } from "../../Button/ButtonSyle";
 function MenuScreen() {
   const navigate = useNavigate();
 
-  const [userInfo, setUserInfo] = useState("");
-
   const advertsImages = [
     {
       image: "https://m.casasbahia.com.br/assets/images/casasbahia-logo.png",
@@ -53,27 +51,6 @@ function MenuScreen() {
       name: "Carone",
     },
   ];
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    getUserInfo(token);
-  }, []);
-
-  function getUserInfo(token) {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    axios
-      .get(`http://localhost:5000/user/me`, config)
-      .then((response) => {
-        setUserInfo(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
 
   return (
     <>
