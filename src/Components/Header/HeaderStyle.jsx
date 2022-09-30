@@ -73,6 +73,9 @@ export const Perfil = styled.div`
   }
 
   p {
+    width: 100px;
     margin: 0 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `;
