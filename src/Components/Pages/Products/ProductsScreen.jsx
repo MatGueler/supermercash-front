@@ -1,5 +1,5 @@
 // *Hooks
-// import axios from "axios";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
@@ -20,15 +20,13 @@ import { useState } from "react";
 import Header from "../../Header/Header";
 import { Button } from "../../Button/ButtonSyle";
 import Footer from "../../Footer/Footer";
+import { useEffect } from "react";
 
 function ProductsScreen() {
   const navigate = useNavigate();
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  // const [img2Advert, setImg2Advert] = useState(true);
+  const [products, setProducts] = useState([]);
+
   const advertsImages = [
     {
       image: "https://m.casasbahia.com.br/assets/images/casasbahia-logo.png",
@@ -55,34 +53,45 @@ function ProductsScreen() {
     },
   ];
 
-  function SignIn(event) {
-    event.preventDefault();
-    console.log("oi");
-    // const url = "http://localhost:5000/signin";
-    // const body = { email, password };
-    // axios
-    //   .get(url)
-    //   .then((res) => {
-    //     const token = res.data;
-    //     localStorage.setItem("token", token);
-    //     navigate("/menu");
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+  useEffect(() => {
+    getAllproducts();
+  }, []);
+
+  function getAllproducts() {
+    const url = "http://localhost:5000/products";
+    axios
+      .get(url)
+      .then((res) => {
+        const products = res.data;
+        setProducts(products);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
-  // setInterval(() => {
-  //   setImg2Advert(!img2Advert);
-  // }, 16000);
+  function ProductRender({ product }) {
+    return (
+      <Product>
+        <ProductInfo>
+          <img src={product.urlImage} alt="foto" />
+          <p>{product.name}</p>
+        </ProductInfo>
+        <p>Quantidade</p>
+        <p>R$ {product.precoMedio}</p>
+        <Add>
+          <FontAwesomeIcon
+            icon={faCirclePlus}
+            color="#1D733A"
+            size="2x"
+            cursor="pointer"
+          />
+        </Add>
+      </Product>
+    );
+  }
 
   return (
-    // <Container>
-    //   <Header />
-    //   <Main>
-
-    //   </Main>
-    // </Container>
     <>
       <Container>
         <Header />
@@ -94,22 +103,11 @@ function ProductsScreen() {
               <p>Preço médio</p>
               <p>Selecionar</p>
             </Legend>
-            <Product>
-              <ProductInfo>
-                <img src="" alt="foto" />
-                <p>Nome do Produto</p>
-              </ProductInfo>
-              <p>Quantidade</p>
-              <p>Preço médio</p>
-              <Add>
-                <FontAwesomeIcon
-                  icon={faCirclePlus}
-                  color="#1D733A"
-                  size="2x"
-                  cursor="pointer"
-                />
-              </Add>
-            </Product>
+            {products.length === 0
+              ? ""
+              : products.map((product, index) => {
+                  return <ProductRender key={index} product={product} />;
+                })}
           </ProductsBox>
           <Button color="#c51b1b" onClick={() => navigate("/cart")}>
             Comparar
