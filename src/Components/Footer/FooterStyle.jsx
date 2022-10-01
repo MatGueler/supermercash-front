@@ -17,16 +17,34 @@ export const FooterBox = styled.div`
     flex-direction: column;
     align-items: center;
     padding: 30px;
+    box-sizing: border-box;
   }
 
   p {
     margin-bottom: 10px;
     text-align: center;
   }
+
+  @media (max-width: 550px) {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    div {
+      padding: 20px;
+      width: 100%;
+    }
+  }
 `;
 
 export const Author = styled.div`
   border-right: 1px solid black;
+
+  @media (max-width: 550px) {
+    border-right: 0;
+    border-bottom: 1px solid black;
+  }
 `;
 
 export const Contact = styled.div``;
