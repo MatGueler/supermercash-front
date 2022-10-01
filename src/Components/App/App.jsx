@@ -4,6 +4,7 @@ import GlobalStyle from "../../Assets/CSS/GlobalStyle";
 import CartScreen from "../Pages/Cart/CartScreen";
 import LoginScreen from "../Pages/Login/LoginScreen";
 import MenuScreen from "../Pages/Menu/MenuScreen";
+import PerfilScreen from "../Pages/Perfil/PerfilScreen";
 import ProductsScreen from "../Pages/Products/ProductsScreen";
 import RegisterScreen from "../Pages/Register/RegisterScreen";
 
@@ -18,6 +19,7 @@ function App() {
           <Route path={"/menu"} element={<MenuScreen />} />
           <Route path={"/products"} element={<ProductsScreen />} />
           <Route path={"/cart"} element={<CartScreen />} />
+          <Route path={"/perfil"} element={<PerfilScreen />} />
         </Routes>
       </BrowserRouter>
     </>
