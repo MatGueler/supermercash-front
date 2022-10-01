@@ -25,7 +25,9 @@ export const Main = styled.div`
     color: #ffffff;
 
     @media (max-width: 499px) {
-      display: none;
+      height: 50px;
+      font-size: 25px;
+      margin: 10px 0;
     }
   }
 
@@ -59,7 +61,6 @@ export const Main = styled.div`
   }
 
   img {
-    margin-bottom: 60px;
     @media (min-width: 500px) {
       display: none;
     }

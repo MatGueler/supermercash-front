@@ -67,11 +67,11 @@ function LoginScreen() {
           <span></span>
           <span></span>
         </Clip>
+        <img src={logo} alt="logo" />
         <h1>
           <span>Supermer</span>
           <span>cash</span>
         </h1>
-        <img src={logo} alt="logo" />
         <form onSubmit={SignIn}>
           <p>Faça seu login! E comece a economizar!</p>
           <Input
