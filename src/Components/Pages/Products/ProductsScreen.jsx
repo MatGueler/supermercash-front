@@ -29,6 +29,7 @@ function ProductsScreen() {
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [disable, setDisable] = useState(false);
   const [userInfo, setUserInfo] = useState("");
 
   const advertsImages = [
@@ -94,14 +95,57 @@ function ProductsScreen() {
       });
   }
 
+  function AddProductCart(name, setQuantify, token) {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const body = {
+      name,
+    };
+    axios
+      .post(`http://localhost:5000/products`, body, config)
+      .then((response) => {
+        getQuantify(name, setQuantify, token);
+      })
+      .catch((error) => {
+        navigate("/");
+        console.error(error);
+      });
+  }
+
+  function getQuantify(name, setQuantify, token) {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    axios
+      .get(`http://localhost:5000/products/quantify/${name}`, config)
+      .then((response) => {
+        const count = response.data._count;
+        setQuantify(count);
+      })
+      .catch((error) => {
+        navigate("/");
+        console.error(error);
+      });
+  }
+
   function ProductRender({ product }) {
+    const token = localStorage.getItem("token");
+    const [quantify, setQuantify] = useState(0);
+    getQuantify(product.name, setQuantify, token);
+    product["quantify"] = quantify;
+
     return (
       <Product>
         <ProductInfo>
           <img src={product.urlImage} alt="foto" />
           <p>{product.name}</p>
         </ProductInfo>
-        <p>Quantidade</p>
+        <p>{product.quantify}</p>
         <p>R$ {product.precoMedio}</p>
         <Add>
           <FontAwesomeIcon
@@ -109,6 +153,9 @@ function ProductsScreen() {
             color="#1D733A"
             size="2x"
             cursor="pointer"
+            onClick={() => {
+              AddProductCart(product.name, setQuantify, token);
+            }}
           />
         </Add>
       </Product>
