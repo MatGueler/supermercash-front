@@ -57,23 +57,43 @@ export const Legend = styled.div`
   p:first-child {
     width: 200px;
   }
+
+  @media (max-width: 600px) {
+    p {
+      width: 50px;
+      overflow: hidden;
+      word-break: break-all;
+    }
+
+    p:first-child {
+      display: flex;
+      flex-direction: column;
+      width: 100px;
+    }
+  }
 `;
 
 export const Product = styled.div`
   width: 100%;
-  height: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
   border-bottom: 1px solid grey;
-  padding: 0 10px;
+  padding: 20px 10px;
 
   p {
     width: 100px;
     display: flex;
     text-align: center;
     justify-content: center;
+    word-break: break-all;
+  }
+
+  @media (max-width: 600px) {
+    p {
+      width: 50px;
+    }
   }
 `;
 
@@ -91,6 +111,18 @@ export const ProductInfo = styled.div`
     align-items: center;
     border-radius: 50%;
     border: 3px solid ${(props) => props.color};
+    margin-bottom: 10px;
+  }
+
+  @media (max-width: 600px) {
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+
+    p {
+      width: 100px;
+      word-break: break-all;
+    }
   }
 `;
 
@@ -107,6 +139,10 @@ export const Add = styled.div`
   }
   img:hover {
     transform: translate(1px, 1px);
+  }
+
+  @media (max-width: 600px) {
+    width: 50px;
   }
 `;
 

@@ -51,34 +51,56 @@ export const Legend = styled.div`
     text-align: center;
     justify-content: center;
     width: 100px;
+    overflow: hidden;
+    word-break: break-all;
   }
 
   p:first-child {
     width: 200px;
   }
+
+  @media (max-width: 600px) {
+    p {
+      width: 50px;
+      overflow: hidden;
+      word-break: break-all;
+    }
+
+    p:first-child {
+      display: flex;
+      flex-direction: column;
+      width: 100px;
+    }
+  }
 `;
 
 export const Product = styled.div`
   width: 100%;
-  height: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
   border-bottom: 1px solid grey;
-  padding: 0 10px;
+  padding: 20px 10px;
 
   p {
     width: 100px;
     display: flex;
     text-align: center;
     justify-content: center;
+    word-break: break-all;
   }
 
   img {
     width: 60px;
     height: 60px;
-    background-color: blue;
+    margin-bottom: 10px;
+  }
+
+  @media (max-width: 600px) {
+    p {
+      width: 50px;
+    }
   }
 `;
 
@@ -87,12 +109,27 @@ export const ProductInfo = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: 600px) {
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+
+    p {
+      width: 100px;
+      word-break: break-all;
+    }
+  }
 `;
 
 export const Add = styled.div`
   width: 100px;
   display: flex;
   justify-content: center;
+
+  @media (max-width: 600px) {
+    width: 50px;
+  }
 `;
 
 export const LoadingBox = styled.div`
