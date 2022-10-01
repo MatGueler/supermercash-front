@@ -12,4 +12,5 @@ export const Button = styled.button`
   font-weight: bold;
   background-color: ${(props) => props.color};
   cursor: pointer;
+  overflow: hidden;
 `;
