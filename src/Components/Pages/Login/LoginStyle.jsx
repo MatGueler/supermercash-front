@@ -23,6 +23,12 @@ export const Main = styled.div`
     border-radius: 10px;
     background-color: black;
     color: #ffffff;
+
+    @media (max-width: 499px) {
+      height: 50px;
+      font-size: 25px;
+      margin: 10px 0;
+    }
   }
 
   h1:hover {
@@ -52,6 +58,12 @@ export const Main = styled.div`
   h3 {
     font-size: 30px;
     margin: 30px 0;
+  }
+
+  img {
+    @media (min-width: 500px) {
+      display: none;
+    }
   }
 `;
 
@@ -87,6 +99,10 @@ export const Logo = styled.div`
     height: 150px;
     cursor: pointer;
     z-index: 1;
+  }
+
+  @media (max-width: 1023px) {
+    display: none;
   }
 `;
 
@@ -143,6 +159,10 @@ export const Clip = styled.div`
     border-radius: 10px;
     background-color: black;
     box-shadow: 2px 2px 5px black;
+  }
+
+  @media (max-width: 1023px) {
+    display: none;
   }
 `;
 

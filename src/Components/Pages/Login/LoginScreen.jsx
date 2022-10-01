@@ -67,6 +67,7 @@ function LoginScreen() {
           <span></span>
           <span></span>
         </Clip>
+        <img src={logo} alt="logo" />
         <h1>
           <span>Supermer</span>
           <span>cash</span>
@@ -93,8 +94,14 @@ function LoginScreen() {
           />
           {loading === false ? (
             <UserButtons>
-              <Button color="#34D70B" disabled={disable}>Entrar</Button>
-              <Button color="#0B8DD7" onClick={() => navigate("/sign-up")} disabled={disable}>
+              <Button color="#34D70B" disabled={disable}>
+                Entrar
+              </Button>
+              <Button
+                color="#0B8DD7"
+                onClick={() => navigate("/sign-up")}
+                disabled={disable}
+              >
                 Cadastrar
               </Button>
             </UserButtons>

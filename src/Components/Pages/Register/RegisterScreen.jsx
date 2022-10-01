@@ -67,6 +67,7 @@ function RegisterScreen() {
           <span></span>
           <span></span>
         </Clip>
+        <img src={logo} alt="logo" />
         <h1>
           <span>Supermer</span>
           <span>cash</span>

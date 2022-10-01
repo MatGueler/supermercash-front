@@ -37,6 +37,10 @@ export const Adverts = styled.div`
     text-align: center;
     font-size: 60px;
   }
+
+  @media (max-width: 700px) {
+    display: none;
+  }
 `;
 
 export const Panel = styled.div`
@@ -71,6 +75,10 @@ export const ButtonsMenu = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 30px;
+
+  @media (max-width: 700px) {
+    margin: 30px 0;
+  }
 `;
 
 export const BoxButton = styled.div`
