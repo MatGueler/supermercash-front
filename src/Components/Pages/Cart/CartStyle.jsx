@@ -75,6 +75,13 @@ export const Product = styled.div`
     text-align: center;
     justify-content: center;
   }
+`;
+
+export const ProductInfo = styled.div`
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
   h2 {
     width: 40px;
@@ -83,18 +90,8 @@ export const Product = styled.div`
     justify-content: center;
     align-items: center;
     border-radius: 50%;
+    border: 3px solid ${(props) => props.color};
   }
-
-  h2:first-child {
-    border: 3px solid black;
-  }
-`;
-
-export const ProductInfo = styled.div`
-  width: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 `;
 
 export const Add = styled.div`
