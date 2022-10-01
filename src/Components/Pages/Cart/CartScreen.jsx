@@ -44,6 +44,7 @@ function CartScreen() {
     axios
       .get(`http://localhost:5000/cart`, config)
       .then((response) => {
+        // ? TRATAR CASO ONDE NÃO EXISTA SUPERMERCADO CADASTRADO OU SEM PRODUTOS CADASTRADOS!!!!!!!!!!!
         setCartsBySupermercat(response.data);
       })
       .catch((error) => {
@@ -69,6 +70,59 @@ function CartScreen() {
       });
   }
 
+  function BuildPodium({ index, item }) {
+    // if (index === 0) {
+    //   return (
+    //     <ProductInfo color="yellow">
+    //       <h2>{index + 1}</h2>
+    //       <p>{item.supermarket}</p>
+    //     </ProductInfo>
+    //   );
+    // }
+    // if (index === 1) {
+    //   return (
+    //     <ProductInfo color="grey">
+    //       <h2>{index + 1}</h2>
+    //       <p>{item.supermarket}</p>
+    //     </ProductInfo>
+    //   );
+    // }
+    // if (index === 2) {
+    //   return (
+    //     <ProductInfo color="brown">
+    //       <h2>{index + 1}</h2>
+    //       <p>{item.supermarket}</p>
+    //     </ProductInfo>
+    //   );
+    // }
+    return (
+      <ProductInfo
+        color={() => {
+          if (index === 0) return "yellow";
+          if (index === 1) return "grey";
+          if (index === 2) return "brown";
+          return "black";
+        }}
+      >
+        <h2>{index + 1}</h2>
+        <p>{item.supermarket}</p>
+      </ProductInfo>
+    );
+  }
+
+  function AddSupermarketValue({ item, index }) {
+    return (
+      <Product>
+        <BuildPodium index={index} item={item} />
+        <p>Cashback</p>
+        <p>R$ {item.total}</p>
+        <Add>
+          <img src={logo} alt="logo" />
+        </Add>
+      </Product>
+    );
+  }
+
   return (
     <>
       {loading ? (
@@ -82,17 +136,19 @@ function CartScreen() {
                 <p>Preço</p>
                 <p>Selecionar</p>
               </Legend>
-              <Product>
-                <ProductInfo>
-                  <h2>1</h2>
-                  <p>Nome do Supermercado</p>
-                </ProductInfo>
-                <p>Cashback</p>
-                <p>Preço</p>
-                <Add>
-                  <img src={logo} alt="logo" />
-                </Add>
-              </Product>
+              {cartsBySupermercat.length === 0 ? (
+                <p>Sem itens no carrinho ou sem supermercados</p>
+              ) : (
+                cartsBySupermercat.map((item, index) => {
+                  return (
+                    <AddSupermarketValue
+                      key={index}
+                      item={item}
+                      index={index}
+                    />
+                  );
+                })
+              )}
             </ProductsBox>
           </Main>
         </Container>
