@@ -6,15 +6,14 @@ import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 
 // *Components
 import {
-  Legend,
-  Main,
-  Product,
-  ProductsBox,
-  Add,
-  ProductInfo,
   LoadingBox,
+  Main,
+  PerfilImage,
+  PerfilInfo,
+  ProgressBarBox,
 } from "./PerfilStyle";
 import { Container } from "../../Container/ContainerStyle";
+import { ProgressBar } from "react-bootstrap";
 
 // *Image
 import { useState } from "react";
@@ -23,6 +22,7 @@ import { Button } from "../../Button/ButtonSyle";
 import Footer from "../../Footer/Footer";
 import { useEffect } from "react";
 import Loading from "../../Loading/Loading";
+import StackedExample from "../../ProgressBar/ProgressBar";
 
 function PerfilScreen() {
   const navigate = useNavigate();
@@ -31,32 +31,6 @@ function PerfilScreen() {
   const [loading, setLoading] = useState(false);
   const [disable, setDisable] = useState(false);
   const [userInfo, setUserInfo] = useState("");
-
-  const advertsImages = [
-    {
-      image: "https://m.casasbahia.com.br/assets/images/casasbahia-logo.png",
-      name: "casas bahia",
-    },
-    {
-      image: "https://capitalist.com.br/wp-content/uploads/2022/05/magalu.jpg",
-      name: "Magazine Luiza",
-    },
-    {
-      image:
-        "https://newspapers-global.s3.eu-west-2.amazonaws.com/production/promotons-br/retailers/f2926253-b47f-4bd4-a357-4784eb2e783e-atacadao-logo.jpg",
-      name: "Atacadão",
-    },
-    {
-      image:
-        "https://logosmarcas.net/wp-content/uploads/2020/11/Carrefour-Logo-1972-1982.jpg",
-      name: "Carrefour",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbiC97TXpj0leoN3xHZhYDs0Ot_JCaiZaETvgVlUy9&s",
-      name: "Carone",
-    },
-  ];
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -133,13 +107,27 @@ function PerfilScreen() {
       });
   }
 
+  function StackedExample() {
+    return (
+      <ProgressBar>
+        <ProgressBar striped animated variant="success" now={75} key={1} />
+      </ProgressBar>
+    );
+  }
+
   return (
     <>
       {loading ? (
         <Container>
           <Header userInfo={userInfo} />
           <Main>
-            
+            <PerfilInfo>ola</PerfilInfo>
+            <PerfilImage>
+              <img src="https://conteudo.imguol.com.br/c/esporte/eb/2022/09/27/neymar-comemora-gol-marcado-pela-selecao-brasileira-contra-a-tunisia-1664308063053_v2_450x600.jpg" />
+              <ProgressBarBox>
+                <StackedExample />
+              </ProgressBarBox>
+            </PerfilImage>
           </Main>
         </Container>
       ) : (
