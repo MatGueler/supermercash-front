@@ -27,11 +27,29 @@ function CartScreen() {
 
   const [loading, setLoading] = useState(false);
   const [userInfo, setUserInfo] = useState("");
+  const [cartsBySupermercat, setCartsBySupermercat] = useState([]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     getUserInfo(token);
+    getCartValues(token);
   }, []);
+
+  function getCartValues(token) {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    axios
+      .get(`http://localhost:5000/cart`, config)
+      .then((response) => {
+        setCartsBySupermercat(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 
   function getUserInfo(token) {
     const config = {
@@ -64,28 +82,6 @@ function CartScreen() {
                 <p>Preço</p>
                 <p>Selecionar</p>
               </Legend>
-              <Product>
-                <ProductInfo>
-                  <h2>1</h2>
-                  <p>Nome do Supermercado</p>
-                </ProductInfo>
-                <p>Cashback</p>
-                <p>Preço</p>
-                <Add>
-                  <img src={logo} alt="logo" />
-                </Add>
-              </Product>
-              <Product>
-                <ProductInfo>
-                  <h2>1</h2>
-                  <p>Nome do Supermercado</p>
-                </ProductInfo>
-                <p>Cashback</p>
-                <p>Preço</p>
-                <Add>
-                  <img src={logo} alt="logo" />
-                </Add>
-              </Product>
               <Product>
                 <ProductInfo>
                   <h2>1</h2>
