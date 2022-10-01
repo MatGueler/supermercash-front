@@ -21,6 +21,10 @@ export const Logo = styled.div`
     align-items: center;
     font-size: 30px;
     cursor: pointer;
+
+    @media (max-width: 700px) {
+      font-size: 20px;
+    }
   }
 
   span {
@@ -52,6 +56,10 @@ export const SearchBox = styled.div`
     margin: 0 30px;
     box-sizing: border-box;
   }
+
+  @media (max-width: 700px) {
+    display: none;
+  }
 `;
 
 export const Perfil = styled.div`
@@ -77,5 +85,9 @@ export const Perfil = styled.div`
     margin: 0 20px;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    @media (max-width: 700px) {
+      display: none;
+    }
   }
 `;
