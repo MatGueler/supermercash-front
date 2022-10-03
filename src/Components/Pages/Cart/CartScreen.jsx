@@ -2,7 +2,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import { faShop } from "@fortawesome/free-solid-svg-icons";
 
 // *Components
 import {
@@ -13,6 +13,7 @@ import {
   Add,
   ProductInfo,
   LoadingBox,
+  BoxButton,
 } from "./CartStyle";
 import { Container } from "../../Container/ContainerStyle";
 import Header from "../../Header/Header";
@@ -129,6 +130,12 @@ function CartScreen() {
         <Container>
           <Header userInfo={userInfo} />
           <Main>
+            <BoxButton onClick={() => navigate("/products")}>
+              <button>
+                <FontAwesomeIcon icon={faShop} size="1x" />
+              </button>
+              <p>Continue adicionando mais produtos ao seu carrinho!</p>
+            </BoxButton>
             <ProductsBox>
               <Legend>
                 <p>Produto</p>

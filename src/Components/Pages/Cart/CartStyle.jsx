@@ -26,6 +26,31 @@ export const Main = styled.div`
   }
 `;
 
+export const BoxButton = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  cursor: pointer;
+
+  button {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    border: 1px solid gray;
+    border-radius: 50%;
+    box-shadow: 1px 1px 3px grey;
+    background-color: #c7c7c7;
+    box-sizing: border-box;
+    margin: 0 20px;
+  }
+
+  p {
+    font-size: 20px;
+  }
+`;
+
 export const ProductsBox = styled.div`
   width: 100%;
   display: flex;
