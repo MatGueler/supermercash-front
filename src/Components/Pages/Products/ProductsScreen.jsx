@@ -32,12 +32,15 @@ function ProductsScreen() {
   const [loading, setLoading] = useState(false);
   const [disable, setDisable] = useState(false);
   const [userInfo, setUserInfo] = useState("");
+  const [token, setToken] = useState("");
+  const [updatePage, setUpdatePage] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    setToken(token);
     getAllproducts();
     getUserInfo(token);
-  }, []);
+  }, [updatePage]);
 
   function getUserInfo(token) {
     const config = {
@@ -90,7 +93,7 @@ function ProductsScreen() {
       });
   }
 
-  function RemoveAllProducts(setQuantify, token) {
+  function RemoveAllProducts() {
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -99,7 +102,7 @@ function ProductsScreen() {
     axios
       .delete(`http://localhost:5000/products/delete`, config)
       .then((response) => {
-        // getQuantify(name, setQuantify, token);
+        setUpdatePage(!updatePage);
       })
       .catch((error) => {
         alert("Is not possible to remove this item");
