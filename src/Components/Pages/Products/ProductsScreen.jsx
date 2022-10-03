@@ -90,6 +90,23 @@ function ProductsScreen() {
       });
   }
 
+  function RemoveAllProducts(setQuantify, token) {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    axios
+      .delete(`http://localhost:5000/products/delete`, config)
+      .then((response) => {
+        // getQuantify(name, setQuantify, token);
+      })
+      .catch((error) => {
+        alert("Is not possible to remove this item");
+        console.error(error);
+      });
+  }
+
   function getQuantify(name, setQuantify, token) {
     const config = {
       headers: {
@@ -168,7 +185,9 @@ function ProductsScreen() {
             <Button color="#c51b1b" onClick={() => navigate("/cart")}>
               Comparar
             </Button>
-            <Button color="#8b8b8b">Limpar carrinho</Button>
+            <Button color="#8b8b8b" onClick={() => RemoveAllProducts()}>
+              Limpar carrinho
+            </Button>
           </Main>
         </Container>
       ) : (
