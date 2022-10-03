@@ -73,7 +73,7 @@ function ProductsScreen() {
       });
   }
 
-  function AddProductCart(name, setQuantify, token) {
+  function AddProductCart(name, setQuantify) {
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -85,7 +85,7 @@ function ProductsScreen() {
     axios
       .post(`http://localhost:5000/products`, body, config)
       .then((response) => {
-        getQuantify(name, setQuantify, token);
+        getQuantify(name, setQuantify);
       })
       .catch((error) => {
         navigate("/");
@@ -110,7 +110,24 @@ function ProductsScreen() {
       });
   }
 
-  function getQuantify(name, setQuantify, token) {
+  function RemoveOneProduct(name, setQuantify) {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    axios
+      .delete(`http://localhost:5000/products/delete/${name}`, config)
+      .then((response) => {
+        getQuantify(name, setQuantify);
+      })
+      .catch((error) => {
+        alert(error.response.data);
+        console.error(error);
+      });
+  }
+
+  function getQuantify(name, setQuantify) {
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -129,7 +146,6 @@ function ProductsScreen() {
   }
 
   function ProductRender({ product }) {
-    const token = localStorage.getItem("token");
     const [quantify, setQuantify] = useState(0);
     getQuantify(product.name, setQuantify, token);
     product["quantify"] = quantify;
@@ -158,7 +174,7 @@ function ProductsScreen() {
             size="2x"
             cursor="pointer"
             onClick={() => {
-              AddProductCart(product.name, setQuantify, token);
+              RemoveOneProduct(product.name, setQuantify);
             }}
           />
         </Add>
