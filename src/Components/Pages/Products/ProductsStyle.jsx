@@ -127,6 +127,7 @@ export const ProductInfo = styled.div`
 
 export const Add = styled.div`
   width: 100px;
+  height: 70px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -142,9 +143,8 @@ export const Add = styled.div`
 `;
 
 export const LoadingBox = styled.div`
-  position: absolute;
   width: 100%;
-  height: 100%;
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: center;
