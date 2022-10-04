@@ -12,7 +12,7 @@ import {
   ProgressBarBox,
 } from "./PerfilStyle";
 import { Container } from "../../Container/ContainerStyle";
-import { ProgressBar } from "react-bootstrap";
+import ProgressBar from "react-bootstrap/ProgressBar";
 
 // *Image
 import { useState } from "react";
@@ -21,7 +21,6 @@ import { Button } from "../../Button/ButtonSyle";
 import { useEffect } from "react";
 import Loading from "../../Loading/Loading";
 import { Input } from "../../Input/InputSyle";
-import StackedExample from "../../ProgressBar/ProgressBar";
 
 function PerfilScreen() {
   const navigate = useNavigate();
@@ -56,6 +55,10 @@ function PerfilScreen() {
       .then((response) => {
         setLoading(true);
         setUserInfo(response.data);
+        setName(response.data.name);
+        setEmail(response.data.email);
+        setAdress(response.data.adress.adress);
+        setPhone(response.data.phone.phone);
       })
       .catch((error) => {
         navigate("/");
@@ -187,6 +190,7 @@ function PerfilScreen() {
             <PerfilImage>
               <img src="https://conteudo.imguol.com.br/c/esporte/eb/2022/09/27/neymar-comemora-gol-marcado-pela-selecao-brasileira-contra-a-tunisia-1664308063053_v2_450x600.jpg" />
               <ProgressBarBox>
+                // ! ESTA DANDO ERRO NA BARRA
                 <StackedExample />
                 <p>xxx produtos comprados</p>
               </ProgressBarBox>
