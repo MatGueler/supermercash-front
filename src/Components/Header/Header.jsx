@@ -30,7 +30,7 @@ function Header({ userInfo }) {
         <Perfil>
           {userInfo ? <GetFirstNameUser /> : <button>Entrar</button>}
           <img
-            src="https://conteudo.imguol.com.br/c/esporte/eb/2022/09/27/neymar-comemora-gol-marcado-pela-selecao-brasileira-contra-a-tunisia-1664308063053_v2_450x600.jpg"
+            src={userInfo.image.urlImage}
             alt="PerfilPhoto"
             onClick={() => navigate("/perfil")}
           />
