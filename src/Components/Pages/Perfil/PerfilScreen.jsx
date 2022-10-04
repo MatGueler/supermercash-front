@@ -25,8 +25,6 @@ import { Input } from "../../Input/InputSyle";
 function PerfilScreen() {
   const navigate = useNavigate();
 
-  const [token, setToken] = useState("");
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [userImage, setUserImage] = useState("");
@@ -42,13 +40,12 @@ function PerfilScreen() {
   const [updateImage, setUpdateImage] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    setToken(token);
+    getUserInfo();
     getAllproducts();
-    getUserInfo(token);
   }, []);
 
-  function getUserInfo(token) {
+  function getUserInfo() {
+    const token = localStorage.getItem("token");
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -57,16 +54,22 @@ function PerfilScreen() {
     axios
       .get(`http://localhost:5000/user/me`, config)
       .then((response) => {
+        console.log(response.data);
+        if (response.data.accessToken) {
+          console.log("trocou");
+          localStorage.setItem("token", response.data.accessToken);
+        }
+        setUserInfo(response.data.userInfo);
         setLoading(true);
-        setUserInfo(response.data);
-        setName(response.data.name);
-        setUserImage(response.data.image.urlImage);
-        setEmail(response.data.email);
-        setAdress(response.data.adress.adress);
-        setPhone(response.data.phone.phone);
+        setName(response.data.userInfo.name);
+        setUserImage(response.data.userInfo.image.urlImage);
+        setEmail(response.data.userInfo.email);
+        setAdress(response.data.userInfo.adress.adress);
+        setPhone(response.data.userInfo.phone.phone);
       })
       .catch((error) => {
-        navigate("/");
+        console.log("erro1");
+        // navigate("/");
         console.error(error);
       });
   }
@@ -85,6 +88,7 @@ function PerfilScreen() {
   }
 
   function UpdateInfos() {
+    const token = localStorage.getItem("token");
     const url = "http://localhost:5000/user/me";
     const config = {
       headers: {
@@ -110,6 +114,7 @@ function PerfilScreen() {
   }
 
   function UpdateImage() {
+    const token = localStorage.getItem("token");
     const url = "http://localhost:5000/user/me/image";
     const config = {
       headers: {
@@ -122,7 +127,7 @@ function PerfilScreen() {
     axios
       .put(url, body, config)
       .then((res) => {
-        getUserInfo(token);
+        getUserInfo();
         setUpdateImage(!updateImage);
       })
       .catch((err) => {

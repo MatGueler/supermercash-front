@@ -51,13 +51,14 @@ function ProductsScreen() {
       .get(`http://localhost:5000/user/me`, config)
       .then((response) => {
         setLoading(true);
+        console.log(response.data.accessToken);
         if (response.data.accessToken) {
           localStorage.setItem("token", response.data.accessToken);
         }
         setUserInfo(response.data.userInfo);
       })
       .catch((error) => {
-        navigate("/");
+        // navigate("/");
         console.error(error);
       });
   }
