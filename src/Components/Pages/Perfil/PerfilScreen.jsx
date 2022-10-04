@@ -92,19 +92,17 @@ function PerfilScreen() {
     const body = {
       name,
       email,
-      userImage,
       adress,
       phone,
     };
-    console.log(body);
-    setUpdateInfos(!updateInfos);
     axios
       .put(url, body, config)
       .then((res) => {
-        const products = res.data;
-        setProducts(products);
+        getUserInfo(token);
+        setUpdateInfos(!updateInfos);
       })
       .catch((err) => {
+        alert(err.response.data[0]);
         console.log(err);
       });
   }
