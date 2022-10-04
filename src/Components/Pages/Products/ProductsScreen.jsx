@@ -74,6 +74,7 @@ function ProductsScreen() {
   }
 
   function AddProductCart(name, setQuantify) {
+    setDisable(true);
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -111,6 +112,7 @@ function ProductsScreen() {
   }
 
   function RemoveOneProduct(name, setQuantify) {
+    setDisable(true);
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -120,10 +122,12 @@ function ProductsScreen() {
       .delete(`http://localhost:5000/products/delete/${name}`, config)
       .then((response) => {
         getQuantify(name, setQuantify);
+        setDisable(false);
       })
       .catch((error) => {
         alert(error.response.data);
         console.error(error);
+        setDisable(false);
       });
   }
 
@@ -137,7 +141,8 @@ function ProductsScreen() {
       .get(`http://localhost:5000/products/quantify/${name}`, config)
       .then((response) => {
         const count = response.data._count;
-        setQuantify(count);
+        setQuantify( count );
+        setDisable(false);
       })
       .catch((error) => {
         navigate("/");
@@ -146,7 +151,7 @@ function ProductsScreen() {
   }
 
   function ProductRender({ product }) {
-    const [quantify, setQuantify] = useState(0);
+    const [quantify, setQuantify] = useState('');
     getQuantify(product.name, setQuantify, token);
     product["quantify"] = quantify;
 
@@ -159,24 +164,37 @@ function ProductsScreen() {
         <p>{product.quantify}</p>
         <p>R$ {product.precoMedio}</p>
         <Add>
-          <FontAwesomeIcon
-            icon={faCirclePlus}
-            color="#1D733A"
-            size="2x"
-            cursor="pointer"
-            onClick={() => {
-              AddProductCart(product.name, setQuantify, token);
-            }}
-          />
-          <FontAwesomeIcon
-            icon={faCircleMinus}
-            color="#c51b1b"
-            size="2x"
-            cursor="pointer"
-            onClick={() => {
-              RemoveOneProduct(product.name, setQuantify);
-            }}
-          />
+          {disable ? (
+            <LoadingBox>
+              <Loading
+                width="100"
+                height="100"
+                color="#000000"
+                secondColor="#000000"
+              />
+            </LoadingBox>
+          ) : (
+            <>
+              <FontAwesomeIcon
+                icon={faCirclePlus}
+                color="#1D733A"
+                size="2x"
+                cursor="pointer"
+                onClick={() => {
+                  AddProductCart(product.name, setQuantify, token);
+                }}
+              />
+              <FontAwesomeIcon
+                icon={faCircleMinus}
+                color="#c51b1b"
+                size="2x"
+                cursor="pointer"
+                onClick={() => {
+                  RemoveOneProduct(product.name, setQuantify);
+                }}
+              />
+            </>
+          )}
         </Add>
       </Product>
     );
