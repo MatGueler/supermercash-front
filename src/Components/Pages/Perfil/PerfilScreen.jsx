@@ -170,7 +170,7 @@ function PerfilScreen() {
                   <Button
                     color="grey"
                     onClick={() => {
-                      setUpdateImage(!updateImage);
+                      UpdateImage();
                     }}
                   >
                     Salvar Imagem
