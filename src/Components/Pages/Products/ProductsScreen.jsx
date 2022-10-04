@@ -36,13 +36,12 @@ function ProductsScreen() {
   const [updatePage, setUpdatePage] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    setToken(token);
+    getUserInfo();
     getAllproducts();
-    getUserInfo(token);
   }, [updatePage]);
 
-  function getUserInfo(token) {
+  function getUserInfo() {
+    const token = localStorage.getItem("token");
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -52,7 +51,10 @@ function ProductsScreen() {
       .get(`http://localhost:5000/user/me`, config)
       .then((response) => {
         setLoading(true);
-        setUserInfo(response.data);
+        if (response.data.accessToken) {
+          localStorage.setItem("token", response.data.accessToken);
+        }
+        setUserInfo(response.data.userInfo);
       })
       .catch((error) => {
         navigate("/");
@@ -74,6 +76,7 @@ function ProductsScreen() {
   }
 
   function AddProductCart(name, setQuantify) {
+    const token = localStorage.getItem("token");
     setDisable(true);
     const config = {
       headers: {
@@ -95,6 +98,7 @@ function ProductsScreen() {
   }
 
   function RemoveAllProducts() {
+    const token = localStorage.getItem("token");
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -112,6 +116,7 @@ function ProductsScreen() {
   }
 
   function RemoveOneProduct(name, setQuantify) {
+    const token = localStorage.getItem("token");
     setDisable(true);
     const config = {
       headers: {
@@ -132,6 +137,7 @@ function ProductsScreen() {
   }
 
   function getQuantify(name, setQuantify) {
+    const token = localStorage.getItem("token");
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -141,7 +147,7 @@ function ProductsScreen() {
       .get(`http://localhost:5000/products/quantify/${name}`, config)
       .then((response) => {
         const count = response.data._count;
-        setQuantify( count );
+        setQuantify(count);
         setDisable(false);
       })
       .catch((error) => {
@@ -151,7 +157,7 @@ function ProductsScreen() {
   }
 
   function ProductRender({ product }) {
-    const [quantify, setQuantify] = useState('');
+    const [quantify, setQuantify] = useState("");
     getQuantify(product.name, setQuantify, token);
     product["quantify"] = quantify;
 
