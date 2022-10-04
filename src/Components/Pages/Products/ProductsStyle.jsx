@@ -17,6 +17,7 @@ export const Main = styled.div`
     height: 40px;
     display: flex;
     justify-content: center;
+    align-items: center;
     box-sizing: border-box;
   }
 
@@ -94,12 +95,14 @@ export const Product = styled.div`
   img {
     width: 60px;
     height: 60px;
-    margin-bottom: 10px;
   }
 
   @media (max-width: 600px) {
     p {
       width: 50px;
+    }
+    img {
+      margin-bottom: 10px;
     }
   }
 `;
@@ -124,8 +127,15 @@ export const ProductInfo = styled.div`
 
 export const Add = styled.div`
   width: 100px;
+  height: 70px;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
+
+  svg:first-child {
+    margin-bottom: 5px;
+  }
 
   @media (max-width: 600px) {
     width: 50px;
@@ -133,9 +143,8 @@ export const Add = styled.div`
 `;
 
 export const LoadingBox = styled.div`
-  position: absolute;
   width: 100%;
-  height: 100%;
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: center;

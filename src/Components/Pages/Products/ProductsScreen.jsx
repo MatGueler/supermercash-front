@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import { faCircleMinus } from "@fortawesome/free-solid-svg-icons";
 
 // *Components
 import {
@@ -31,38 +32,15 @@ function ProductsScreen() {
   const [loading, setLoading] = useState(false);
   const [disable, setDisable] = useState(false);
   const [userInfo, setUserInfo] = useState("");
-
-  const advertsImages = [
-    {
-      image: "https://m.casasbahia.com.br/assets/images/casasbahia-logo.png",
-      name: "casas bahia",
-    },
-    {
-      image: "https://capitalist.com.br/wp-content/uploads/2022/05/magalu.jpg",
-      name: "Magazine Luiza",
-    },
-    {
-      image:
-        "https://newspapers-global.s3.eu-west-2.amazonaws.com/production/promotons-br/retailers/f2926253-b47f-4bd4-a357-4784eb2e783e-atacadao-logo.jpg",
-      name: "Atacadão",
-    },
-    {
-      image:
-        "https://logosmarcas.net/wp-content/uploads/2020/11/Carrefour-Logo-1972-1982.jpg",
-      name: "Carrefour",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbiC97TXpj0leoN3xHZhYDs0Ot_JCaiZaETvgVlUy9&s",
-      name: "Carone",
-    },
-  ];
+  const [token, setToken] = useState("");
+  const [updatePage, setUpdatePage] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    setToken(token);
     getAllproducts();
     getUserInfo(token);
-  }, []);
+  }, [updatePage]);
 
   function getUserInfo(token) {
     const config = {
@@ -95,7 +73,8 @@ function ProductsScreen() {
       });
   }
 
-  function AddProductCart(name, setQuantify, token) {
+  function AddProductCart(name, setQuantify) {
+    setDisable(true);
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -107,7 +86,7 @@ function ProductsScreen() {
     axios
       .post(`http://localhost:5000/products`, body, config)
       .then((response) => {
-        getQuantify(name, setQuantify, token);
+        getQuantify(name, setQuantify);
       })
       .catch((error) => {
         navigate("/");
@@ -115,7 +94,44 @@ function ProductsScreen() {
       });
   }
 
-  function getQuantify(name, setQuantify, token) {
+  function RemoveAllProducts() {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    axios
+      .delete(`http://localhost:5000/products/delete`, config)
+      .then((response) => {
+        setUpdatePage(!updatePage);
+      })
+      .catch((error) => {
+        alert("Is not possible to remove this item");
+        console.error(error);
+      });
+  }
+
+  function RemoveOneProduct(name, setQuantify) {
+    setDisable(true);
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    axios
+      .delete(`http://localhost:5000/products/delete/${name}`, config)
+      .then((response) => {
+        getQuantify(name, setQuantify);
+        setDisable(false);
+      })
+      .catch((error) => {
+        alert(error.response.data);
+        console.error(error);
+        setDisable(false);
+      });
+  }
+
+  function getQuantify(name, setQuantify) {
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -125,7 +141,8 @@ function ProductsScreen() {
       .get(`http://localhost:5000/products/quantify/${name}`, config)
       .then((response) => {
         const count = response.data._count;
-        setQuantify(count);
+        setQuantify( count );
+        setDisable(false);
       })
       .catch((error) => {
         navigate("/");
@@ -134,8 +151,7 @@ function ProductsScreen() {
   }
 
   function ProductRender({ product }) {
-    const token = localStorage.getItem("token");
-    const [quantify, setQuantify] = useState(0);
+    const [quantify, setQuantify] = useState('');
     getQuantify(product.name, setQuantify, token);
     product["quantify"] = quantify;
 
@@ -148,15 +164,37 @@ function ProductsScreen() {
         <p>{product.quantify}</p>
         <p>R$ {product.precoMedio}</p>
         <Add>
-          <FontAwesomeIcon
-            icon={faCirclePlus}
-            color="#1D733A"
-            size="2x"
-            cursor="pointer"
-            onClick={() => {
-              AddProductCart(product.name, setQuantify, token);
-            }}
-          />
+          {disable ? (
+            <LoadingBox>
+              <Loading
+                width="100"
+                height="100"
+                color="#000000"
+                secondColor="#000000"
+              />
+            </LoadingBox>
+          ) : (
+            <>
+              <FontAwesomeIcon
+                icon={faCirclePlus}
+                color="#1D733A"
+                size="2x"
+                cursor="pointer"
+                onClick={() => {
+                  AddProductCart(product.name, setQuantify, token);
+                }}
+              />
+              <FontAwesomeIcon
+                icon={faCircleMinus}
+                color="#c51b1b"
+                size="2x"
+                cursor="pointer"
+                onClick={() => {
+                  RemoveOneProduct(product.name, setQuantify);
+                }}
+              />
+            </>
+          )}
         </Add>
       </Product>
     );
@@ -183,6 +221,9 @@ function ProductsScreen() {
             </ProductsBox>
             <Button color="#c51b1b" onClick={() => navigate("/cart")}>
               Comparar
+            </Button>
+            <Button color="#8b8b8b" onClick={() => RemoveAllProducts()}>
+              Limpar carrinho
             </Button>
           </Main>
         </Container>
