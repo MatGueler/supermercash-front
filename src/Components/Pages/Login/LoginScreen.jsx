@@ -44,6 +44,7 @@ function LoginScreen() {
         navigate("/menu");
       })
       .catch((err) => {
+        alert(err.response.data);
         console.log(err);
         setLoading(false);
         setDisable(false);
