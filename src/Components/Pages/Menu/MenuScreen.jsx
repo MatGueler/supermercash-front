@@ -44,7 +44,12 @@ function MenuScreen() {
       .get(`http://localhost:5000/user/me`, config)
       .then((response) => {
         setLoading(true);
-        setUserInfo(response.data);
+        console.log(response.data.userInfo);
+        if (response.data.accessToken) {
+          console.log("trocou");
+          localStorage.setItem("token", response.data.accessToken);
+        }
+        setUserInfo(response.data.userInfo);
       })
       .catch((error) => {
         navigate("/");
