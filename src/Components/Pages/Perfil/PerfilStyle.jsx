@@ -6,12 +6,11 @@ export const Main = styled.div`
   display: flex;
   box-sizing: border-box;
   padding: 90px 20px 0 20px;
-  /* background-color: grey; */
 `;
 
 export const PerfilInfo = styled.div`
   width: 100%;
-  padding: 20px;
+  padding-right: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -27,20 +26,11 @@ export const PerfilInfo = styled.div`
     color: black;
   }
 
-  p {
-    width: 100px;
-    display: flex;
-    align-items: center;
-    font-size: 15px;
-    margin-bottom: 20px;
-  }
-
   button {
     width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: black;
     :hover {
       transform: translate(1px, 1px);
     }
@@ -50,6 +40,19 @@ export const PerfilInfo = styled.div`
 export const BoxInfo = styled.div`
   width: 100%;
   display: flex;
+  justify-content: center;
+
+  p {
+    width: 100px;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    margin: 0 10px 20px 0;
+
+    :nth-child(2) {
+      width: 60%;
+    }
+  }
 `;
 
 export const PerfilImage = styled.div`
@@ -59,6 +62,7 @@ export const PerfilImage = styled.div`
   align-items: center;
   border-left: 2px solid black;
   border-style: dashed;
+  padding-left: 20px;
   img {
     width: 400px;
     height: 400px;
@@ -72,6 +76,15 @@ export const PerfilImage = styled.div`
     width: 100%;
     text-align: center;
     margin: 10px 0;
+  }
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    :hover {
+      transform: translate(1px, 1px);
+    }
   }
 `;
 
