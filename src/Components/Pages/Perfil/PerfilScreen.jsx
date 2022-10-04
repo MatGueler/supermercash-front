@@ -25,12 +25,13 @@ import { Input } from "../../Input/InputSyle";
 function PerfilScreen() {
   const navigate = useNavigate();
 
-  const n = "mateus";
+  const [token, setToken] = useState("");
 
-  const [name, setName] = useState(n);
-  const [email, setEmail] = useState(n);
-  const [phone, setPhone] = useState(n);
-  const [adress, setAdress] = useState(n);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [userImage, setUserImage] = useState("");
+  const [phone, setPhone] = useState("");
+  const [adress, setAdress] = useState("");
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -40,6 +41,7 @@ function PerfilScreen() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    setToken(token);
     getAllproducts();
     getUserInfo(token);
   }, []);
@@ -56,6 +58,7 @@ function PerfilScreen() {
         setLoading(true);
         setUserInfo(response.data);
         setName(response.data.name);
+        setUserImage(response.data.image.urlImage);
         setEmail(response.data.email);
         setAdress(response.data.adress.adress);
         setPhone(response.data.phone.phone);
@@ -80,93 +83,30 @@ function PerfilScreen() {
   }
 
   function UpdateInfos() {
-    return (
-      <>
-        <BoxInfo>
-          <p>Nome:</p>
-          {!updateInfos ? (
-            <p>{name}</p>
-          ) : (
-            <Input
-              placeholder="Name"
-              type="text"
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
-              value={name}
-              disabled={disable}
-            />
-          )}
-        </BoxInfo>
-        <BoxInfo>
-          <p>Email:</p>
-          {!updateInfos ? (
-            <p>{email}</p>
-          ) : (
-            <Input
-              type="email"
-              placeholder="Email"
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-              value={email}
-              disabled={disable}
-            />
-          )}
-        </BoxInfo>
-        <BoxInfo>
-          <p>Endereço:</p>
-          {!updateInfos ? (
-            <p>{adress}</p>
-          ) : (
-            <Input
-              placeholder="Name"
-              type="text"
-              onChange={(e) => {
-                setAdress(e.target.value);
-              }}
-              value={adress}
-              disabled={disable}
-            />
-          )}
-        </BoxInfo>
-        <BoxInfo>
-          <p>Telefone:</p>
-          {!updateInfos ? (
-            <p>{phone}</p>
-          ) : (
-            <Input
-              placeholder="Telefone"
-              type="text"
-              onChange={(e) => {
-                setPhone(e.target.value);
-              }}
-              value={phone}
-              disabled={disable}
-            />
-          )}
-        </BoxInfo>
-        {!updateInfos ? (
-          <Button
-            color="grey"
-            onClick={() => {
-              setUpdateInfos(!updateInfos);
-            }}
-          >
-            Atualizar dados
-          </Button>
-        ) : (
-          <Button
-            color="blue"
-            onClick={() => {
-              setUpdateInfos(!updateInfos);
-            }}
-          >
-            Salvar dados
-          </Button>
-        )}
-      </>
-    );
+    const url = "http://localhost:5000/user/me";
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const body = {
+      name,
+      email,
+      userImage,
+      adress,
+      phone,
+    };
+    console.log(body);
+    setUpdateInfos(!updateInfos);
+    axios
+      .put(url, body, config)
+      .then((res) => {
+        const products = res.data;
+        setProducts(products);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function StackedExample() {
@@ -185,10 +125,92 @@ function PerfilScreen() {
           <Main>
             <PerfilInfo>
               <h2>Dados de cadastro</h2>
-              <UpdateInfos />
+              <BoxInfo>
+                <p>Nome:</p>
+                {!updateInfos ? (
+                  <p>{name}</p>
+                ) : (
+                  <Input
+                    placeholder="Name"
+                    type="text"
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
+                    value={name || ""}
+                    disabled={disable}
+                  />
+                )}
+              </BoxInfo>
+              <BoxInfo>
+                <p>Email:</p>
+                {!updateInfos ? (
+                  <p>{email}</p>
+                ) : (
+                  <Input
+                    type="email"
+                    placeholder="Email"
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+                    value={email || ""}
+                    disabled={disable}
+                  />
+                )}
+              </BoxInfo>
+              <BoxInfo>
+                <p>Endereço:</p>
+                {!updateInfos ? (
+                  <p>{adress}</p>
+                ) : (
+                  <Input
+                    placeholder="Name"
+                    type="text"
+                    onChange={(e) => {
+                      setAdress(e.target.value);
+                    }}
+                    value={adress || ""}
+                    disabled={disable}
+                  />
+                )}
+              </BoxInfo>
+              <BoxInfo>
+                <p>Telefone:</p>
+                {!updateInfos ? (
+                  <p>{phone}</p>
+                ) : (
+                  <Input
+                    placeholder="Telefone"
+                    type="text"
+                    onChange={(e) => {
+                      setPhone(e.target.value);
+                    }}
+                    value={phone || ""}
+                    disabled={disable}
+                  />
+                )}
+              </BoxInfo>
+              {!updateInfos ? (
+                <Button
+                  color="grey"
+                  onClick={() => {
+                    setUpdateInfos(!updateInfos);
+                  }}
+                >
+                  Atualizar dados
+                </Button>
+              ) : (
+                <Button
+                  color="blue"
+                  onClick={() => {
+                    UpdateInfos();
+                  }}
+                >
+                  Salvar dados
+                </Button>
+              )}
             </PerfilInfo>
             <PerfilImage>
-              <img src="https://conteudo.imguol.com.br/c/esporte/eb/2022/09/27/neymar-comemora-gol-marcado-pela-selecao-brasileira-contra-a-tunisia-1664308063053_v2_450x600.jpg" />
+              <img src={userImage} />
               <ProgressBarBox>
                 // ! ESTA DANDO ERRO NA BARRA
                 <StackedExample />
