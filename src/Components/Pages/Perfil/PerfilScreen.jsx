@@ -121,6 +121,15 @@ function PerfilScreen() {
         <Container>
           <Header userInfo={userInfo} />
           <Main>
+            <PerfilImage>
+              <img src={userImage} />
+              <Button color="grey">Mudar imagem</Button>
+              <ProgressBarBox>
+                {/* // ! ESTA DANDO ERRO NA BARRA
+                <StackedExample />
+                <p>xxx produtos comprados</p> */}
+              </ProgressBarBox>
+            </PerfilImage>
             <PerfilInfo>
               <h2>Dados de cadastro</h2>
               <BoxInfo>
@@ -207,15 +216,6 @@ function PerfilScreen() {
                 </Button>
               )}
             </PerfilInfo>
-            <PerfilImage>
-              <img src={userImage} />
-              <Button color="grey">Mudar imagem</Button>
-              <ProgressBarBox>
-                {/* // ! ESTA DANDO ERRO NA BARRA
-                <StackedExample />
-                <p>xxx produtos comprados</p> */}
-              </ProgressBarBox>
-            </PerfilImage>
           </Main>
         </Container>
       ) : (

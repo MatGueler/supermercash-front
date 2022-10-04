@@ -6,16 +6,24 @@ export const Main = styled.div`
   display: flex;
   box-sizing: border-box;
   padding: 90px 20px 0 20px;
+
+  @media (max-width: 880px) {
+    flex-direction: column;
+  }
 `;
 
 export const PerfilInfo = styled.div`
   width: 100%;
-  padding-right: 20px;
+  padding-left: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
+
+  input {
+    width: 60%;
+  }
 
   h2 {
     width: 100%;
@@ -27,7 +35,7 @@ export const PerfilInfo = styled.div`
   }
 
   button {
-    width: 50%;
+    width: 60%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,22 +43,29 @@ export const PerfilInfo = styled.div`
       transform: translate(1px, 1px);
     }
   }
+
+  @media (max-width: 880px) {
+    padding: 0;
+  }
 `;
 
 export const BoxInfo = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-bottom: 20px;
 
   p {
-    width: 100px;
+    width: 40%;
     display: flex;
+    justify-content: center;
     align-items: center;
     font-size: 20px;
-    margin: 0 10px 20px 0;
 
     :nth-child(2) {
       width: 60%;
+      justify-content: left;
+      margin-right: 0;
     }
   }
 `;
@@ -60,9 +75,9 @@ export const PerfilImage = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-left: 2px solid black;
+  border-right: 2px solid black;
   border-style: dashed;
-  padding-left: 20px;
+  padding-right: 20px;
   img {
     width: 400px;
     height: 400px;
@@ -84,6 +99,16 @@ export const PerfilImage = styled.div`
     align-items: center;
     :hover {
       transform: translate(1px, 1px);
+    }
+  }
+
+  @media (max-width: 880px) {
+    padding: 0;
+    border: 0;
+
+    img {
+      width: 300px;
+      height: 300px;
     }
   }
 `;
