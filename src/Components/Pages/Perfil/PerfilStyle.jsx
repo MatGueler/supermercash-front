@@ -72,6 +72,7 @@ export const BoxInfo = styled.div`
 
 export const PerfilImage = styled.div`
   width: 100%;
+  height: 550px;
   display: flex;
   flex-direction: column;
   align-items: center;

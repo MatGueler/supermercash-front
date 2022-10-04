@@ -36,8 +36,10 @@ function PerfilScreen() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [disable, setDisable] = useState(false);
-  const [updateInfos, setUpdateInfos] = useState(false);
   const [userInfo, setUserInfo] = useState("");
+
+  const [updateInfos, setUpdateInfos] = useState(false);
+  const [updateImage, setUpdateImage] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -107,6 +109,28 @@ function PerfilScreen() {
       });
   }
 
+  function UpdateImage() {
+    const url = "http://localhost:5000/user/me/image";
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const body = {
+      userImage,
+    };
+    axios
+      .put(url, body, config)
+      .then((res) => {
+        getUserInfo(token);
+        setUpdateImage(!updateImage);
+      })
+      .catch((err) => {
+        alert(err.response.data[0]);
+        console.log(err);
+      });
+  }
+
   function StackedExample() {
     return (
       <ProgressBar>
@@ -123,11 +147,39 @@ function PerfilScreen() {
           <Main>
             <PerfilImage>
               <img src={userImage} />
-              <Button color="grey">Mudar imagem</Button>
+              {!updateImage ? (
+                <Button
+                  color="grey"
+                  onClick={() => {
+                    setUpdateImage(!updateImage);
+                  }}
+                >
+                  Mudar imagem
+                </Button>
+              ) : (
+                <>
+                  <Input
+                    placeholder="Url da imagem"
+                    type="text"
+                    onChange={(e) => {
+                      setUserImage(e.target.value);
+                    }}
+                    value={userImage || ""}
+                    disabled={disable}
+                  />
+                  <Button
+                    color="grey"
+                    onClick={() => {
+                      setUpdateImage(!updateImage);
+                    }}
+                  >
+                    Salvar Imagem
+                  </Button>
+                </>
+              )}
               <ProgressBarBox>
-                {/* // ! ESTA DANDO ERRO NA BARRA
                 <StackedExample />
-                <p>xxx produtos comprados</p> */}
+                <p>xxx produtos comprados</p>
               </ProgressBarBox>
             </PerfilImage>
             <PerfilInfo>
