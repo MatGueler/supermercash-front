@@ -1,11 +1,10 @@
 // *Hooks
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 
 // *Components
 import {
+  BoxInfo,
   LoadingBox,
   Main,
   PerfilImage,
@@ -19,17 +18,25 @@ import { ProgressBar } from "react-bootstrap";
 import { useState } from "react";
 import Header from "../../Header/Header";
 import { Button } from "../../Button/ButtonSyle";
-import Footer from "../../Footer/Footer";
 import { useEffect } from "react";
 import Loading from "../../Loading/Loading";
+import { Input } from "../../Input/InputSyle";
 import StackedExample from "../../ProgressBar/ProgressBar";
 
 function PerfilScreen() {
   const navigate = useNavigate();
 
+  const n = "mateus";
+
+  const [name, setName] = useState(n);
+  const [email, setEmail] = useState(n);
+  const [phone, setPhone] = useState(n);
+  const [adress, setAdress] = useState(n);
+
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [disable, setDisable] = useState(false);
+  const [updateInfos, setUpdateInfos] = useState(false);
   const [userInfo, setUserInfo] = useState("");
 
   useEffect(() => {
@@ -110,7 +117,7 @@ function PerfilScreen() {
   function StackedExample() {
     return (
       <ProgressBar>
-        <ProgressBar striped animated variant="success" now={75} key={1} />
+        <ProgressBar striped animated variant="success" now={90} key={1} />
       </ProgressBar>
     );
   }
@@ -121,11 +128,97 @@ function PerfilScreen() {
         <Container>
           <Header userInfo={userInfo} />
           <Main>
-            <PerfilInfo>ola</PerfilInfo>
+            <PerfilInfo>
+              <h2>Dados de cadastro</h2>
+              <BoxInfo>
+                <p>Nome:</p>
+                {!updateInfos ? (
+                  <p>{name}</p>
+                ) : (
+                  <Input
+                    placeholder="Name"
+                    type="text"
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
+                    value={name}
+                    disabled={disable}
+                  />
+                )}
+              </BoxInfo>
+              <BoxInfo>
+                <p>Email:</p>
+                {!updateInfos ? (
+                  <p>{email}</p>
+                ) : (
+                  <Input
+                    type="email"
+                    placeholder="Email"
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+                    value={email}
+                    disabled={disable}
+                  />
+                )}
+              </BoxInfo>
+              <BoxInfo>
+                <p>Endereço:</p>
+                {!updateInfos ? (
+                  <p>{adress}</p>
+                ) : (
+                  <Input
+                    placeholder="Name"
+                    type="text"
+                    onChange={(e) => {
+                      setAdress(e.target.value);
+                    }}
+                    value={adress}
+                    disabled={disable}
+                  />
+                )}
+              </BoxInfo>
+              <BoxInfo>
+                <p>Telefone:</p>
+                {!updateInfos ? (
+                  <p>{phone}</p>
+                ) : (
+                  <Input
+                    placeholder="Telefone"
+                    type="text"
+                    onChange={(e) => {
+                      setPhone(e.target.value);
+                    }}
+                    value={phone}
+                    disabled={disable}
+                  />
+                )}
+              </BoxInfo>
+              {!updateInfos ? (
+                <Button
+                  color="grey"
+                  onClick={() => {
+                    setUpdateInfos(!updateInfos);
+                  }}
+                >
+                  Atualizar dados
+                </Button>
+              ) : (
+                <Button
+                  color="blue"
+                  onClick={() => {
+                    setUpdateInfos(!updateInfos);
+                  }}
+                >
+                  Salvar dados
+                </Button>
+              )}
+            </PerfilInfo>
             <PerfilImage>
               <img src="https://conteudo.imguol.com.br/c/esporte/eb/2022/09/27/neymar-comemora-gol-marcado-pela-selecao-brasileira-contra-a-tunisia-1664308063053_v2_450x600.jpg" />
               <ProgressBarBox>
                 <StackedExample />
+                <p>xxx produtos comprados</p>
               </ProgressBarBox>
             </PerfilImage>
           </Main>

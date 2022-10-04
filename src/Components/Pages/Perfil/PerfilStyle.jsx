@@ -6,11 +6,50 @@ export const Main = styled.div`
   display: flex;
   box-sizing: border-box;
   padding: 90px 20px 0 20px;
-  background-color: grey;
+  /* background-color: grey; */
 `;
 
 export const PerfilInfo = styled.div`
   width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+
+  h2 {
+    width: 100%;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: black;
+  }
+
+  p {
+    width: 100px;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+
+  button {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    :hover {
+      transform: translate(1px, 1px);
+    }
+  }
+`;
+
+export const BoxInfo = styled.div`
+  width: 100%;
+  display: flex;
 `;
 
 export const PerfilImage = styled.div`
@@ -26,8 +65,16 @@ export const PerfilImage = styled.div`
     border-radius: 100%;
     object-fit: cover;
     margin-bottom: 20px;
+    box-shadow: 0px 0px 15px black;
+  }
+
+  p {
+    width: 100%;
+    text-align: center;
+    margin: 10px 0;
   }
 `;
+
 export const ProgressBarBox = styled.div`
   width: 100%;
   padding: 20px 20px;
