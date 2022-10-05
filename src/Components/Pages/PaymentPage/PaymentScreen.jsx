@@ -1,3 +1,5 @@
+import axios from "axios";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRectangleXmark } from "@fortawesome/free-solid-svg-icons";
 
@@ -12,6 +14,7 @@ import {
 import { Input } from "../../Input/InputSyle";
 import { Button } from "../../Button/ButtonSyle";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function PaymentScreen({
   quantifyProducts,
@@ -26,10 +29,55 @@ export function PaymentScreen({
 
   const [disable, setDisable] = useState(false);
 
+  let navigate = useNavigate();
+
+  function getUserInfo() {
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    axios
+      .get(`http://localhost:5000/user/me`, config)
+      .then((response) => {
+        if (response.data.accessToken) {
+          localStorage.setItem("token", response.data.accessToken);
+        }
+      })
+      .catch((error) => {
+        navigate("/");
+        console.error(error);
+      });
+  }
+
   function FinalizePurchase(event) {
     event.preventDefault();
-    const body = { cardHolder, cardNumber, CVC, password };
-    console.log(body);
+    setDisable(true);
+    getUserInfo();
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const body = {
+      cardHolder,
+      cardNumber,
+      CVC,
+      password,
+      quantifyProducts,
+      purchaseValue: totalValue,
+    };
+    axios
+      .post(`http://localhost:5000/payment`, body, config)
+      .then((response) => {
+        setPayment(!payment);
+      })
+      .catch((error) => {
+        setDisable(false);
+        console.error(error);
+      });
   }
 
   return (

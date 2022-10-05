@@ -37,7 +37,7 @@ function CartScreen() {
   useEffect(() => {
     getUserInfo();
     getCartValues();
-  }, []);
+  }, [payment]);
 
   function getUserInfo() {
     const token = localStorage.getItem("token");
