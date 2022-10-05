@@ -10,15 +10,19 @@ function Header({ userInfo }) {
   let navigate = useNavigate();
 
   function GetFirstNameUser() {
-    const firstName = userInfo.name.split(" ");
-    return <p>Olá, {firstName[0]}</p>;
+    if (userInfo) {
+      const firstName = userInfo.name.split(" ");
+      return <p>Olá, {firstName[0]}</p>;
+    } else {
+      return <p></p>;
+    }
   }
 
   return (
     <>
       <HeaderBox>
         <Logo>
-          <img src={logo} alt="logo" />
+          <img src={logo} alt="" />
           <h1 onClick={() => navigate("/menu")}>
             <span>Supermer</span>
             <span>cash</span>
@@ -31,7 +35,7 @@ function Header({ userInfo }) {
           {userInfo ? <GetFirstNameUser /> : <button>Entrar</button>}
           <img
             src={userInfo.image.urlImage}
-            alt="PerfilPhoto"
+            alt=""
             onClick={() => navigate("/perfil")}
           />
           <FontAwesomeIcon
