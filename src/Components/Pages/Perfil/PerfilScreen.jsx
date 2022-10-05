@@ -54,7 +54,6 @@ function PerfilScreen() {
     axios
       .get(`http://localhost:5000/user/me`, config)
       .then((response) => {
-        console.log(response.data);
         if (response.data.accessToken) {
           localStorage.setItem("token", response.data.accessToken);
         }
