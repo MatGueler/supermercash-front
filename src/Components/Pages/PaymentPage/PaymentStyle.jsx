@@ -47,6 +47,10 @@ export const PaymentBox = styled.div`
     font-size: 25px;
     margin-bottom: 20px;
   }
+
+  @media (max-width: 650px) {
+    width: 100%;
+  }
 `;
 
 export const ItensBox = styled.div`
