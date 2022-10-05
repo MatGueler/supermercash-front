@@ -22,11 +22,14 @@ import Header from "../../Header/Header";
 import logo from "../../../Assets/Image/Logo.png";
 import Loading from "../../Loading/Loading";
 import { useEffect, useState } from "react";
+import PaymentScreen from "../PaymentPage/PaymentScreen";
 
 function CartScreen() {
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
+  const [payment, setPayment] = useState(false);
+  const [totalValue, setTotalValue] = useState(0);
   const [userInfo, setUserInfo] = useState("");
   const [cartsBySupermercat, setCartsBySupermercat] = useState([]);
 
@@ -76,30 +79,6 @@ function CartScreen() {
   }
 
   function BuildPodium({ index, item }) {
-    // if (index === 0) {
-    //   return (
-    //     <ProductInfo color="yellow">
-    //       <h2>{index + 1}</h2>
-    //       <p>{item.supermarket}</p>
-    //     </ProductInfo>
-    //   );
-    // }
-    // if (index === 1) {
-    //   return (
-    //     <ProductInfo color="grey">
-    //       <h2>{index + 1}</h2>
-    //       <p>{item.supermarket}</p>
-    //     </ProductInfo>
-    //   );
-    // }
-    // if (index === 2) {
-    //   return (
-    //     <ProductInfo color="brown">
-    //       <h2>{index + 1}</h2>
-    //       <p>{item.supermarket}</p>
-    //     </ProductInfo>
-    //   );
-    // }
     return (
       <ProductInfo
         color={() => {
@@ -122,7 +101,14 @@ function CartScreen() {
         <p>Cashback</p>
         <p>R$ {item.total}</p>
         <Add>
-          <img src={logo} alt="logo" />
+          <img
+            src={logo}
+            alt="logo"
+            onClick={() => {
+              setTotalValue(item.total);
+              setPayment(!payment);
+            }}
+          />
         </Add>
       </Product>
     );
@@ -132,6 +118,15 @@ function CartScreen() {
     <>
       {loading ? (
         <Container>
+          {payment ? (
+            <PaymentScreen
+              totalValue={totalValue}
+              payment={payment}
+              setPayment={setPayment}
+            />
+          ) : (
+            ""
+          )}
           <Header userInfo={userInfo} />
           <Main>
             <BoxButton onClick={() => navigate("/products")}>
