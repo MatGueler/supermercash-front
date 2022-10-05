@@ -31,12 +31,12 @@ function CartScreen() {
   const [cartsBySupermercat, setCartsBySupermercat] = useState([]);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    getUserInfo(token);
-    getCartValues(token);
+    getUserInfo();
+    getCartValues();
   }, []);
 
-  function getCartValues(token) {
+  function getCartValues() {
+    const token = localStorage.getItem("token");
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -53,7 +53,8 @@ function CartScreen() {
       });
   }
 
-  function getUserInfo(token) {
+  function getUserInfo() {
+    const token = localStorage.getItem("token");
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -62,8 +63,11 @@ function CartScreen() {
     axios
       .get(`http://localhost:5000/user/me`, config)
       .then((response) => {
+        if (response.data.accessToken) {
+          localStorage.setItem("token", response.data.accessToken);
+        }
+        setUserInfo(response.data.userInfo);
         setLoading(true);
-        setUserInfo(response.data);
       })
       .catch((error) => {
         navigate("/");
