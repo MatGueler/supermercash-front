@@ -47,6 +47,37 @@ export const PaymentBox = styled.div`
     font-size: 25px;
     margin-bottom: 20px;
   }
+
+  @media (max-width: 650px) {
+    width: 100%;
+  }
+`;
+
+export const ItensBox = styled.div`
+  width: 100%;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  background-color: #a7ffa4;
+  border: 1px solid lightgrey;
+
+  h4 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+    font-weight: bold;
+    background-color: #ffffff;
+    margin: 0;
+    border-radius: 10px 10px 0 0;
+  }
 `;
 
 export const TotalValueBox = styled.div`
@@ -56,7 +87,6 @@ export const TotalValueBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
   border-radius: 10px;
   padding: 10px;
   box-sizing: border-box;
