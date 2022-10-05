@@ -10,6 +10,7 @@ html, body, #root {
 	height: 100vh;
 	margin: 0;
 	padding: 0;
+	background-color: #d9d9d9;
 }
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -24,7 +25,7 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-	font-family: 'Lato', sans-serif;
+	font-family: 'Varela Round', sans-serif;
     margin: 0;
 	padding: 0;
 	border: 0;
@@ -54,6 +55,6 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-`
+`;
 
 export default GlobalStyle;
