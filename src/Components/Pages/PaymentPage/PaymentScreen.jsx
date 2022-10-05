@@ -75,6 +75,7 @@ export function PaymentScreen({
         setPayment(!payment);
       })
       .catch((error) => {
+        alert(error.response.data);
         setDisable(false);
         console.error(error);
       });
