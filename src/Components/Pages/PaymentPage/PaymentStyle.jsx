@@ -13,6 +13,7 @@ export const PaymentContainer = styled.div`
 
 export const PaymentBox = styled.div`
   width: 50%;
+  position: relative;
   border-radius: 10px;
   background-color: #ffe77e;
   border: 1px solid grey;
@@ -65,4 +66,13 @@ export const TotalValueBox = styled.div`
     font-size: 20px;
     font-weight: bold;
   }
+`;
+
+export const CloseButton = styled.button`
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
 `;

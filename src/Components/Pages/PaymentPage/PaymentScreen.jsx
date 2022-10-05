@@ -1,35 +1,85 @@
-import { PaymentBox, PaymentContainer, TotalValueBox } from "./PaymentStyle";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRectangleXmark } from "@fortawesome/free-solid-svg-icons";
+
+import {
+  CloseButton,
+  PaymentBox,
+  PaymentContainer,
+  TotalValueBox,
+} from "./PaymentStyle";
 
 import { Input } from "../../Input/InputSyle";
 import { Button } from "../../Button/ButtonSyle";
+import { useState } from "react";
 
 export function PaymentScreen({ totalValue, payment, setPayment }) {
+  const [cardHolder, setCardHolder] = useState("");
+  const [cardNumber, setCardNumber] = useState("");
+  const [CVC, setCVC] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [disable, setDisable] = useState(false);
+
+  function FinalizePurchase(event) {
+    event.preventDefault();
+    const body = { cardHolder, cardNumber, CVC, password };
+    console.log(body);
+  }
+
   return (
     <>
-      <PaymentContainer
-        onClick={() => {
-          setPayment(!payment);
-        }}
-      >
+      <PaymentContainer>
         <PaymentBox>
           <h3>Preecha os dados</h3>
-          <form>
-            <Input placeholder="Titular do cartão" />
-            <Input placeholder="Número do cartão" />
-            <Input placeholder="CVC" />
-            <Input placeholder="Senha da conta" />
+          <CloseButton
+            onClick={() => {
+              setPayment(!payment);
+            }}
+          >
+            <FontAwesomeIcon icon={faRectangleXmark} size="2x" />
+          </CloseButton>
+          <form onSubmit={FinalizePurchase}>
+            <Input
+              placeholder="Titular do cartão"
+              type="text"
+              onChange={(e) => {
+                setCardHolder(e.target.value);
+              }}
+              value={cardHolder}
+              disabled={disable}
+            />
+            <Input
+              placeholder="Número do cartão"
+              type="text"
+              onChange={(e) => {
+                setCardNumber(e.target.value);
+              }}
+              value={cardNumber}
+              disabled={disable}
+            />
+            <Input
+              placeholder="CVC"
+              type="text"
+              onChange={(e) => {
+                setCVC(e.target.value);
+              }}
+              value={CVC}
+              disabled={disable}
+            />
+            <Input
+              placeholder="Senha da conta"
+              type="password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              value={password}
+              disabled={disable}
+            />
             <TotalValueBox>
               <p>Total:</p>
               <p>R$ {totalValue}</p>
             </TotalValueBox>
-            <Button
-              color="#e92020"
-              onClick={() => {
-                setPayment(!payment);
-              }}
-            >
-              Finalizar compra
-            </Button>
+            <Button color="#e92020">Finalizar compra</Button>
           </form>
         </PaymentBox>
       </PaymentContainer>
