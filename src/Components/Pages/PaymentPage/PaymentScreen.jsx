@@ -3,6 +3,7 @@ import { faRectangleXmark } from "@fortawesome/free-solid-svg-icons";
 
 import {
   CloseButton,
+  ItensBox,
   PaymentBox,
   PaymentContainer,
   TotalValueBox,
@@ -12,7 +13,12 @@ import { Input } from "../../Input/InputSyle";
 import { Button } from "../../Button/ButtonSyle";
 import { useState } from "react";
 
-export function PaymentScreen({ totalValue, payment, setPayment }) {
+export function PaymentScreen({
+  quantifyProducts,
+  totalValue,
+  payment,
+  setPayment,
+}) {
   const [cardHolder, setCardHolder] = useState("");
   const [cardNumber, setCardNumber] = useState("");
   const [CVC, setCVC] = useState("");
@@ -75,10 +81,13 @@ export function PaymentScreen({ totalValue, payment, setPayment }) {
               value={password}
               disabled={disable}
             />
-            <TotalValueBox>
-              <p>Total:</p>
-              <p>R$ {totalValue}</p>
-            </TotalValueBox>
+            <ItensBox>
+              <h4>{quantifyProducts} itens</h4>
+              <TotalValueBox>
+                <p>Total:</p>
+                <p>R$ {totalValue}</p>
+              </TotalValueBox>
+            </ItensBox>
             <Button color="#e92020">Finalizar compra</Button>
           </form>
         </PaymentBox>
