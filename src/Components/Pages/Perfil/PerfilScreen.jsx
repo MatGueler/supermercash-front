@@ -35,6 +35,7 @@ function PerfilScreen() {
   const [loading, setLoading] = useState(false);
   const [disable, setDisable] = useState(false);
   const [userInfo, setUserInfo] = useState("");
+  const [productsHistoric, setProductsHistoric] = useState(0);
 
   const [updateInfos, setUpdateInfos] = useState(false);
   const [updateImage, setUpdateImage] = useState(false);
@@ -42,7 +43,26 @@ function PerfilScreen() {
   useEffect(() => {
     getUserInfo();
     getAllproducts();
+    getProductsHistoric();
   }, []);
+
+  function getProductsHistoric() {
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    axios
+      .get(`http://localhost:5000/products/historic`, config)
+      .then((response) => {
+        setProductsHistoric(response.data.quantifyProducts);
+      })
+      .catch((error) => {
+        navigate("/");
+        console.error(error);
+      });
+  }
 
   function getUserInfo() {
     const token = localStorage.getItem("token");
@@ -136,7 +156,13 @@ function PerfilScreen() {
   function StackedExample() {
     return (
       <ProgressBar>
-        <ProgressBar striped animated variant="success" now={90} key={1} />
+        <ProgressBar
+          striped
+          animated
+          variant="success"
+          now={(productsHistoric / 1000) * 100}
+          key={1}
+        />
       </ProgressBar>
     );
   }
@@ -181,7 +207,7 @@ function PerfilScreen() {
               )}
               <ProgressBarBox>
                 <StackedExample />
-                <p>xxx produtos comprados</p>
+                <p>{productsHistoric} produtos comprados</p>
               </ProgressBarBox>
             </PerfilImage>
             <PerfilInfo>
