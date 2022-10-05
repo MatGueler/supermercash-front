@@ -22,7 +22,7 @@ function Header({ userInfo }) {
     <>
       <HeaderBox>
         <Logo>
-          <img src={logo} alt="logo" />
+          <img src={logo} alt="" />
           <h1 onClick={() => navigate("/menu")}>
             <span>Supermer</span>
             <span>cash</span>
@@ -35,7 +35,7 @@ function Header({ userInfo }) {
           {userInfo ? <GetFirstNameUser /> : <button>Entrar</button>}
           <img
             src={userInfo.image.urlImage}
-            alt="PerfilPhoto"
+            alt=""
             onClick={() => navigate("/perfil")}
           />
           <FontAwesomeIcon
