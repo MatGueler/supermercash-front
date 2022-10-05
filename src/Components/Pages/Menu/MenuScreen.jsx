@@ -45,7 +45,6 @@ function MenuScreen() {
       .then((response) => {
         setLoading(true);
         if (response.data.accessToken) {
-          console.log("trocou");
           localStorage.setItem("token", response.data.accessToken);
         }
         setUserInfo(response.data.userInfo);

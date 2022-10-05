@@ -56,7 +56,6 @@ function PerfilScreen() {
       .then((response) => {
         console.log(response.data);
         if (response.data.accessToken) {
-          console.log("trocou");
           localStorage.setItem("token", response.data.accessToken);
         }
         setUserInfo(response.data.userInfo);
@@ -68,8 +67,7 @@ function PerfilScreen() {
         setPhone(response.data.userInfo.phone.phone);
       })
       .catch((error) => {
-        console.log("erro1");
-        // navigate("/");
+        navigate("/");
         console.error(error);
       });
   }
