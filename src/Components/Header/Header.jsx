@@ -10,8 +10,12 @@ function Header({ userInfo }) {
   let navigate = useNavigate();
 
   function GetFirstNameUser() {
-    const firstName = userInfo.name.split(" ");
-    return <p>Olá, {firstName[0]}</p>;
+    if (userInfo) {
+      const firstName = userInfo.name.split(" ");
+      return <p>Olá, {firstName[0]}</p>;
+    } else {
+      return <p></p>;
+    }
   }
 
   return (
