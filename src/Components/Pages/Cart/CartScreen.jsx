@@ -30,6 +30,7 @@ function CartScreen() {
   const [loading, setLoading] = useState(false);
   const [payment, setPayment] = useState(false);
   const [totalValue, setTotalValue] = useState(0);
+  const [quantifyProducts, setQuantifuProducts] = useState(0);
   const [userInfo, setUserInfo] = useState("");
   const [cartsBySupermercat, setCartsBySupermercat] = useState([]);
 
@@ -37,24 +38,6 @@ function CartScreen() {
     getUserInfo();
     getCartValues();
   }, []);
-
-  function getCartValues() {
-    const token = localStorage.getItem("token");
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    axios
-      .get(`http://localhost:5000/cart`, config)
-      .then((response) => {
-        // ? TRATAR CASO ONDE NÃO EXISTA SUPERMERCADO CADASTRADO OU SEM PRODUTOS CADASTRADOS!!!!!!!!!!!
-        setCartsBySupermercat(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
 
   function getUserInfo() {
     const token = localStorage.getItem("token");
@@ -78,6 +61,24 @@ function CartScreen() {
       });
   }
 
+  function getCartValues() {
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    axios
+      .get(`http://localhost:5000/cart`, config)
+      .then((response) => {
+        // ? TRATAR CASO ONDE NÃO EXISTA SUPERMERCADO CADASTRADO OU SEM PRODUTOS CADASTRADOS!!!!!!!!!!!
+        setCartsBySupermercat(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   function BuildPodium({ index, item }) {
     return (
       <ProductInfo
@@ -94,6 +95,25 @@ function CartScreen() {
     );
   }
 
+  function getQuantifyProducts() {
+    getUserInfo();
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    axios
+      .get(`http://localhost:5000/cart/products`, config)
+      .then((response) => {
+        setQuantifuProducts(response.data.quantify);
+      })
+      .catch((error) => {
+        navigate("/");
+        console.error(error);
+      });
+  }
+
   function AddSupermarketValue({ item, index }) {
     return (
       <Product>
@@ -105,6 +125,7 @@ function CartScreen() {
             src={logo}
             alt="logo"
             onClick={() => {
+              getQuantifyProducts();
               setTotalValue(item.total);
               setPayment(!payment);
             }}
@@ -120,6 +141,7 @@ function CartScreen() {
         <Container>
           {payment ? (
             <PaymentScreen
+              quantifyProducts={quantifyProducts}
               totalValue={totalValue}
               payment={payment}
               setPayment={setPayment}
