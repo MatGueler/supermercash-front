@@ -27,28 +27,6 @@ describe("Test register user", () => {
 
     cy.url().should("equal", "http://localhost:3000/");
   });
-
-  // it("Create a repeated test", () => {
-  //   cy.visit(url);
-  //   const recomendation = {
-  //     name: faker.name.jobType(),
-  //     youtubeLink: "https://www.youtube.com/watch?v=kXYiU_JCYtU",
-  //   };
-
-  //   // * Create a recommendation directly on database
-  //   cy.CreateRecommendation(recomendation);
-
-  //   // * Try create a new recommendation with already existent name
-  //   cy.get("[data-cy=Name]").type(recomendation.name);
-  //   cy.get("[data-cy=Url]").type(recomendation.youtubeLink);
-  //   cy.intercept("POST", "http://localhost:5000/recommendations").as("create");
-  //   cy.get("[data-cy=Create]").click();
-  //   cy.wait("@create");
-
-  //   // * Verify if exist just one test with same name
-  //   cy.get(`[data-cy=${recomendation.name}]`).should("have.length", 1);
-  //   cy.url().should("equal", url);
-  // });
 });
 
 // - Login User

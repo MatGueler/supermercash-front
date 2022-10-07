@@ -1,5 +1,9 @@
 import { faker } from "@faker-js/faker";
 
+// beforeEach(async () => {
+//   await cy.request("POST", "http://localhost:5000/e2e/reset", {});
+// });
+
 // - Add products or remove itens on user cart
 describe("Test login user", () => {
   const url = "http://localhost:3000/";
