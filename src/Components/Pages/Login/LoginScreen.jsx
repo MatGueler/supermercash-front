@@ -76,6 +76,7 @@ function LoginScreen() {
         <form onSubmit={SignIn}>
           <p>Faça seu login! E comece a economizar!</p>
           <Input
+            data-cy-id="Email"
             type="email"
             placeholder="Email"
             onChange={(e) => {
@@ -85,6 +86,7 @@ function LoginScreen() {
             disabled={disable}
           />
           <Input
+            data-cy-id="Password"
             placeholder="Senha"
             type="password"
             onChange={(e) => {
@@ -95,7 +97,7 @@ function LoginScreen() {
           />
           {loading === false ? (
             <UserButtons>
-              <Button color="#34D70B" disabled={disable}>
+              <Button data-cy-id="SigninButton" color="#34D70B" disabled={disable}>
                 Entrar
               </Button>
               <Button

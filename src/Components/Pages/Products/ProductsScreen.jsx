@@ -169,7 +169,7 @@ function ProductsScreen() {
         </ProductInfo>
         <p>{product.quantify}</p>
         <p>R$ {product.precoMedio}</p>
-        <Add>
+        <Add data-cy-id={product.name}>
           {disable ? (
             <LoadingBox>
               <Loading
@@ -182,6 +182,7 @@ function ProductsScreen() {
           ) : (
             <>
               <FontAwesomeIcon
+                data-cy-id="ButtonAdd"
                 icon={faCirclePlus}
                 color="#1D733A"
                 size="2x"
@@ -191,6 +192,7 @@ function ProductsScreen() {
                 }}
               />
               <FontAwesomeIcon
+                data-cy-id="ButtonRemove"
                 icon={faCircleMinus}
                 color="#c51b1b"
                 size="2x"

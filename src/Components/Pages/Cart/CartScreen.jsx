@@ -122,6 +122,7 @@ function CartScreen() {
         <p>R$ {item.total}</p>
         <Add>
           <img
+            data-cy-id={item.supermarket}
             src={logo}
             alt="logo"
             onClick={() => {
