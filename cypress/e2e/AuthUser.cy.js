@@ -62,17 +62,17 @@ describe("Test login user", () => {
       password: faker.lorem.word(6),
     };
 
+    cy.RegisterUser({ ...userInfos, confirmPassword: userInfos.password });
+
     // * Write in inputs all informations about recommendation
-    cy.get("[data-cy-id=Name]").type(userInfos.name);
     cy.get("[data-cy-id=Email]").type(userInfos.email);
     cy.get("[data-cy-id=Password]").type(userInfos.password);
-    cy.get("[data-cy-id=ConfirmPassword]").type(userInfos.password);
-    cy.intercept("POST", "http://localhost:5000/sign-up").as("register");
-    cy.get("[data-cy-id=RegisterButton]").click();
+    cy.intercept("POST", "http://localhost:5000/sign-in").as("login");
+    cy.get("[data-cy-id=SigninButton]").click();
 
-    cy.wait("@register");
+    cy.wait("@login");
 
-    cy.url().should("equal", "http://localhost:3000/");
+    cy.url().should("equal", "http://localhost:3000/menu");
   });
 
   // it("Create a repeated test", () => {

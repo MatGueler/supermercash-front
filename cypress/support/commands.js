@@ -11,6 +11,11 @@
 //
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
+
+Cypress.Commands.add("RegisterUser", (userInfos) => {
+  cy.request("POST", "http://localhost:5000/sign-up", userInfos);
+});
+
 //
 //
 // -- This is a child command --
