@@ -19,6 +19,7 @@ import { Button } from "../../Button/ButtonSyle";
 import logo from "../../../Assets/Image/Logo.png";
 import { useState } from "react";
 import Loading from "../../Loading/Loading";
+import { DeployUrl } from "../../Services/MockServices";
 
 function RegisterScreen() {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ function RegisterScreen() {
     event.preventDefault();
     setLoading(!loading);
     setDisable(!disable);
-    const url = "http://localhost:5000/sign-up";
+    const url = `${DeployUrl}/sign-up`;
     const body = { name, email, password, confirmPassword };
     axios
       .post(url, body)
