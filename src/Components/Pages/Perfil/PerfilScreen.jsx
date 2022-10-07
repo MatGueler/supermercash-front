@@ -21,6 +21,7 @@ import { Button } from "../../Button/ButtonSyle";
 import { useEffect } from "react";
 import Loading from "../../Loading/Loading";
 import { Input } from "../../Input/InputSyle";
+import { DeployUrl } from "../../Services/MockServices";
 
 function PerfilScreen() {
   const navigate = useNavigate();
@@ -54,7 +55,7 @@ function PerfilScreen() {
       },
     };
     axios
-      .get(`http://localhost:5000/products/historic`, config)
+      .get(`${DeployUrl}/products/historic`, config)
       .then((response) => {
         setProductsHistoric(response.data.quantifyProducts);
       })
@@ -72,7 +73,7 @@ function PerfilScreen() {
       },
     };
     axios
-      .get(`http://localhost:5000/user/me`, config)
+      .get(`${DeployUrl}/user/me`, config)
       .then((response) => {
         if (response.data.accessToken) {
           localStorage.setItem("token", response.data.accessToken);
@@ -92,7 +93,7 @@ function PerfilScreen() {
   }
 
   function getAllproducts() {
-    const url = "http://localhost:5000/products";
+    const url = `${DeployUrl}/products`;
     axios
       .get(url)
       .then((res) => {
@@ -106,7 +107,7 @@ function PerfilScreen() {
 
   function UpdateInfos() {
     const token = localStorage.getItem("token");
-    const url = "http://localhost:5000/user/me";
+    const url = `${DeployUrl}/user/me`;
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -132,7 +133,7 @@ function PerfilScreen() {
 
   function UpdateImage() {
     const token = localStorage.getItem("token");
-    const url = "http://localhost:5000/user/me/image";
+    const url = `${DeployUrl}/user/me/image`;
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,

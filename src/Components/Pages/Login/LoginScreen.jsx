@@ -19,6 +19,7 @@ import { Button } from "../../Button/ButtonSyle";
 import logo from "../../../Assets/Image/Logo.png";
 import { useState } from "react";
 import Loading from "../../Loading/Loading";
+import { DeployUrl } from "../../Services/MockServices";
 
 function LoginScreen() {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ function LoginScreen() {
     event.preventDefault();
     setLoading(true);
     setDisable(true);
-    const url = "http://localhost:5000/sign-in";
+    const url = `${DeployUrl}/sign-in`;
     const body = { email, password };
     axios
       .post(url, body)
