@@ -44,7 +44,8 @@ function RegisterScreen() {
         setDisable(false);
         navigate("/");
       })
-      .catch((err) => {
+      .catch( ( err ) => {
+        alert(err.response.data)
         setLoading(false);
         setDisable(false);
         console.log(err);

@@ -58,7 +58,7 @@ function ProductsScreen() {
         setUserInfo(response.data.userInfo);
       })
       .catch((error) => {
-        // navigate("/");
+        navigate("/");
         console.error(error);
       });
   }
