@@ -95,6 +95,7 @@ export function PaymentScreen({
           </CloseButton>
           <form onSubmit={FinalizePurchase}>
             <Input
+              data-cy-id="CardHolder"
               placeholder="Titular do cartão"
               type="text"
               onChange={(e) => {
@@ -104,6 +105,7 @@ export function PaymentScreen({
               disabled={disable}
             />
             <Input
+              data-cy-id="CardNumber"
               placeholder="Número do cartão"
               type="text"
               onChange={(e) => {
@@ -113,6 +115,7 @@ export function PaymentScreen({
               disabled={disable}
             />
             <Input
+              data-cy-id="CVC"
               placeholder="CVC"
               type="text"
               onChange={(e) => {
@@ -122,6 +125,7 @@ export function PaymentScreen({
               disabled={disable}
             />
             <Input
+              data-cy-id="Password"
               placeholder="Senha da conta"
               type="password"
               onChange={(e) => {
