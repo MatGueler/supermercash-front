@@ -22,6 +22,7 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import Header from "../../Header/Header";
 import Loading from "../../Loading/Loading";
+import { DeployUrl } from "../../Services/MockServices";
 
 function MenuScreen() {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ function MenuScreen() {
       },
     };
     axios
-      .get(`http://localhost:5000/user/me`, config)
+      .get(`${DeployUrl}/user/me`, config)
       .then((response) => {
         setLoading(true);
         if (response.data.accessToken) {
