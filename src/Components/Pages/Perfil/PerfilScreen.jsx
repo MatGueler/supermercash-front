@@ -177,6 +177,7 @@ function PerfilScreen() {
               <img src={userImage} />
               {!updateImage ? (
                 <Button
+                  data-cy-id="UpdateImage"
                   color="grey"
                   onClick={() => {
                     setUpdateImage(!updateImage);
@@ -187,6 +188,7 @@ function PerfilScreen() {
               ) : (
                 <>
                   <Input
+                    data-cy-id="UrlImage"
                     placeholder="Url da imagem"
                     type="text"
                     onChange={(e) => {
@@ -196,6 +198,7 @@ function PerfilScreen() {
                     disabled={disable}
                   />
                   <Button
+                    data-cy-id="SaveImage"
                     color="grey"
                     onClick={() => {
                       UpdateImage();
