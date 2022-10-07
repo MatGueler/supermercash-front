@@ -103,13 +103,19 @@ function MenuScreen() {
             </Adverts>
             <ButtonsMenu>
               <BoxButton>
-                <button onClick={() => navigate("/products")}>
+                <button
+                  data-cy-id="ProductsButton"
+                  onClick={() => navigate("/products")}
+                >
                   <FontAwesomeIcon icon={faShop} size="2x" />
                 </button>
                 <p>Shop</p>
               </BoxButton>
               <BoxButton>
-                <button onClick={() => navigate("/perfil")}>
+                <button
+                  data-cy-id="PerfilButton"
+                  onClick={() => navigate("/perfil")}
+                >
                   <FontAwesomeIcon icon={faUser} size="2x" />
                 </button>
                 <p>Perfil</p>

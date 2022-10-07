@@ -14,6 +14,10 @@
 
 Cypress.Commands.add("RegisterUser", (userInfos) => {
   cy.request("POST", "http://localhost:5000/sign-up", userInfos);
+} );
+
+Cypress.Commands.add("LoginUser", (userInfos) => {
+  cy.request("POST", "http://localhost:5000/sign-in", userInfos);
 });
 
 //
