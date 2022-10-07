@@ -34,6 +34,10 @@ describe("Test login user", () => {
       cy.wait("@Add");
     });
 
+    cy.get("[data-cy-id=Negresco]").within(() => {
+      cy.get("[data-cy-id=ButtonRemove]").click();
+    });
+
     cy.url().should("equal", "http://localhost:3000/products");
   });
 });
