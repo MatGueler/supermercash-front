@@ -23,6 +23,7 @@ import logo from "../../../Assets/Image/Logo.png";
 import Loading from "../../Loading/Loading";
 import { useEffect, useState } from "react";
 import PaymentScreen from "../PaymentPage/PaymentScreen";
+import { DeployUrl } from "../../Services/MockServices";
 
 function CartScreen() {
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ function CartScreen() {
       },
     };
     axios
-      .get(`http://localhost:5000/user/me`, config)
+      .get(`${DeployUrl}/user/me`, config)
       .then((response) => {
         if (response.data.accessToken) {
           localStorage.setItem("token", response.data.accessToken);
@@ -69,7 +70,7 @@ function CartScreen() {
       },
     };
     axios
-      .get(`http://localhost:5000/cart`, config)
+      .get(`${DeployUrl}/cart`, config)
       .then((response) => {
         // ? TRATAR CASO ONDE NÃO EXISTA SUPERMERCADO CADASTRADO OU SEM PRODUTOS CADASTRADOS!!!!!!!!!!!
         setCartsBySupermercat(response.data);
@@ -104,7 +105,7 @@ function CartScreen() {
       },
     };
     axios
-      .get(`http://localhost:5000/cart/products`, config)
+      .get(`${DeployUrl}/cart/products`, config)
       .then((response) => {
         setQuantifuProducts(response.data.quantify);
       })

@@ -15,6 +15,7 @@ import { Input } from "../../Input/InputSyle";
 import { Button } from "../../Button/ButtonSyle";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { DeployUrl } from "../../Services/MockServices";
 
 export function PaymentScreen({
   quantifyProducts,
@@ -39,7 +40,7 @@ export function PaymentScreen({
       },
     };
     axios
-      .get(`http://localhost:5000/user/me`, config)
+      .get(`${DeployUrl}/user/me`, config)
       .then((response) => {
         if (response.data.accessToken) {
           localStorage.setItem("token", response.data.accessToken);
@@ -70,7 +71,7 @@ export function PaymentScreen({
       purchaseValue: totalValue,
     };
     axios
-      .post(`http://localhost:5000/payment`, body, config)
+      .post(`${DeployUrl}/payment`, body, config)
       .then((response) => {
         setPayment(!payment);
       })
