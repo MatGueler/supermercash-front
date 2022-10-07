@@ -24,6 +24,7 @@ import { Button } from "../../Button/ButtonSyle";
 import Footer from "../../Footer/Footer";
 import { useEffect } from "react";
 import Loading from "../../Loading/Loading";
+import { DeployUrl } from "../../Services/MockServices";
 
 function ProductsScreen() {
   const navigate = useNavigate();
@@ -48,7 +49,7 @@ function ProductsScreen() {
       },
     };
     axios
-      .get(`http://localhost:5000/user/me`, config)
+      .get(`${DeployUrl}/user/me`, config)
       .then((response) => {
         setLoading(true);
         if (response.data.accessToken) {
@@ -63,7 +64,7 @@ function ProductsScreen() {
   }
 
   function getAllproducts() {
-    const url = "http://localhost:5000/products";
+    const url = `${DeployUrl}/products`;
     axios
       .get(url)
       .then((res) => {
@@ -87,7 +88,7 @@ function ProductsScreen() {
       name,
     };
     axios
-      .post(`http://localhost:5000/products`, body, config)
+      .post(`${DeployUrl}/products`, body, config)
       .then((response) => {
         getQuantify(name, setQuantify);
       })
@@ -105,7 +106,7 @@ function ProductsScreen() {
       },
     };
     axios
-      .delete(`http://localhost:5000/products/delete`, config)
+      .delete(`${DeployUrl}/products/delete`, config)
       .then((response) => {
         setUpdatePage(!updatePage);
       })
@@ -124,7 +125,7 @@ function ProductsScreen() {
       },
     };
     axios
-      .delete(`http://localhost:5000/products/delete/${name}`, config)
+      .delete(`${DeployUrl}/products/delete/${name}`, config)
       .then((response) => {
         getQuantify(name, setQuantify);
         setDisable(false);
@@ -144,7 +145,7 @@ function ProductsScreen() {
       },
     };
     axios
-      .get(`http://localhost:5000/products/quantify/${name}`, config)
+      .get(`${DeployUrl}/products/quantify/${name}`, config)
       .then((response) => {
         const count = response.data._count;
         setQuantify(count);
