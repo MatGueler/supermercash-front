@@ -75,6 +75,7 @@ function RegisterScreen() {
         <form onSubmit={SignIn}>
           <p>Faça já seu cadastro e ajude o seu bolso!</p>
           <Input
+            data-cy-id="Name"
             type="text"
             placeholder="Nome"
             onChange={(e) => {
@@ -84,6 +85,7 @@ function RegisterScreen() {
             disabled={disable}
           />
           <Input
+            data-cy-id="Email"
             type="email"
             placeholder="Email"
             onChange={(e) => {
@@ -93,6 +95,7 @@ function RegisterScreen() {
             disabled={disable}
           />
           <Input
+            data-cy-id="Password"
             placeholder="Senha"
             type="password"
             onChange={(e) => {
@@ -102,6 +105,7 @@ function RegisterScreen() {
             disabled={disable}
           />
           <Input
+            data-cy-id="ConfirmPassword"
             placeholder="Confirmar senha"
             type="password"
             onChange={(e) => {
@@ -113,14 +117,18 @@ function RegisterScreen() {
           {loading === false ? (
             <UserButtons>
               <Button
+                data-cy-id="RegisterButton"
+                color="#0B8DD7"
+                disabled={disable}
+              >
+                Cadastrar
+              </Button>
+              <Button
                 color="#34D70B"
                 onClick={() => navigate("/")}
                 disabled={disable}
               >
                 Entrar
-              </Button>
-              <Button color="#0B8DD7" disabled={disable}>
-                Cadastrar
               </Button>
             </UserButtons>
           ) : (
