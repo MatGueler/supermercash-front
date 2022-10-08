@@ -153,7 +153,7 @@ function ProductScreen() {
           <p>{product.name}</p>
         </ProductInfo>
         <p>{product.quantify}</p>
-        <p>R$ {product.precoMedio}</p>
+        <p>R$ {Number(product.precoMedio).toFixed(2)}</p>
         <Add data-cy-id={product.name}>
           {disable ? (
             <LoadingBox>
