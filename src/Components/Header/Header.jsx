@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 import { DebounceInput } from "react-debounce-input";
 import { DeployUrl } from "../Services/MockServices";
 
-function Header({ userInfo }) {
+function Header({ userInfo, setUpdatePage, updatePage }) {
   let navigate = useNavigate();
 
   const [productsList, setProductsLis] = useState([]);
@@ -67,7 +67,17 @@ function Header({ userInfo }) {
               ? ""
               : productsList.map((item, index) => {
                   return (
-                    <Product key={index}>
+                    <Product
+                      key={index}
+                      onClick={() => {
+                        if (updatePage === undefined) {
+                          navigate(`/product/${item.id}`);
+                        } else {
+                          setUpdatePage(!updatePage);
+                          navigate(`/product/${item.id}`);
+                        }
+                      }}
+                    >
                       <img src={item.urlImage} alt="" />
                       <p>{item.name}</p>
                     </Product>
