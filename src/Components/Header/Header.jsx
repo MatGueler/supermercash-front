@@ -1,13 +1,23 @@
-import { HeaderBox, Logo, Perfil, SearchBox } from "./HeaderStyle";
+import {
+  HeaderBox,
+  Logo,
+  Perfil,
+  Product,
+  ProductsBox,
+  SearchBox,
+} from "./HeaderStyle";
 import logo from "../../Assets/Image/Logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faPersonRunning } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { DebounceInput } from "react-debounce-input";
 
 function Header({ userInfo }) {
   let navigate = useNavigate();
+
+  const [productsList, setProductsLis] = useState([]);
 
   function GetFirstNameUser() {
     if (userInfo) {
@@ -15,6 +25,14 @@ function Header({ userInfo }) {
       return <p>Olá, {firstName[0]}</p>;
     } else {
       return <p></p>;
+    }
+  }
+
+  function getListProducts(text) {
+    if (text.length > 3) {
+      setProductsLis(["macaco", "arroz", "leco"]);
+    } else {
+      setProductsLis([]);
     }
   }
 
@@ -29,7 +47,19 @@ function Header({ userInfo }) {
           </h1>
         </Logo>
         <SearchBox>
-          <input placeholder="Pesquisar . . ." />
+          <DebounceInput
+            minLength={3}
+            debounceTimeout={300}
+            onChange={(e) => getListProducts(e.target.value)}
+            placeholder="Pesquise um produto"
+          />
+          <ProductsBox>
+            {productsList.length === 0
+              ? ""
+              : productsList.map((item) => {
+                  return <Product>{item}</Product>;
+                })}
+          </ProductsBox>
         </SearchBox>
         <Perfil>
           {userInfo ? <GetFirstNameUser /> : <button>Entrar</button>}
