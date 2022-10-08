@@ -29,11 +29,19 @@ function Header({ userInfo }) {
   }
 
   function getListProducts(text) {
-    if (text.length > 3) {
-      setProductsLis(["macaco", "arroz", "leco"]);
-    } else {
-      setProductsLis([]);
-    }
+    axios
+      .get(`${DeployUrl}/product/${text}`)
+      .then((res) => {
+        if (text.length > 3) {
+          setProductsLis(res.data);
+        } else {
+          setProductsLis([]);
+        }
+      })
+      .catch((err) => {
+        alert(err.response.data);
+        console.log(err);
+      });
   }
 
   return (

@@ -87,6 +87,7 @@ export const Product = styled.div`
   box-sizing: border-box;
   border-bottom: 1px solid #cccccc;
   background-color: #dfdfdf;
+  cursor: pointer;
 `;
 
 export const Perfil = styled.div`
