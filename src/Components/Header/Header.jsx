@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { DebounceInput } from "react-debounce-input";
+import { DeployUrl } from "../Services/MockServices";
 
 function Header({ userInfo }) {
   let navigate = useNavigate();
@@ -30,7 +31,7 @@ function Header({ userInfo }) {
 
   function getListProducts(text) {
     axios
-      .get(`${DeployUrl}/product/${text}`)
+      .get(`${DeployUrl}/products/${text}`)
       .then((res) => {
         if (text.length > 3) {
           setProductsLis(res.data);
@@ -64,8 +65,13 @@ function Header({ userInfo }) {
           <ProductsBox>
             {productsList.length === 0
               ? ""
-              : productsList.map((item) => {
-                  return <Product>{item}</Product>;
+              : productsList.map((item, index) => {
+                  return (
+                    <Product key={index}>
+                      <img src={item.urlImage} alt="" />
+                      <p>{item.name}</p>
+                    </Product>
+                  );
                 })}
           </ProductsBox>
         </SearchBox>

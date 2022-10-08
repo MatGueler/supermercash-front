@@ -80,7 +80,7 @@ export const ProductsBox = styled.div`
 
 export const Product = styled.div`
   width: 100%;
-  height: 40px;
+  height: 50px;
   display: flex;
   align-items: center;
   padding: 0 10px;
@@ -88,6 +88,17 @@ export const Product = styled.div`
   border-bottom: 1px solid #cccccc;
   background-color: #dfdfdf;
   cursor: pointer;
+
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+
+  :hover {
+    border: 1px solid red;
+  }
 `;
 
 export const Perfil = styled.div`
