@@ -5,7 +5,7 @@ import CartScreen from "../Pages/Cart/CartScreen";
 import LoginScreen from "../Pages/Login/LoginScreen";
 import MenuScreen from "../Pages/Menu/MenuScreen";
 import PerfilScreen from "../Pages/Perfil/PerfilScreen";
-import ProductScreen from "../Pages/Products/Product/ProductsScreen";
+import ProductScreen from "../Pages/Products/Product/ProductScreen";
 import ProductsScreen from "../Pages/Products/ProductsScreen";
 import RegisterScreen from "../Pages/Register/RegisterScreen";
 
