@@ -1,6 +1,6 @@
 // *Hooks
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import { faCircleMinus } from "@fortawesome/free-solid-svg-icons";
@@ -14,19 +14,18 @@ import {
   Add,
   ProductInfo,
   LoadingBox,
-} from "./ProductsStyle";
-import { Container } from "../../Container/ContainerStyle";
+} from "./ProductStyle";
+import { Container } from "../../../Container/ContainerStyle";
 
 // *Image
 import { useState } from "react";
-import Header from "../../Header/Header";
-import { Button } from "../../Button/ButtonSyle";
-import Footer from "../../Footer/Footer";
+import Header from "../../../Header/Header";
+import { Button } from "../../../Button/ButtonSyle";
 import { useEffect } from "react";
-import Loading from "../../Loading/Loading";
-import { DeployUrl } from "../../Services/MockServices";
+import Loading from "../../../Loading/Loading";
+import { DeployUrl } from "../../../Services/MockServices";
 
-function ProductsScreen() {
+function ProductScreen() {
   const navigate = useNavigate();
 
   const [products, setProducts] = useState([]);
@@ -36,7 +35,10 @@ function ProductsScreen() {
   const [token, setToken] = useState("");
   const [updatePage, setUpdatePage] = useState(true);
 
+  const { id } = useParams();
+
   useEffect(() => {
+    setProducts([]);
     getUserInfo();
     getAllproducts();
   }, [updatePage]);
@@ -64,11 +66,11 @@ function ProductsScreen() {
   }
 
   function getAllproducts() {
-    const url = `${DeployUrl}/products`;
+    const url = `${DeployUrl}/product/${id}`;
     axios
       .get(url)
       .then((res) => {
-        const products = res.data;
+        const products = [res.data];
         setProducts(products);
       })
       .catch((err) => {
@@ -94,24 +96,6 @@ function ProductsScreen() {
       })
       .catch((error) => {
         navigate("/");
-        console.error(error);
-      });
-  }
-
-  function RemoveAllProducts() {
-    const token = localStorage.getItem("token");
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    axios
-      .delete(`${DeployUrl}/products/delete`, config)
-      .then((response) => {
-        setUpdatePage(!updatePage);
-      })
-      .catch((error) => {
-        alert("Is not possible to remove this item");
         console.error(error);
       });
   }
@@ -213,7 +197,11 @@ function ProductsScreen() {
     <>
       {loading ? (
         <Container>
-          <Header userInfo={userInfo} />
+          <Header
+            userInfo={userInfo}
+            setUpdatePage={setUpdatePage}
+            updatePage={updatePage}
+          />
           <Main>
             <ProductsBox>
               <Legend>
@@ -231,9 +219,6 @@ function ProductsScreen() {
             <Button color="#c51b1b" onClick={() => navigate("/cart")}>
               Comparar
             </Button>
-            <Button color="#8b8b8b" onClick={() => RemoveAllProducts()}>
-              Limpar carrinho
-            </Button>
           </Main>
         </Container>
       ) : (
@@ -250,4 +235,4 @@ function ProductsScreen() {
   );
 }
 
-export default ProductsScreen;
+export default ProductScreen;
