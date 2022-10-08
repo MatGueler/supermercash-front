@@ -42,8 +42,13 @@ export const Logo = styled.div`
 `;
 
 export const SearchBox = styled.div`
-  width: 60%;
+  width: 40%;
   display: flex;
+  flex-direction: column;
+  position: relative;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  border-radius: 10px;
 
   input {
     width: 100%;
@@ -53,12 +58,46 @@ export const SearchBox = styled.div`
     border: 0;
     border-radius: 10px;
     padding: 0 10px;
-    margin: 0 30px;
     box-sizing: border-box;
   }
 
   @media (max-width: 700px) {
     display: none;
+  }
+`;
+
+export const ProductsBox = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 40px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: #dfdfdf;
+`;
+
+export const Product = styled.div`
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #cccccc;
+  background-color: #dfdfdf;
+  cursor: pointer;
+
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+
+  :hover {
+    border: 1px solid red;
   }
 `;
 

@@ -1,13 +1,24 @@
-import { HeaderBox, Logo, Perfil, SearchBox } from "./HeaderStyle";
+import {
+  HeaderBox,
+  Logo,
+  Perfil,
+  Product,
+  ProductsBox,
+  SearchBox,
+} from "./HeaderStyle";
 import logo from "../../Assets/Image/Logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faPersonRunning } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { DebounceInput } from "react-debounce-input";
+import { DeployUrl } from "../Services/MockServices";
 
-function Header({ userInfo }) {
+function Header({ userInfo, setUpdatePage, updatePage }) {
   let navigate = useNavigate();
+
+  const [productsList, setProductsLis] = useState([]);
 
   function GetFirstNameUser() {
     if (userInfo) {
@@ -16,6 +27,22 @@ function Header({ userInfo }) {
     } else {
       return <p></p>;
     }
+  }
+
+  function getListProducts(text) {
+    axios
+      .get(`${DeployUrl}/products/${text}`)
+      .then((res) => {
+        if (text.length > 3) {
+          setProductsLis(res.data);
+        } else {
+          setProductsLis([]);
+        }
+      })
+      .catch((err) => {
+        alert(err.response.data);
+        console.log(err);
+      });
   }
 
   return (
@@ -29,7 +56,34 @@ function Header({ userInfo }) {
           </h1>
         </Logo>
         <SearchBox>
-          <input placeholder="Pesquisar . . ." />
+          <DebounceInput
+            minLength={3}
+            debounceTimeout={300}
+            onChange={(e) => getListProducts(e.target.value)}
+            placeholder="Pesquise um produto"
+          />
+          <ProductsBox>
+            {productsList.length === 0
+              ? ""
+              : productsList.map((item, index) => {
+                  return (
+                    <Product
+                      key={index}
+                      onClick={() => {
+                        if (updatePage === undefined) {
+                          navigate(`/product/${item.id}`);
+                        } else {
+                          setUpdatePage(!updatePage);
+                          navigate(`/product/${item.id}`);
+                        }
+                      }}
+                    >
+                      <img src={item.urlImage} alt="" />
+                      <p>{item.name}</p>
+                    </Product>
+                  );
+                })}
+          </ProductsBox>
         </SearchBox>
         <Perfil>
           {userInfo ? <GetFirstNameUser /> : <button>Entrar</button>}
