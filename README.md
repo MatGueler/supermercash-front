@@ -1,70 +1,118 @@
-# Getting Started with Create React App
+# <p align = "center"> Supermercash - front </p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center" style="background-color: white">
+   <img src="https://uploaddeimagens.com.br/images/004/056/154/full/Logo.png?1665418882"/>
+</p>
 
-## Available Scripts
+<p align = "center">
+   <img src="https://img.shields.io/badge/author-Mateus Gueler-4dae71?style=flat-square" />
+   <img src="https://img.shields.io/github/languages/count/MatGueler/supermercash-front?color=4dae71&style=flat-square" />
+</p>
 
-In the project directory, you can run:
+## :clipboard: Description
 
-### `npm start`
+The **supermercash** project is based on the problem where a user has several markets close to his residence, and is left with the doubt of which of the markets his **shopping list** would be cheaper?
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The application proposes that the user assembles his shopping list with the desired items, then the prices of his purchase will be presented in each of the markets, available in order, so that the user can easily choose the best **cost- benefit**.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+In addition to observing the best value for the purchase, the user can make the purchase through the application itself, using information from the **user card**.
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## :computer: Tecnologias e Conceitos
 
-### `npm run build`
+- REST APIs
+- JWTs & refresh tokens
+- Node.js (v16.17.0)
+- JavaScript
+- React
+- Syled components
+- Cypress
+- Vercel
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## :rocket: Rotas
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```yml
+Endpoint: '/sign-up'
+    - Route to register a new user
+```
 
-### `npm run eject`
+```yml
+Endpoint: '/'
+    - Route to make user login
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```yml
+Endpoint: '/menu (autenticada)'
+    - Route start for the user to choose the next step in the application
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```yml
+Endpoint: '/products (autenticada)'
+    - Route to list available products
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```yml
+Endpoint: '/product/:product (autenticada)'
+    - Route to list all users
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```yml
+Endpoint: '/cart (autenticada)'
+    - Route to list the value of the shopping cart in each supermarket
+```
 
-## Learn More
+```yml
+Endpoint: '/perfil'
+    - Route to present and update user information
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🏁 Rodando a aplicação
 
-### Code Splitting
+- Deploy
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The application is available in deploy on the [VERCEL] platform (https://supermercash-front.vercel.app/), in this case, the back-end deploy is used using the Heroku platform.
 
-### Analyzing the Bundle Size
+- Local
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+This project was initialized with [Create React App](https://github.com/facebook/create-react-app), so make sure you have the latest stable version of [Node.js](https:/ /nodejs.org/en/download/) and [npm](https://www.npmjs.com/) running locally.
 
-### Making a Progressive Web App
+First, clone this repository on your machine:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```
+git clone https://github.com/MatGueler/supermercash-front.git
+```
 
-### Advanced Configuration
+Then, inside the folder, run the following command to install the dependencies.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```
+npm install
+```
 
-### Deployment
+Finished the process, just start the server
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```
+npm run start
+```
 
-### `npm run build` fails to minify
+:stop_sign: Don't forget to run the application server startup, available in the [back-end repository](https://github.com/MatGueler/supermercash-back), to fully test the project.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+## :hammer: Testing the application
+
+The tests were carried out on the front-end and back end of this project. Addressing a end-to-end testing.
+
+### **Cypress**
+
+The [Cypress](https://docs.cypress.io/guides/overview/why-cypress) test framework was used as a front-end test framework, for that, run the command below to initialize the cypress:
+
+#### E2E
+
+```
+npx cypress open
+```
