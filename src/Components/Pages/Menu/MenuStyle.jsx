@@ -219,21 +219,64 @@ export const BoxButton = styled.div`
 export const Map = styled.div`
   width: 100%;
   display: flex;
+  justify-content: center;
   align-items: center;
   border-radius: 10px;
   margin-bottom: 30px;
 
   h3 {
-    width: 50%;
+    width: 400px;
     text-align: center;
-    font-size: 30px;
+    font-size: 40px;
     font-family: "Paytone One", sans-serif;
-    padding: 0 20px;
+    padding: 0 30px;
+  }
+
+  svg {
+    color: #921111;
   }
 
   iframe {
+    width: 400px;
+    height: 200px;
     border-radius: 10px;
     box-shadow: 2px 2px 8px gray;
+  }
+`;
+
+export const BootBox = styled.div`
+  position: fixed;
+  width: 240px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  border-radius: 20px;
+  border: 2px solid grey;
+  cursor: pointer;
+  padding: 0 10px;
+  z-index: 2;
+  right: 40px;
+  bottom: 40px;
+
+  animation-name: boot;
+  animation-duration: 2s;
+  background-color: #ffffff;
+
+  img {
+    height: 40px;
+    margin-right: 10px;
+  }
+
+  @keyframes boot {
+    0% {
+      right: -100%;
+    }
+
+    100% {
+      right: 40px;
+    }
   }
 `;
 
