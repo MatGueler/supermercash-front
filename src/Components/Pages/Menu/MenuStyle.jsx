@@ -219,8 +219,17 @@ export const BoxButton = styled.div`
 export const Map = styled.div`
   width: 100%;
   display: flex;
+  align-items: center;
   border-radius: 10px;
   margin-bottom: 30px;
+
+  h3 {
+    width: 50%;
+    text-align: center;
+    font-size: 30px;
+    font-family: "Paytone One", sans-serif;
+    padding: 0 20px;
+  }
 
   iframe {
     border-radius: 10px;
