@@ -46,6 +46,7 @@ function CommonQuestions() {
 
   useEffect(() => {
     getUserInfo();
+    getAllQuestionsAnswers();
   }, [updatePage]);
 
   function getUserInfo() {
@@ -68,6 +69,38 @@ function CommonQuestions() {
         navigate("/");
         console.error(error);
       });
+  }
+
+  function getAllQuestionsAnswers() {
+    axios
+      .get(`${DeployUrl}/questions`)
+      .then((response) => {
+        setLoading(true);
+        setQuestions(response.data);
+      })
+      .catch((error) => {
+        navigate("/");
+        console.error(error);
+      });
+  }
+
+  function RenderQuestion({ question }) {
+    return (
+      <Question>
+        <h1>{question.question}</h1>
+        <h2>R: {question.answers}</h2>
+        <ReactionsButtons>
+          <button>
+            <FontAwesomeIcon icon={faThumbsUp} />
+            {question.likes}
+          </button>
+          <button>
+            <FontAwesomeIcon icon={faThumbsDown} />
+            {question.dislikes}
+          </button>
+        </ReactionsButtons>
+      </Question>
+    );
   }
 
   return (
@@ -109,19 +142,13 @@ function CommonQuestions() {
               ) : (
                 ""
               )}
-              <Question>
-                <h1>Pergunta</h1>
-                <h2>R: Resposta</h2>
-                <ReactionsButtons>
-                  <button>
-                    <FontAwesomeIcon icon={faThumbsUp} />
-                    10
-                  </button>
-                  <button>
-                    <FontAwesomeIcon icon={faThumbsDown} />1
-                  </button>
-                </ReactionsButtons>
-              </Question>
+              {questions.length !== 0 ? (
+                questions.map((question, index) => {
+                  return <RenderQuestion key={index} question={question} />;
+                })
+              ) : (
+                <h2>Não existem perguntas ainda</h2>
+              )}
             </QuestionsBox>
           </Main>
         </Container>
