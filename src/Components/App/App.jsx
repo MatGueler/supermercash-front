@@ -2,6 +2,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import GlobalStyle from "../../Assets/CSS/GlobalStyle";
 import CartScreen from "../Pages/Cart/CartScreen";
+import CommonQuestions from "../Pages/CommonQuestions/CommonQuestionsScreen";
 import LoginScreen from "../Pages/Login/LoginScreen";
 import MenuScreen from "../Pages/Menu/MenuScreen";
 import PerfilScreen from "../Pages/Perfil/PerfilScreen";
@@ -20,6 +21,7 @@ function App() {
           <Route path={"/menu"} element={<MenuScreen />} />
           <Route path={"/products"} element={<ProductsScreen />} />
           <Route path={"/product/:id"} element={<ProductScreen />} />
+          <Route path={"/questions"} element={<CommonQuestions />} />
           <Route path={"/cart"} element={<CartScreen />} />
           <Route path={"/perfil"} element={<PerfilScreen />} />
         </Routes>

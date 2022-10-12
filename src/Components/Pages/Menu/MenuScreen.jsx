@@ -150,7 +150,12 @@ function MenuScreen() {
                 <p>Veja seu perfil</p>
               </BoxButton>
               <BoxButton>
-                <button data-cy-id="PerfilButton">
+                <button
+                  data-cy-id="InfoButton"
+                  onClick={() => {
+                    navigate("/questions");
+                  }}
+                >
                   <FontAwesomeIcon icon={faInfo} size="2x" />
                 </button>
                 <p>Tire dúvidas</p>
