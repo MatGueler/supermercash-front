@@ -8,10 +8,10 @@ import {
 } from "./HeaderStyle";
 import logo from "../../Assets/Image/Logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faPersonRunning } from "@fortawesome/free-solid-svg-icons";
+import { faPersonRunning } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { DebounceInput } from "react-debounce-input";
 import { DeployUrl } from "../Services/MockServices";
 
