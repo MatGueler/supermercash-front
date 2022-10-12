@@ -11,6 +11,7 @@ html, body, #root {
 	margin: 0;
 	padding: 0;
 	background-color: #d9d9d9;
+	color: #000000;
 }
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
