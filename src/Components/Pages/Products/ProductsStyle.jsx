@@ -11,6 +11,7 @@ export const Main = styled.div`
   position: relative;
   background-color: #d9d9d9;
   overflow: hidden;
+  margin-bottom: 120px;
 
   button {
     width: 50%;
@@ -49,11 +50,12 @@ export const Legend = styled.div`
 
   p {
     display: flex;
+    font-size: 20px;
     text-align: center;
     justify-content: center;
     width: 100px;
     overflow: hidden;
-    word-break: break-all;
+    word-wrap: break-word;
   }
 
   p:first-child {
@@ -63,6 +65,7 @@ export const Legend = styled.div`
   @media (max-width: 600px) {
     p {
       width: 50px;
+      font-size: 15px;
       overflow: hidden;
       word-break: break-all;
     }
@@ -75,6 +78,12 @@ export const Legend = styled.div`
   }
 `;
 
+export const Br = styled.br`
+  @media (min-width: 600px) {
+    display: none;
+  }
+`;
+
 export const Product = styled.div`
   width: 100%;
   display: flex;
@@ -84,12 +93,21 @@ export const Product = styled.div`
   border-bottom: 1px solid grey;
   padding: 20px 10px;
 
+  :last-child {
+    border-bottom: 0;
+  }
+
   p {
     width: 100px;
+    height: 60px;
     display: flex;
     text-align: center;
+    align-items: center;
     justify-content: center;
-    word-break: break-all;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 20px;
   }
 
   img {
@@ -100,6 +118,7 @@ export const Product = styled.div`
   @media (max-width: 600px) {
     p {
       width: 50px;
+      font-size: 15px;
     }
     img {
       margin-bottom: 10px;
@@ -139,6 +158,25 @@ export const Add = styled.div`
 
   @media (max-width: 600px) {
     width: 50px;
+  }
+`;
+
+export const CartButtons = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+
+  @media (max-width: 800px) {
+    width: 100%;
+    padding: 0 20px;
+
+    button {
+      width: 100%;
+    }
   }
 `;
 
