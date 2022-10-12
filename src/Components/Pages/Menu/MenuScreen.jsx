@@ -7,6 +7,7 @@ import {
   Adverts,
   Alert,
   AlertsBox,
+  BootBox,
   BoxButton,
   ButtonsMenu,
   ButtonsMessage,
@@ -24,23 +25,29 @@ import {
   faClockRotateLeft,
   faUser,
   faAnglesRight,
+  faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
-
-// *Image
 import { useEffect, useState } from "react";
 import Header from "../../Header/Header";
 import Loading from "../../Loading/Loading";
 import { DeployUrl } from "../../Services/MockServices";
 
+// *Image
+import avatar from "../../../Assets/Image/avatar.png";
+
 function MenuScreen() {
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
+  const [bootDisable, setBootDisable] = useState(true);
   const [userInfo, setUserInfo] = useState("");
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     getUserInfo(token);
+    setTimeout(() => {
+      setBootDisable(!bootDisable);
+    }, 10000);
   }, []);
 
   function getUserInfo(token) {
@@ -165,13 +172,24 @@ function MenuScreen() {
               })}
             </AlertsBox>
             <Map>
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31760591.28161111!2d-69.73009156372365!3d-13.656224737639535!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9c59c7ebcc28cf%3A0x295a1506f2293e63!2sBrasil!5e0!3m2!1spt-BR!2sbr!4v1664261466349!5m2!1spt-BR!2sbr"
-                width="50%"
-                height="200"
-              ></iframe>
-              <h3>Melhores ofertas próximas a você!</h3>
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31760591.28161111!2d-69.73009156372365!3d-13.656224737639535!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9c59c7ebcc28cf%3A0x295a1506f2293e63!2sBrasil!5e0!3m2!1spt-BR!2sbr!4v1664261466349!5m2!1spt-BR!2sbr"></iframe>
+              <h3>
+                Melhores ofertas próximas a você!{" "}
+                <FontAwesomeIcon icon={faLocationDot} />
+              </h3>
             </Map>
+            {bootDisable ? (
+              ""
+            ) : (
+              <BootBox
+                onClick={() => {
+                  alert("Disponível em breve");
+                }}
+              >
+                <img src={avatar} alt="" />
+                <h1>Olá, posso te ajudar?</h1>
+              </BootBox>
+            )}
           </Main>
           <Footer />
         </Container>
