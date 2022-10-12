@@ -5,8 +5,11 @@ import { useNavigate } from "react-router-dom";
 // *Components
 import {
   Adverts,
+  Alert,
+  AlertsBox,
   BoxButton,
   ButtonsMenu,
+  ButtonsMessage,
   LoadingBox,
   Main,
   Map,
@@ -15,8 +18,13 @@ import {
 import { Container } from "../../Container/ContainerStyle";
 import Footer from "../../Footer/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShop } from "@fortawesome/free-solid-svg-icons";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faShop,
+  faInfo,
+  faClockRotateLeft,
+  faUser,
+  faAnglesRight,
+} from "@fortawesome/free-solid-svg-icons";
 
 // *Image
 import { useEffect, useState } from "react";
@@ -82,6 +90,15 @@ function MenuScreen() {
     },
   ];
 
+  const alertsArray = [
+    { text: "Receba cashback" },
+    { text: "Alerta de promoções" },
+    { text: "-TEMPO\n +DINHEIRO" },
+    { text: "+COMPRAS\n +CASHBACK" },
+    { text: "Variedade de produtos" },
+    { text: "Mais facilidade" },
+  ];
+
   return (
     <>
       {loading ? (
@@ -103,6 +120,10 @@ function MenuScreen() {
               </Panel>
             </Adverts>
             <ButtonsMenu>
+              <ButtonsMessage>
+                <h3>Escolha o próximo passo</h3>
+                <FontAwesomeIcon icon={faAnglesRight} size="4x" />
+              </ButtonsMessage>
               <BoxButton>
                 <button
                   data-cy-id="ProductsButton"
@@ -110,7 +131,7 @@ function MenuScreen() {
                 >
                   <FontAwesomeIcon icon={faShop} size="2x" />
                 </button>
-                <p>Shop</p>
+                <p>Escolher produtos</p>
               </BoxButton>
               <BoxButton>
                 <button
@@ -119,15 +140,37 @@ function MenuScreen() {
                 >
                   <FontAwesomeIcon icon={faUser} size="2x" />
                 </button>
-                <p>Perfil</p>
+                <p>Veja seu perfil</p>
+              </BoxButton>
+              <BoxButton>
+                <button data-cy-id="PerfilButton">
+                  <FontAwesomeIcon icon={faInfo} size="2x" />
+                </button>
+                <p>Tire dúvidas</p>
+              </BoxButton>
+              <BoxButton>
+                <button data-cy-id="PerfilButton">
+                  <FontAwesomeIcon icon={faClockRotateLeft} size="2x" />
+                </button>
+                <p>Historico de compras</p>
               </BoxButton>
             </ButtonsMenu>
+            <AlertsBox>
+              {alertsArray.map((alert) => {
+                return (
+                  <Alert>
+                    <p>{alert.text}</p>
+                  </Alert>
+                );
+              })}
+            </AlertsBox>
             <Map>
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31760591.28161111!2d-69.73009156372365!3d-13.656224737639535!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9c59c7ebcc28cf%3A0x295a1506f2293e63!2sBrasil!5e0!3m2!1spt-BR!2sbr!4v1664261466349!5m2!1spt-BR!2sbr"
-                width="100%"
+                width="50%"
                 height="200"
               ></iframe>
+              <h3>Melhores ofertas próximas a você!</h3>
             </Map>
           </Main>
           <Footer />
