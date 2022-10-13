@@ -14,6 +14,8 @@ import {
   Add,
   ProductInfo,
   LoadingBox,
+  CartButtons,
+  Br,
 } from "./ProductsStyle";
 import { Container } from "../../Container/ContainerStyle";
 
@@ -169,7 +171,13 @@ function ProductsScreen() {
           <p>{product.name}</p>
         </ProductInfo>
         <p>{product.quantify}</p>
-        <p>R$ {Number(product.precoMedio).toFixed(2)}</p>
+        <p>
+          R$
+          {/* <BreakLine> */}
+          <Br></Br>
+          {/* </BreakLine> */}
+          {Number(product.precoMedio).toFixed(2)}
+        </p>
         <Add data-cy-id={product.name}>
           {disable ? (
             <LoadingBox>
@@ -218,7 +226,7 @@ function ProductsScreen() {
             <ProductsBox>
               <Legend>
                 <p>Produto</p>
-                <p>Quantidade</p>
+                <p>QTD</p>
                 <p>Preço médio</p>
                 <p>Selecionar</p>
               </Legend>
@@ -228,12 +236,14 @@ function ProductsScreen() {
                     return <ProductRender key={index} product={product} />;
                   })}
             </ProductsBox>
-            <Button color="#c51b1b" onClick={() => navigate("/cart")}>
-              Comparar
-            </Button>
-            <Button color="#8b8b8b" onClick={() => RemoveAllProducts()}>
-              Limpar carrinho
-            </Button>
+            <CartButtons>
+              <Button color="#c51b1b" onClick={() => navigate("/cart")}>
+                Comparar
+              </Button>
+              <Button color="#8b8b8b" onClick={() => RemoveAllProducts()}>
+                Limpar carrinho
+              </Button>
+            </CartButtons>
           </Main>
         </Container>
       ) : (

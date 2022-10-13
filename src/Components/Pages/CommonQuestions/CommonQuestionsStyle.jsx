@@ -28,53 +28,122 @@ export const Main = styled.div`
   }
 `;
 
-export const ProductsBox = styled.div`
+export const TitleQuestion = styled.div`
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  box-sizing: border-box;
+  font-size: 30px;
+  border-radius: 10px;
+  color: #ffffff;
+  margin-bottom: 20px;
+  background-color: #a09b9b;
+
+  h3 {
+    font-family: "Paytone One", sans-serif;
+  }
+
+  svg {
+    cursor: pointer;
+  }
+`;
+
+export const QuestionsBox = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   margin-bottom: 30px;
   border-radius: 10px;
+  padding: 20px;
   background-color: #ffffff;
   box-sizing: border-box;
+
+  :last-child() {
+    margin: 0;
+  }
 `;
 
-export const Legend = styled.div`
+export const Question = styled.div`
   width: 100%;
-  height: 50px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid grey;
+  background-color: #ffffff;
   box-sizing: border-box;
-  padding: 0 10px;
-  border-bottom: 1px solid grey;
+  position: relative;
 
-  p {
-    display: flex;
-    font-size: 20px;
-    text-align: center;
-    justify-content: center;
-    width: 100px;
+  h1 {
+    max-height: 80px;
+    padding-bottom: 10px;
+    font-size: 25px;
     overflow: hidden;
-    word-wrap: break-word;
+    text-overflow: ellipsis;
   }
 
-  p:first-child {
-    width: 200px;
+  h2 {
+    max-height: 100px;
+    font-size: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 20px;
+  }
+`;
+
+export const ReactionsButtons = styled.div`
+  position: absolute;
+  display: flex;
+  right: 10px;
+  bottom: 10px;
+
+  button {
+    width: 20px;
+    height: 20px;
+    border: 0;
+    background-color: transparent;
+    margin: 0 15px;
+
+    :first-child {
+      color: green;
+    }
+
+    :nth-child(2) {
+      color: red;
+    }
+
+    :hover {
+      border: 0;
+    }
+  }
+`;
+
+export const NewQuestionBox = styled.div`
+  display: flex;
+  justify-content: center;
+  background-color: #ffee009d;
+  border-radius: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+
+  form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
-  @media (max-width: 600px) {
-    p {
-      width: 50px;
-      font-size: 15px;
-      overflow: hidden;
-      word-break: break-all;
-    }
+  input:hover {
+    border: 1px solid black;
+  }
 
-    p:first-child {
-      display: flex;
-      flex-direction: column;
-      width: 100px;
-    }
+  button {
+    margin: 0;
   }
 `;
 
