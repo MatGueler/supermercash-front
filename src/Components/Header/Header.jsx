@@ -86,9 +86,9 @@ function Header({ userInfo, setUpdatePage, updatePage }) {
           </ProductsBox>
         </SearchBox>
         <Perfil>
-          {userInfo ? <GetFirstNameUser /> : <button>Entrar</button>}
+          {userInfo.image ? <GetFirstNameUser /> : <button>Entrar</button>}
           <img
-            src={userInfo.image.urlImage}
+            src={userInfo.image ? userInfo.image.urlImage : ""}
             alt=""
             onClick={() => navigate("/perfil")}
           />
