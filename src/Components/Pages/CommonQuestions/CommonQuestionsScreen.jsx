@@ -1,6 +1,7 @@
 // *Hooks
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import config from "../../Services/config";
 
 // *Components
 import {
@@ -84,6 +85,24 @@ function CommonQuestions() {
       });
   }
 
+  function CreateNewQuestion() {
+    setDisable(!disable);
+    const token = localStorage.getItem("token");
+    const body = { question: newQuestion };
+    axios
+      .post(`${DeployUrl}/questions`, body, config(token))
+      .then((response) => {
+        setLoading(true);
+        getAllQuestionsAnswers();
+        setDisable(!disable);
+      })
+      .catch((error) => {
+        alert("Não foi possível realizar a pergunta!");
+        console.error(error);
+        setDisable(!disable);
+      });
+  }
+
   function RenderQuestion({ question }) {
     return (
       <Question>
@@ -121,7 +140,7 @@ function CommonQuestions() {
               </TitleQuestion>
               {makeQuestion ? (
                 <NewQuestionBox>
-                  <form onSubmit="{}">
+                  <form onSubmit={CreateNewQuestion}>
                     <Input
                       placeholder="Escreva sua pergunta"
                       onChange={(e) => {
@@ -130,11 +149,7 @@ function CommonQuestions() {
                       value={newQuestion}
                       disabled={disable}
                     />
-                    <Button
-                      color="#000000"
-                      disabled={disable}
-                      onClick={() => setDisable(!disable)}
-                    >
+                    <Button color="#000000" disabled={disable}>
                       Perguntar
                     </Button>
                   </form>
