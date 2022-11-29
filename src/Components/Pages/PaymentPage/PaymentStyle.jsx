@@ -6,13 +6,14 @@ export const PaymentContainer = styled.div`
   height: 100%;
   display: flex;
   justify-content: center;
+  padding: 20px;
   align-items: center;
   background-color: #adadad39;
   z-index: 2;
 `;
 
 export const PaymentBox = styled.div`
-  width: 50%;
+  width: 100%;
   position: relative;
   border-radius: 10px;
   background-color: #ffe77e;
@@ -50,6 +51,34 @@ export const PaymentBox = styled.div`
 
   @media (max-width: 650px) {
     width: 100%;
+  }
+`;
+
+export const CardBox = styled.div`
+  width: 100%;
+  position: relative;
+  border-radius: 10px;
+  background-color: #ffe77e;
+  border: 1px solid grey;
+  padding: 20px;
+  box-sizing: border-box;
+  z-index: 3;
+
+  display: flex;
+
+  form {
+    width: 50%;
+  }
+
+  .CardRenderBox {
+    width: 50%;
+
+    display: flex;
+    justify-content: center;
+  }
+
+  .rccs {
+    margin: auto;
   }
 `;
 

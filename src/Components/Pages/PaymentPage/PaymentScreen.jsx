@@ -1,9 +1,13 @@
 import axios from "axios";
 
+import Cards from "react-credit-cards";
+import "react-credit-cards/es/styles-compiled.css";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRectangleXmark } from "@fortawesome/free-solid-svg-icons";
 
 import {
+  CardBox,
   CloseButton,
   ItensBox,
   PaymentBox,
@@ -26,6 +30,8 @@ export function PaymentScreen({
   const [cardHolder, setCardHolder] = useState("");
   const [cardNumber, setCardNumber] = useState("");
   const [CVC, setCVC] = useState("");
+  const [expiry, setExpiry] = useState("");
+  const [focused, setFocused] = useState("");
   const [password, setPassword] = useState("");
 
   const [disable, setDisable] = useState(false);
@@ -94,56 +100,93 @@ export function PaymentScreen({
           >
             <FontAwesomeIcon icon={faRectangleXmark} size="2x" />
           </CloseButton>
-          <form onSubmit={FinalizePurchase}>
-            <Input
-              data-cy-id="CardHolder"
-              placeholder="Titular do cartão"
-              type="text"
-              onChange={(e) => {
-                setCardHolder(e.target.value);
-              }}
-              value={cardHolder}
-              disabled={disable}
-            />
-            <Input
-              data-cy-id="CardNumber"
-              placeholder="Número do cartão"
-              type="text"
-              onChange={(e) => {
-                setCardNumber(e.target.value);
-              }}
-              value={cardNumber}
-              disabled={disable}
-            />
-            <Input
-              data-cy-id="CVC"
-              placeholder="CVC"
-              type="text"
-              onChange={(e) => {
-                setCVC(e.target.value);
-              }}
-              value={CVC}
-              disabled={disable}
-            />
-            <Input
-              data-cy-id="Password"
-              placeholder="Senha da conta"
-              type="password"
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-              value={password}
-              disabled={disable}
-            />
-            <ItensBox>
-              <h4>{quantifyProducts} itens</h4>
-              <TotalValueBox>
-                <p>Total:</p>
-                <p>R$ {totalValue}</p>
-              </TotalValueBox>
-            </ItensBox>
-            <Button color="#e92020">Finalizar compra</Button>
-          </form>
+          <CardBox>
+            <form onSubmit={FinalizePurchase}>
+              <Input
+                data-cy-id="CardHolder"
+                placeholder="Titular do cartão"
+                type="text"
+                onChange={(e) => {
+                  setCardHolder(e.target.value);
+                }}
+                onFocus={(e) => {
+                  setFocused("CardHolder");
+                }}
+                value={cardHolder}
+                maxLength={15}
+                disabled={disable}
+              />
+              <Input
+                data-cy-id="CardNumber"
+                placeholder="Número do cartão"
+                type="text"
+                onChange={(e) => {
+                  setCardNumber(e.target.value);
+                }}
+                onFocus={(e) => {
+                  setFocused("CardNumber");
+                }}
+                value={cardNumber}
+                maxLength={16}
+                disabled={disable}
+              />
+              <Input
+                data-cy-id="CVC"
+                placeholder="CVC"
+                type="text"
+                onChange={(e) => {
+                  setCVC(e.target.value);
+                }}
+                onFocus={(e) => {
+                  setFocused("cvc");
+                }}
+                value={CVC}
+                maxLength={3}
+                disabled={disable}
+              />
+              <Input
+                data-cy-id="expiry"
+                placeholder="Expiry"
+                type="text"
+                onChange={(e) => {
+                  setExpiry(e.target.value);
+                }}
+                onFocus={(e) => {
+                  setFocused("expiry");
+                }}
+                value={expiry}
+                maxLength={4}
+                disabled={disable}
+              />
+              <Input
+                data-cy-id="Password"
+                placeholder="Senha da conta"
+                type="password"
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+                value={password}
+                disabled={disable}
+              />
+              <ItensBox>
+                <h4>{quantifyProducts} itens</h4>
+                <TotalValueBox>
+                  <p>Total:</p>
+                  <p>R$ {totalValue}</p>
+                </TotalValueBox>
+              </ItensBox>
+              <Button color="#e92020">Finalizar compra</Button>
+            </form>
+            <div className="CardRenderBox">
+              <Cards
+                cvc={CVC}
+                expiry={expiry}
+                focused={focused}
+                name={cardHolder}
+                number={cardNumber}
+              />
+            </div>
+          </CardBox>
         </PaymentBox>
       </PaymentContainer>
     </>
