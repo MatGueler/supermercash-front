@@ -72,6 +72,7 @@ export function PaymentScreen({
       cardHolder,
       cardNumber,
       CVC,
+      expiry,
       password,
       quantifyProducts,
       purchaseValue: totalValue,
