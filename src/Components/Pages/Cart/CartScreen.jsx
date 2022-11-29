@@ -119,7 +119,7 @@ function CartScreen() {
     return (
       <Product>
         <BuildPodium index={index} item={item} />
-        <p>Cashback</p>
+        <p>0%</p>
         <p>R$ {item.total}</p>
         <Add>
           <img

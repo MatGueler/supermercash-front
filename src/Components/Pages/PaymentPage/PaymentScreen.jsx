@@ -111,7 +111,7 @@ export function PaymentScreen({
                   setCardHolder(e.target.value);
                 }}
                 onFocus={(e) => {
-                  setFocused("CardHolder");
+                  setFocused("name");
                 }}
                 value={cardHolder}
                 maxLength={15}
@@ -125,7 +125,7 @@ export function PaymentScreen({
                   setCardNumber(e.target.value);
                 }}
                 onFocus={(e) => {
-                  setFocused("CardNumber");
+                  setFocused("number");
                 }}
                 value={cardNumber}
                 maxLength={16}
