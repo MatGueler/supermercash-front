@@ -1,6 +1,10 @@
 // *Hooks
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import qs from "query-string";
+
+// * Icons
+import { AiFillGithub } from "react-icons/ai";
 
 // *Components
 import {
@@ -10,6 +14,7 @@ import {
   UserButtons,
   Clip,
   LoadingBox,
+  AuthButtons,
 } from "./LoginStyle";
 import { AuthContainer } from "../../Container/ContainerStyle";
 import { Input } from "../../Input/InputSyle";
@@ -51,6 +56,43 @@ function LoginScreen() {
         setDisable(false);
       });
   }
+
+  function redirectGitHub() {
+    const GithubAuthURL = "https://github.com/login/oauth/authorize";
+    const OAuthParams = {
+      response_type: "code",
+      scope: "user public_repo",
+      client_id: process.env.REACT_APP_CLIENT_ID,
+      redirect_url: process.env.REACT_APP_REDIRECT_URL,
+      state: "supermercash",
+    };
+
+    const GitHubQS = qs.stringify(OAuthParams);
+    const AuthorizationURL = `${GithubAuthURL}?${GitHubQS}`;
+    window.location.href = AuthorizationURL;
+  }
+
+  window.onload = () => {
+    const { code } = qs.parseUrl(window.location.href).query;
+    if (code) {
+      setLoading(true);
+      setDisable(true);
+      axios
+        .post(`${process.env.REACT_APP_BACK_END_URL}login`, {
+          code,
+        })
+        .then((response) => {
+          const token = response.data;
+          localStorage.setItem("token", token);
+          setLoading(false);
+          setDisable(false);
+          navigate("/menu");
+        })
+        .catch((err) => {
+          console.log("err", err);
+        });
+    }
+  };
 
   return (
     <AuthContainer>
@@ -97,18 +139,24 @@ function LoginScreen() {
             disabled={disable}
           />
           {loading === false ? (
-            <UserButtons>
-              <Button data-cy-id="SigninButton" color="#34D70B" disabled={disable}>
-                Entrar
-              </Button>
-              <Button
-                color="#0B8DD7"
-                onClick={() => navigate("/sign-up")}
-                disabled={disable}
-              >
-                Cadastrar
-              </Button>
-            </UserButtons>
+            <>
+              <UserButtons>
+                <Button
+                  data-cy-id="SigninButton"
+                  color="#34D70B"
+                  disabled={disable}
+                >
+                  Entrar
+                </Button>
+                <Button
+                  color="#0B8DD7"
+                  onClick={() => navigate("/sign-up")}
+                  disabled={disable}
+                >
+                  Cadastrar
+                </Button>
+              </UserButtons>
+            </>
           ) : (
             <LoadingBox>
               <Loading
@@ -120,6 +168,18 @@ function LoginScreen() {
             </LoadingBox>
           )}
         </form>
+        <AuthButtons>
+          <Button
+            color="#000000"
+            disabled={disable}
+            onClick={() => {
+              redirectGitHub();
+            }}
+          >
+            <AiFillGithub />
+            GitHub
+          </Button>
+        </AuthButtons>
       </Main>
     </AuthContainer>
   );

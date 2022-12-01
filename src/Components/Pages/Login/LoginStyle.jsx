@@ -144,6 +144,26 @@ export const UserButtons = styled.div`
   }
 `;
 
+export const AuthButtons = styled.div`
+  width: 70%;
+  display: flex;
+
+  button:hover {
+    transform: translate(2px, 2px);
+  }
+
+  button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  svg {
+    margin: 0 20px;
+  }
+`;
+
 export const Clip = styled.div`
   position: absolute;
   width: 50px;

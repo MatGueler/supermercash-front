@@ -86,7 +86,7 @@ function Header({ userInfo, setUpdatePage, updatePage }) {
           </ProductsBox>
         </SearchBox>
         <Perfil>
-          {userInfo.image ? <GetFirstNameUser /> : <button>Entrar</button>}
+          {userInfo.image ? <GetFirstNameUser /> : ""}
           <img
             src={userInfo.image ? userInfo.image.urlImage : ""}
             alt=""
