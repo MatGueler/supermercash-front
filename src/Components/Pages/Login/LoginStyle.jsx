@@ -147,6 +147,7 @@ export const UserButtons = styled.div`
 export const AuthButtons = styled.div`
   width: 70%;
   display: flex;
+  flex-direction: column;
 
   button:hover {
     transform: translate(2px, 2px);
@@ -157,6 +158,16 @@ export const AuthButtons = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 10px;
+  }
+
+  button:nth-child(2) {
+    color: black;
+  }
+
+  .google-button {
+    border-radius: 10px;
+    overflow: hidden;
   }
 
   svg {

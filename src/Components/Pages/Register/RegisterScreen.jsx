@@ -5,6 +5,8 @@ import qs from "query-string";
 
 // * Icons
 import { AiFillGithub } from "react-icons/ai";
+import GoogleLogin from "react-google-login";
+import { gapi } from "gapi-script";
 
 // *Components
 import {
@@ -72,6 +74,26 @@ function RegisterScreen() {
     window.location.href = AuthorizationURL;
   }
 
+  function GoogleLoginSuccess(result) {
+    axios
+      .post(`${process.env.REACT_APP_BACK_END_URL}auth/register/google`, {
+        user: result.wt,
+      })
+      .then((response) => {
+        const token = response.data;
+        localStorage.setItem("token", token);
+        setLoading(false);
+        setDisable(false);
+        navigate("/menu");
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
+  }
+  function GoogleLoginFailure(err) {
+    console.log("err", err);
+  }
+
   window.onload = () => {
     const { code } = qs.parseUrl(window.location.href).query;
     if (code) {
@@ -92,6 +114,15 @@ function RegisterScreen() {
           console.log("err", err);
         });
     }
+
+    function start() {
+      gapi.client.init({
+        clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID_LOGIN,
+        scope: "",
+      });
+    }
+
+    gapi.load("client:auth2", start);
   };
 
   return (
@@ -197,6 +228,15 @@ function RegisterScreen() {
             <AiFillGithub />
             GitHub
           </Button>
+          <div className="google-button">
+            <GoogleLogin
+              clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID_LOGIN}
+              buttonText="Google"
+              onFailure={GoogleLoginFailure}
+              onSuccess={GoogleLoginSuccess}
+              cookiePolicy={"single_host_origin"}
+            ></GoogleLogin>
+          </div>
         </AuthButtons>
       </Main>
     </AuthContainer>
