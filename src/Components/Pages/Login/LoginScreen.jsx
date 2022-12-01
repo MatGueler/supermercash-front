@@ -62,8 +62,8 @@ function LoginScreen() {
     const OAuthParams = {
       response_type: "code",
       scope: "user public_repo",
-      client_id: process.env.REACT_APP_CLIENT_ID,
-      redirect_url: process.env.REACT_APP_REDIRECT_URL,
+      client_id: process.env.REACT_APP_CLIENT_ID_LOGIN,
+      redirect_url: process.env.REACT_APP_REDIRECT_LOGIN_URL,
       state: "supermercash",
     };
 
