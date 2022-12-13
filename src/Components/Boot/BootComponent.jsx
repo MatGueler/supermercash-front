@@ -8,7 +8,6 @@ import {
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRectangleXmark } from "@fortawesome/free-solid-svg-icons";
-
 import avatar from "../../Assets/Image/avatar.png";
 import { useState } from "react";
 
