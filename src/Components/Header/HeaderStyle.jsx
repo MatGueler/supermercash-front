@@ -97,7 +97,7 @@ export const Product = styled.div`
   }
 
   :hover {
-    border: 1px solid red;
+    background-color: #fcafaf;
   }
 `;
 

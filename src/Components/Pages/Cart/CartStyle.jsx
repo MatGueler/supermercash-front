@@ -107,6 +107,10 @@ export const Product = styled.div`
   border-bottom: 1px solid grey;
   padding: 20px 10px;
 
+  :hover {
+    background-color: #ffef9761;
+  }
+
   p {
     width: 100px;
     display: flex;

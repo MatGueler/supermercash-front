@@ -1,6 +1,12 @@
 // *Hooks
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import qs from "query-string";
+
+// * Icons
+import { AiFillGithub } from "react-icons/ai";
+import GoogleLogin from "react-google-login";
+import { gapi } from "gapi-script";
 
 // *Components
 import {
@@ -10,6 +16,7 @@ import {
   UserButtons,
   Clip,
   LoadingBox,
+  AuthButtons,
 } from "./LoginStyle";
 import { AuthContainer } from "../../Container/ContainerStyle";
 import { Input } from "../../Input/InputSyle";
@@ -20,6 +27,7 @@ import logo from "../../../Assets/Image/Logo.png";
 import { useState } from "react";
 import Loading from "../../Loading/Loading";
 import { DeployUrl } from "../../Services/MockServices";
+import { useEffect } from "react";
 
 function LoginScreen() {
   const navigate = useNavigate();
@@ -51,6 +59,72 @@ function LoginScreen() {
         setDisable(false);
       });
   }
+
+  function redirectGitHub() {
+    const GithubAuthURL = "https://github.com/login/oauth/authorize";
+    const OAuthParams = {
+      response_type: "code",
+      scope: "user public_repo",
+      client_id: process.env.REACT_APP_CLIENT_ID_LOGIN,
+      redirect_url: process.env.REACT_APP_REDIRECT_LOGIN_URL,
+      state: "supermercash",
+    };
+
+    const GitHubQS = qs.stringify(OAuthParams);
+    const AuthorizationURL = `${GithubAuthURL}?${GitHubQS}`;
+    window.location.href = AuthorizationURL;
+  }
+
+  function GoogleLoginSuccess(result) {
+    axios
+      .post(`${process.env.REACT_APP_BACK_END_URL}auth/google`, {
+        user: result.wt,
+      })
+      .then((response) => {
+        const token = response.data;
+        localStorage.setItem("token", token);
+        setLoading(false);
+        setDisable(false);
+        navigate("/menu");
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
+  }
+  function GoogleLoginFailure(err) {
+    console.log("err", err);
+  }
+
+  window.onload = () => {
+    const { code } = qs.parseUrl(window.location.href).query;
+    if (code) {
+      setLoading(true);
+      setDisable(true);
+      axios
+        .post(`${process.env.REACT_APP_BACK_END_URL}login`, {
+          code,
+        })
+        .then((response) => {
+          const token = response.data;
+          localStorage.setItem("token", token);
+          setLoading(false);
+          setDisable(false);
+          navigate("/menu");
+        })
+        .catch((err) => {
+          console.log("err", err);
+        });
+    }
+
+    function start() {
+      gapi.client.init({
+        clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID_LOGIN,
+        scope: "",
+      });
+    }
+
+    gapi.load("client:auth2", start);
+  };
 
   return (
     <AuthContainer>
@@ -97,18 +171,24 @@ function LoginScreen() {
             disabled={disable}
           />
           {loading === false ? (
-            <UserButtons>
-              <Button data-cy-id="SigninButton" color="#34D70B" disabled={disable}>
-                Entrar
-              </Button>
-              <Button
-                color="#0B8DD7"
-                onClick={() => navigate("/sign-up")}
-                disabled={disable}
-              >
-                Cadastrar
-              </Button>
-            </UserButtons>
+            <>
+              <UserButtons>
+                <Button
+                  data-cy-id="SigninButton"
+                  color="#34D70B"
+                  disabled={disable}
+                >
+                  Entrar
+                </Button>
+                <Button
+                  color="#0B8DD7"
+                  onClick={() => navigate("/sign-up")}
+                  disabled={disable}
+                >
+                  Cadastrar
+                </Button>
+              </UserButtons>
+            </>
           ) : (
             <LoadingBox>
               <Loading
@@ -120,6 +200,27 @@ function LoginScreen() {
             </LoadingBox>
           )}
         </form>
+        <AuthButtons>
+          <Button
+            color="#000000"
+            disabled={disable}
+            onClick={() => {
+              redirectGitHub();
+            }}
+          >
+            <AiFillGithub />
+            GitHub
+          </Button>
+          <div className="google-button">
+            <GoogleLogin
+              clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID_LOGIN}
+              buttonText="Google"
+              onFailure={GoogleLoginFailure}
+              onSuccess={GoogleLoginSuccess}
+              cookiePolicy={"single_host_origin"}
+            ></GoogleLogin>
+          </div>
+        </AuthButtons>
       </Main>
     </AuthContainer>
   );
