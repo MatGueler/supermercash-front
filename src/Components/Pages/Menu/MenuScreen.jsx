@@ -33,7 +33,7 @@ import Loading from "../../Loading/Loading";
 import { DeployUrl } from "../../Services/MockServices";
 
 // *Image
-import avatar from "../../../Assets/Image/avatar.png";
+import BootComponent from "../../Boot/BootComponent";
 
 function MenuScreen() {
   const navigate = useNavigate();
@@ -183,17 +183,19 @@ function MenuScreen() {
                 <FontAwesomeIcon icon={faLocationDot} />
               </h3>
             </Map>
+
             {bootDisable ? (
               ""
             ) : (
-              <BootBox
-                onClick={() => {
-                  alert("Disponível em breve");
-                }}
-              >
-                <img src={avatar} alt="" />
-                <h1>Olá, posso te ajudar?</h1>
-              </BootBox>
+              <BootComponent />
+              // <BootBox
+              //   onClick={() => {
+              //     alert("Disponível em breve");
+              //   }}
+              // >
+              //   <img src={avatar} alt="" />
+              //   <h1>Olá, posso te ajudar?</h1>
+              // </BootBox>
             )}
           </Main>
           <Footer />
