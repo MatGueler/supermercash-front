@@ -1,7 +1,7 @@
 import axios from "axios";
 
-import Cards from "react-credit-cards";
-import "react-credit-cards/es/styles-compiled.css";
+import Cards from "react-credit-cards-2";
+import "react-credit-cards-2/es/styles-compiled.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRectangleXmark } from "@fortawesome/free-solid-svg-icons";
