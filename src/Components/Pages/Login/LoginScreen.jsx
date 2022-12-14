@@ -5,8 +5,8 @@ import qs from "query-string";
 
 // * Icons
 import { AiFillGithub } from "react-icons/ai";
-import GoogleLogin from "react-google-login";
-import { gapi } from "gapi-script";
+import { GoogleLogin } from "@react-oauth/google";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 // *Components
 import {
@@ -75,10 +75,13 @@ function LoginScreen() {
     window.location.href = AuthorizationURL;
   }
 
-  function GoogleLoginSuccess(result) {
+  function GoogleLoginSuccess(token) {
+    setLoading(true);
+    setDisable(true);
+    console.log(token);
     axios
-      .post(`${process.env.REACT_APP_BACK_END_URL}auth/google`, {
-        user: result.wt,
+      .post(`${process.env.REACT_APP_BACK_END_URL}/auth/google`, {
+        token,
       })
       .then((response) => {
         const token = response.data;
@@ -115,15 +118,6 @@ function LoginScreen() {
           console.log("err", err);
         });
     }
-
-    function start() {
-      gapi.client.init({
-        clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID_LOGIN,
-        scope: "",
-      });
-    }
-
-    gapi.load("client:auth2", start);
   };
 
   return (
@@ -212,13 +206,16 @@ function LoginScreen() {
             GitHub
           </Button>
           <div className="google-button">
-            <GoogleLogin
+            <GoogleOAuthProvider
               clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID_LOGIN}
-              buttonText="Google"
-              onFailure={GoogleLoginFailure}
-              onSuccess={GoogleLoginSuccess}
-              cookiePolicy={"single_host_origin"}
-            ></GoogleLogin>
+            >
+              <GoogleLogin
+                onSuccess={(credentialResponse) =>
+                  GoogleLoginSuccess(credentialResponse.credential)
+                }
+                onError={(err) => GoogleLoginFailure(err)}
+              />
+            </GoogleOAuthProvider>
           </div>
         </AuthButtons>
       </Main>
