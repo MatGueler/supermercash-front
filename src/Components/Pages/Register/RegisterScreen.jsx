@@ -77,7 +77,8 @@ function RegisterScreen() {
   }
 
   function GoogleLoginSuccess(token) {
-    console.log(token);
+    setLoading(true);
+    setDisable(true);
     axios
       .post(`${process.env.REACT_APP_BACK_END_URL}auth/register/google`, {
         token,
