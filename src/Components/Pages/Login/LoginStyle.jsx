@@ -166,6 +166,8 @@ export const AuthButtons = styled.div`
   }
 
   .google-button {
+    display: flex;
+    justify-content: center;
     border-radius: 10px;
     overflow: hidden;
   }
