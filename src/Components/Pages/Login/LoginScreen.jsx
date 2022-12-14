@@ -5,8 +5,6 @@ import qs from "query-string";
 
 // * Icons
 import { AiFillGithub } from "react-icons/ai";
-import GoogleLogin from "react-google-login";
-import { gapi } from "gapi-script";
 
 // *Components
 import {
@@ -75,25 +73,25 @@ function LoginScreen() {
     window.location.href = AuthorizationURL;
   }
 
-  function GoogleLoginSuccess(result) {
-    axios
-      .post(`${process.env.REACT_APP_BACK_END_URL}auth/google`, {
-        user: result.wt,
-      })
-      .then((response) => {
-        const token = response.data;
-        localStorage.setItem("token", token);
-        setLoading(false);
-        setDisable(false);
-        navigate("/menu");
-      })
-      .catch((err) => {
-        console.log("err", err);
-      });
-  }
-  function GoogleLoginFailure(err) {
-    console.log("err", err);
-  }
+  // function GoogleLoginSuccess(result) {
+  //   axios
+  //     .post(`${process.env.REACT_APP_BACK_END_URL}auth/google`, {
+  //       user: result.wt,
+  //     })
+  //     .then((response) => {
+  //       const token = response.data;
+  //       localStorage.setItem("token", token);
+  //       setLoading(false);
+  //       setDisable(false);
+  //       navigate("/menu");
+  //     })
+  //     .catch((err) => {
+  //       console.log("err", err);
+  //     });
+  // }
+  // function GoogleLoginFailure(err) {
+  //   console.log("err", err);
+  // }
 
   window.onload = () => {
     const { code } = qs.parseUrl(window.location.href).query;
@@ -116,14 +114,14 @@ function LoginScreen() {
         });
     }
 
-    function start() {
-      gapi.client.init({
-        clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID_LOGIN,
-        scope: "",
-      });
-    }
+    // function start() {
+    //   gapi.client.init({
+    //     clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID_LOGIN,
+    //     scope: "",
+    //   });
+    // }
 
-    gapi.load("client:auth2", start);
+    // gapi.load("client:auth2", start);
   };
 
   return (
@@ -212,13 +210,13 @@ function LoginScreen() {
             GitHub
           </Button>
           <div className="google-button">
-            <GoogleLogin
+            {/* <GoogleLogin
               clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID_LOGIN}
               buttonText="Google"
               onFailure={GoogleLoginFailure}
               onSuccess={GoogleLoginSuccess}
               cookiePolicy={"single_host_origin"}
-            ></GoogleLogin>
+            ></GoogleLogin> */}
           </div>
         </AuthButtons>
       </Main>
