@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import Cards from "react-credit-cards";
+import Cards from "react-credit-cards-2";
 import "react-credit-cards-2/es/styles-compiled.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
